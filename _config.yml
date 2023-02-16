@@ -4,16 +4,18 @@
 
 # Site
 title: 南城记录倌
-subtitle: '往昔皆为过眼云烟,一切尽随风而逝;此刻之行终将化未来的救赎利刃'
+subtitle: '往昔皆为过眼云烟,一切尽随风而逝;此刻之行终将化未来的救赎之刃'
 description: '清醒,知趣 明得失,知进退'
 keywords: Java,Python,web
 author: Luo Qianyou
-language: zh-CN
+language:
+  - zh-CN
+  - en
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://lqy679.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -41,10 +43,7 @@ external_link:
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
-marked:
-  prependRoot: true
-  postAsset: true
-relative_link: false
+relative_link: true
 future: true
 highlight:
   enable: true
@@ -101,9 +100,30 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 # theme: landscape
-theme: hiker
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/LQY679/LQY679.github.io/
+  # example, https://github.com/hexojs/hexojs.github.io
+  branch: master
+
+# npm install hexo-excerpt --save 自动生成文章摘要
+excerpt:
+  depth: 5
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true 
+
+# next主题 搜索插件
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
+
+# 启用看板娘
+live2d:
+  enable: true

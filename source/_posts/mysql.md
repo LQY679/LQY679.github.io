@@ -7,6 +7,9 @@ categories:
 ## 关系型数据库(MySQL)
 
 ### 数据库分类
+
+<!-- more -->
+
 #### 关系型数据库(SQL)
 
 * 如mySQL SQLserver Oracle

@@ -1,5 +1,8 @@
 ---
 title: {{ title }}
-date: {{ date }}
+date: 2020-04-12
+updated: {{ date }}
+disableNunjucks: false
+categories: 
 tags:
 ---

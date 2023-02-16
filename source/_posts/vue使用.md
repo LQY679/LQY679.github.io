@@ -3,6 +3,7 @@ title: Vue使用
 date: 2020-04-12 18:57:32
 categories: 
 - 大前端
+
 ---
 
 
@@ -10,6 +11,8 @@ categories:
 # Vue(使用)
 
 ## Vue初识
+
+
 
 ### 1、什么是MVVM
 
@@ -2093,9 +2096,9 @@ Vue.use("插件名")
 
 - 字符串写法适用于：类名不确定，要动态获取。
 
--  对象写法适用于：要绑定多个样式，个数不确定，名字也不确定。
+- 对象写法适用于：要绑定多个样式，个数不确定，名字也不确定。
 
--  数组写法适用于：要绑定多个样式，个数确定，名字也确定，但不确定用不用。
+- 数组写法适用于：要绑定多个样式，个数确定，名字也确定，但不确定用不用。
 
 ### 2. style样式
 
@@ -2389,7 +2392,6 @@ export default {
 子组件`student.vue`:
 
 ```vue
-
 <template>
     <div class="demo">
         <h2>学生信息:</h2>
@@ -2506,7 +2508,6 @@ export default {
 绑定组件事件的组件: `Student.vue`
 
 ```vue
-
 <template>
     <div class="demo">
         <h2>学生信息:</h2>
@@ -4079,7 +4080,6 @@ export default new VueRouter({
 `main.js:`
 
 ```js
-
 //引入必需模块
 import Vue from 'vue'
 import App from './App.vue'

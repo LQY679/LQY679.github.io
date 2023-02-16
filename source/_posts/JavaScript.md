@@ -1160,7 +1160,7 @@ p1.style.fontSize = 12em ; //修改字体大小
 
 ### 简述初识
 
-jQuery 库位于一个 JavaScript 文件中，其中包含了所有的 jQuery 函数。==请注意，<script> 标签应该位于页面的 <head> 部分。==
+jQuery 库位于一个 JavaScript 文件中，其中包含了所有的 jQuery 函数。==请注意，`<script> `标签应该位于页面的 `<head>` 部分。==
 
 ```html
 <head>
