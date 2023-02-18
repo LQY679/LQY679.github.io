@@ -11,7 +11,7 @@ tags:
 
 前置环境: git, node,更多具体参考Hexo官方文档, 有一个GitHub账号
 
-## Hexo建站,本地部署调式
+## Hexo建站,本地部署
 
 > 参考官方文档快速上手:[文档 | Hexo](https://hexo.io/zh-cn/docs/)
 
@@ -35,6 +35,10 @@ post_asset_folder: true
 ```
 
 然后还有一点要注意: 我们可以命令`hexo new 文章名` 来创建一篇文章,也可以直接把md文件复制粘贴到`博客根目录\source\_posts`目录下, 这样都可以创建文章,但是请注意: **如果你的文章名是带有中文的最好使用命令来创建一个和你想要创建的文件重名的,然后再把md文件复制过去覆盖掉用命令创建的文件** ,反正我这样亲测可用,但是还有一个问题就是: 即使是这样,首页展示的文章依旧无法加载图片(点击阅读更多进去还是正常显示没问题)
+
+通过插件解决参考: 
+
+
 
 ### 自动生成文章摘要
 
@@ -86,7 +90,7 @@ hexo g -d
 
 - [Next主题官方文档](https://theme-next.js.org/docs/getting-started/)
 
-## github pages
+## github pages 上线发布
 
 github pages 是github为我们的仓库提供了一个可以部署静态网站的功能,并且还能白嫖一个三级域名:`用户名.github.io`例如我的个人博客: https://lqy679.github.io/ , lqy679就是github的用户名
 
@@ -100,7 +104,7 @@ github pages 是github为我们的仓库提供了一个可以部署静态网站�
 
 **创建完毕后别忘了进行仓库设置,打开pages功能**
 
-![image-20230216165121743](hexo%E6%90%AD%E9%85%8Dgithub%E7%99%BD%E5%AB%96%E5%9F%9F%E5%90%8D%E6%90%AD%E5%BB%BAmd%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2.assets/image-20230216165121743.png)
+![image-20230218163626006](hexo%E6%90%AD%E9%85%8Dgithub%E7%99%BD%E5%AB%96%E5%9F%9F%E5%90%8D%E6%90%AD%E5%BB%BAmd%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/image-20230218163626006.png)
 
 
 
@@ -249,7 +253,7 @@ initWidget({
   waifuPath: live2d_path + "waifu-tips.json",
 	// apiPath: "https://live2d.fghrsh.net/api/",  // 被墙
 	apiPath: "https://api.zsq.im/live2d",  // 需要国内方位请使用这个配置
-	// cdnPath: "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/",
+	// cdnPath: "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/", // 被墙
 });
 ```
 
@@ -377,3 +381,65 @@ hexo.extend.injector.register('body_end',()=>{
 </meting-js>
 ```
 
+
+
+
+
+## 网站连通本地笔记预览:解决图片本地或线上无法显示
+
+> 参考自: [Hexo 图片插入无法显示的问题 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/542101567)
+
+上文已经解决了大部分问题, 但是还有一个小问题还有待改进, 就是**图片无法实现在本地编辑器和生成的网站同时显示图片**,这是因为Hexo解析生成网站路径的原因,参考自知乎大佬的文章,记录一下解决方案:
+
+### 设置开启资源文件夹
+
+**首先,修改一下Hexo的配置文件,开启资源文件夹**,官方文档具体描述: [资源文件夹 | Hexo](https://hexo.io/zh-cn/docs/asset-folders) 
+
+`_config.yml`文件, 修改为如下所示
+
+```yaml
+post_asset_folder: true
+```
+
+### 下载插件:
+
+进入你博客的根目录, 或者使用命令行切换到博客根目录, 执行`npm install hexo-asset-image --save`
+
+下载失败尝试用管理员身份,
+
+==注意!!! 由于这个插件年久失修,所以需要修改一下源码:==
+
+- 进入你博客的根目录，然后下面顺序找到`index.js`:
+  `node_modules` --> `hexo-asset-image` --> `index.js`
+- 用VS Code 或者 记事本打开 `index.js`
+- 在第 58 行，可以找到这么一行代码：
+
+```js
+$(this).attr('src', config.root + link + src);
+```
+
+修改为:
+
+```js
+$(this).attr('src', src);
+```
+
+**至此,配置相关的工作就算是做完了**
+
+### 图片路径怎么写?
+
+由于我们设置了资源文件夹配置, `post_asset_folder: true` , 所以**在文章的存放目录下会有和你md文件重名的文件夹, 我们在那个文件夹下放图片即可,** 
+
+![image-20230218165228005](hexo%E6%90%AD%E9%85%8Dgithub%E7%99%BD%E5%AB%96%E5%9F%9F%E5%90%8D%E6%90%AD%E5%BB%BAmd%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/image-20230218165228005.png)
+
+当然,我们在写md的时候一般都会用一些比较只能的编辑器比如typora , 下面我就以这个软件举例:
+
+### typora进行图片粘贴设置
+
+打开typora的偏好设置 (快捷键: ctrl + 逗号)
+
+![image-20230218165637267](hexo%E6%90%AD%E9%85%8Dgithub%E7%99%BD%E5%AB%96%E5%9F%9F%E5%90%8D%E6%90%AD%E5%BB%BAmd%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/image-20230218165637267.png)
+
+这样, 我们就可以在typora中直接ctrl + v 直接粘贴图片,而且会把图片自动存储到与md文件同名的文件夹中
+
+**至此,问题完全解决,即可在typora上看到图片,发布到网站上的笔记又不会导致网页笔记图片丢失**

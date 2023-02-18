@@ -782,7 +782,7 @@ history.forward //前进
 
 网页就是一个Dom树形结构!
 
-![image-20211118153909319](JavaScript.assets/image-20211118153909319-16372211518311.png)
+![image-20211118153909319](JavaScript/image-20211118153909319-16372211518311.png)
 
 >  获得dom节点
 
@@ -1040,7 +1040,7 @@ p1.style.fontSize = 12em ; //修改字体大小
 
 ==此外,在提交表单时容易被人抓包发现表单的数据,==,因此我们需要对表单数据进行加密
 
-![抓包表单数据](JavaScript.assets/image-20211122091159492-16375435231821.png)
+![抓包表单数据](JavaScript/image-20211122091159492-16375435231821.png)
 
 如下代码对表单进行了加密
 
@@ -1400,7 +1400,7 @@ Ajax即**A**synchronous **J**avascript **A**nd **X**ML（异步JavaScript和[XML
 
 **Ajax如何工作:**
 
-![image-20211224194617743](JavaScript.assets/image-20211224194617743.png)
+![image-20211224194617743](JavaScript/image-20211224194617743.png)
 
 1. 网页中发生一个事件（页面加载、按钮点击）
 2. **由 JavaScript 创建 XMLHttpRequest 对象**
@@ -1649,7 +1649,7 @@ function myFunction(xml) {
 
 如图所示:
 
-![image-20220316094227008](JavaScript.assets/image-20220316094227008.png)
+![image-20220316094227008](JavaScript/image-20220316094227008.png)
 
 
 
@@ -2123,7 +2123,7 @@ axios({
 
 **3.VM:视图模型(ViewModel): Vue实例对象**
 
-![image-20220209114456405](JavaScript.assets/image-20220209114456405.png)
+![image-20220209114456405](JavaScript/image-20220209114456405.png)
 
 
 
@@ -2209,7 +2209,7 @@ axios({
 
 
 
-![image-20220209185957371](JavaScript.assets/image-20220209185957371.png)
+![image-20220209185957371](JavaScript/image-20220209185957371.png)
 
 
 
@@ -2254,7 +2254,7 @@ axios({
 
 但是可借助Vue.set()方法在**已有的数据对象(即这个对象必须是响应式的)**中添加属性
 
-![image-20220215130230951](JavaScript.assets/image-20220215130230951.png)
+![image-20220215130230951](JavaScript/image-20220215130230951.png)
 
 #### Vue2监测数组问题
 
@@ -2272,7 +2272,7 @@ axios({
 
 #### 数据监测小总结:
 
-![image-20220215132021565](JavaScript.assets/image-20220215132021565.png)
+![image-20220215132021565](JavaScript/image-20220215132021565.png)
 
 
 
@@ -2280,7 +2280,7 @@ axios({
 
 #### 循环列表的key原理(key使用id而不使用index)
 
-![image-20220211121920259](JavaScript.assets/image-20220211121920259.png)
+![image-20220211121920259](JavaScript/image-20220211121920259.png)
 
 
 
@@ -2390,13 +2390,13 @@ axios({
 
 ### 表单数据收集
 
-![image-20220215133523178](JavaScript.assets/image-20220215133523178.png)
+![image-20220215133523178](JavaScript/image-20220215133523178.png)
 
 
 
 ### 生命周期
 
-![生命周期](JavaScript.assets/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png)
+![生命周期](JavaScript/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png)
 
 **注: 生命周期钩子函数共有4对,8个,即:**
 
@@ -2428,7 +2428,7 @@ VueComponent是组件的构造函数,下面将组件实例对象称为vc
 
 此外,请注意,在**组件中的配置项**(如methods中定义的函数)它们的**this应该是指向vc**的
 
-![image-20211225163956299](JavaScript.assets/image-20211225163956299.png)
+![image-20211225163956299](JavaScript/image-20211225163956299.png)
 
 
 
@@ -2452,7 +2452,7 @@ VueComponent是组件的构造函数,下面将组件实例对象称为vc
 
    在node.js下新建两个文件夹如下所示
 
-   ![image-20220218172641041](JavaScript.assets/image-20220218172641041.png)
+   ![image-20220218172641041](JavaScript/image-20220218172641041.png)
 
 随后输入命令修改配置:
 
@@ -2495,7 +2495,7 @@ npm --registry https://registry.npm.taobao.org install express -g
 
 #### 项目结构
 
-![image-20220218224157557](JavaScript.assets/image-20220218224157557.png)
+![image-20220218224157557](JavaScript/image-20220218224157557.png)
 
 
 
@@ -2535,5 +2535,5 @@ npm --registry https://registry.npm.taobao.org install express -g
 
 随后来到vue官网的CLI配置栏目进行查找:  [配置参考 | Vue CLI (vuejs.org)](https://cli.vuejs.org/zh/config/#outputdir)
 
-![image-20220219131757221](JavaScript.assets/image-20220219131757221.png)
+![image-20220219131757221](JavaScript/image-20220219131757221.png)
 

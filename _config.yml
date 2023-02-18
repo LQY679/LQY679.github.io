@@ -43,7 +43,7 @@ external_link:
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
-relative_link: true
+relative_link: false
 future: true
 highlight:
   enable: true
@@ -103,14 +103,13 @@ ignore:
 theme: next
 
 # Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
-deploy:
-  type: git
-  repo: https://github.com/LQY679/LQY679.github.io/
-  # example, https://github.com/hexojs/hexojs.github.io
-  branch: master
-  # message: {{ now('YYYY-MM-DD HH:mm:ss') }}
-  # message: 更换音乐插件歌单
+# Docs: https://hexo.io/docs/one-command-deployment
+# deploy:
+#   type: git
+#   repo: https://github.com/LQY679/LQY679.github.io
+#   branch: master
+#   # message: {{ now('YYYY-MM-DD HH:mm:ss') }}
+#   message: 通过插件解决图片无法在本地和发布同时预览问题
 
 # npm install hexo-excerpt --save 自动生成文章摘要
 excerpt:
