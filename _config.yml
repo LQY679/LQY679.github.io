@@ -104,12 +104,12 @@ theme: next
 
 # Deployment
 # Docs: https://hexo.io/docs/one-command-deployment
-# deploy:
-#   type: git
-#   repo: https://github.com/LQY679/LQY679.github.io
-#   branch: master
-#   # message: {{ now('YYYY-MM-DD HH:mm:ss') }}
-#   message: 通过插件解决图片无法在本地和发布同时预览问题
+deploy:
+  type: git
+  repo: https://github.com/LQY679/LQY679.github.io
+  branch: master
+  # message: {{ now('YYYY-MM-DD HH:mm:ss') }}
+  message: 通过插件解决图片无法在本地和发布同时预览问题
 
 # npm install hexo-excerpt --save 自动生成文章摘要
 excerpt:
