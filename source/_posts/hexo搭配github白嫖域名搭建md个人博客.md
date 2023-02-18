@@ -240,15 +240,16 @@ const live2d_path = "/live2d-widget/";
 
 注: 如果你的hexo加了URL前缀，就将前缀加入`live2d_path`
 
-##### 2.修改api
+##### 2.修改api (被墙一定要修改)
 
-同样是修改`autoload.js`文件,替换修改一下注释即可
+同样是修改`autoload.js`文件,替换修改一下注释即可, 
 
 ```js
 initWidget({
-   waifuPath: live2d_path + "waifu-tips.json",
-  apiPath: "https://live2d.fghrsh.net/api/",
-  // cdnPath: "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/"
+  waifuPath: live2d_path + "waifu-tips.json",
+	// apiPath: "https://live2d.fghrsh.net/api/",  // 被墙
+	apiPath: "https://api.zsq.im/live2d",  // 需要国内方位请使用这个配置
+	// cdnPath: "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/",
 });
 ```
 
@@ -261,6 +262,8 @@ initWidget({
 ```html
 <script src="/live2d-widget/autoload.js"></script>
 ```
+
+
 
 ##### 4.启用Linve 2D
 
