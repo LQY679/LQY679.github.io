@@ -121,9 +121,9 @@ categories:
 >
 > ​	下载步骤：登录官网，进入下载页面，选择对应环境与版本。
 
-![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88\903.jpg)
+![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/903.jpg)
 
-![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88\904.jpg)
+![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/904.jpg)
 
 #### 3.3 Maven安装
 
@@ -133,9 +133,9 @@ categories:
 >
 > ​	注意：解压路径建议 无空格，无中文
 
-![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88\1001.jpg)
+![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/1001.jpg)
 
-![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88\1002.jpg)
+![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/1002.jpg)
 
 <img src="Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88\1003.jpg" style="zoom: 200%;" />
 
@@ -469,11 +469,11 @@ public class HelloMaven{
 
 #### 3.3 创建Maven项目
 
-![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88\309.)
+![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/309.)
 
-![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88\310.)
+![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/310.)
 
-![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88\311.)
+![](Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/311.)
 
 ### 4.小结
 
