@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lqy679.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Linux 快速入门可以通过 tab键来补全提示命令或者目录,终端命令的格式: 命令 [-选项,多个选项可以结合写] [参数] ,  大多数情况可以通过 ctrl  c 退出命令 磁盘管理123456789101112131415161718192021222324252627282930313233343536373839404142pwd # 查看当前所在目录   即:print wrok d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux快速入门">
+<meta property="og:url" content="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="南城记录倌">
+<meta property="og:description" content="Linux 快速入门可以通过 tab键来补全提示命令或者目录,终端命令的格式: 命令 [-选项,多个选项可以结合写] [参数] ,  大多数情况可以通过 ctrl  c 退出命令 磁盘管理123456789101112131415161718192021222324252627282930313233343536373839404142pwd # 查看当前所在目录   即:print wrok d">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/image-20220202193549623.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/image-20220203183038509.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/image-20220203193314724.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/image-20220206135757684.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/image-20220313000429055.png">
+<meta property="article:published_time" content="2020-01-01T10:57:32.000Z">
+<meta property="article:modified_time" content="2023-02-22T05:05:37.042Z">
+<meta property="article:author" content="Luo Qianyou">
+<meta property="article:tag" content="Java,Python,web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/image-20220202193549623.png">
+
+
+<link rel="canonical" href="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/","path":"2020/01/01/Linux常用命令/","title":"Linux快速入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux快速入门 | 南城记录倌</title>
+  
+
+
+
+
+
+
+
+
+  <!--
+    引用自作者
+    <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  -->
+  <script src="/live2d-widget/autoload.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/site_images/logo.jpg" alt="南城记录倌">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">南城记录倌</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">往昔皆为过眼云烟,一切尽随风而逝;此刻之行终将化未来的救赎之刃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">Linux 快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">磁盘管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%B8%8E%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.</span> <span class="nav-text">系统与设备信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84"><span class="nav-number">1.3.</span> <span class="nav-text">权限与用户组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.1.</span> <span class="nav-text">权限管理命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">文件打包压缩与软件安装管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-number">1.4.1.</span> <span class="nav-text">常见软件环境安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">vim编辑器使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="nav-number">1.6.</span> <span class="nav-text">软连接和硬链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell"><span class="nav-number">1.7.</span> <span class="nav-text">Shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.7.1.</span> <span class="nav-text">shell基本概念:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFshell"><span class="nav-number">1.7.1.1.</span> <span class="nav-text">什么是shell ?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%84%9A%E6%9C%AC"><span class="nav-number">1.7.1.2.</span> <span class="nav-text">什么是脚本?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shell-%E7%A7%8D%E7%B1%BB"><span class="nav-number">1.7.1.3.</span> <span class="nav-text">Shell 种类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell-%E5%85%A5%E9%97%A8"><span class="nav-number">1.7.2.</span> <span class="nav-text">shell 入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell%E5%8F%98%E9%87%8F"><span class="nav-number">1.7.3.</span> <span class="nav-text">Shell变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%BC%95%E5%8F%B7%E5%BC%95%E7%94%A8%E8%87%AA%E5%B8%A6%E5%91%BD%E4%BB%A4"><span class="nav-number">1.7.3.1.</span> <span class="nav-text">反引号引用自带命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%97%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="nav-number">1.7.3.2.</span> <span class="nav-text">接受用户输入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.7.4.</span> <span class="nav-text">条件判断语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.7.5.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.7.5.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.7.5.2.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91-%E5%B8%83%E5%B0%94-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.7.5.3.</span> <span class="nav-text">逻辑(布尔)运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.7.5.4.</span> <span class="nav-text">字符串运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%90%E7%AE%97%E7%AC%A6d"><span class="nav-number">1.7.5.5.</span> <span class="nav-text">文件测试运算符d</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell%E8%84%9A%E6%9C%AC%E9%99%84%E5%B8%A6%E5%8F%82%E6%95%B0%E9%80%89%E9%A1%B9"><span class="nav-number">1.7.6.</span> <span class="nav-text">shell脚本附带参数选项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%AB%E5%90%8D-alias"><span class="nav-number">1.8.</span> <span class="nav-text">别名(alias)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH%E8%BF%9C%E7%A8%8B%E9%93%BE%E6%8E%A5"><span class="nav-number">1.9.</span> <span class="nav-text">SSH远程链接</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Luo Qianyou"
+      src="/site_images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Luo Qianyou</p>
+  <div class="site-description" itemprop="description">清醒,知趣 明得失,知进退</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LQY679" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LQY679" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/QianyouLuo" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;QianyouLuo" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com" rel="noopener" target="_blank">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/site_images/logo.jpg">
+      <meta itemprop="name" content="Luo Qianyou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南城记录倌">
+      <meta itemprop="description" content="清醒,知趣 明得失,知进退">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux快速入门 | 南城记录倌">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux快速入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-01 18:57:32" itemprop="dateCreated datePublished" datetime="2020-01-01T18:57:32+08:00">2020-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-22 13:05:37" itemprop="dateModified" datetime="2023-02-22T13:05:37+08:00">2023-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Linux-快速入门"><a href="#Linux-快速入门" class="headerlink" title="Linux 快速入门"></a>Linux 快速入门</h1><p>可以<strong>通过<code> tab</code>键来补全提示命令或者目录</strong>,<strong>终端命令的格式: 命令 [-选项,多个选项可以结合写] [参数] ,  大多数情况可以通过 <code>ctrl  c </code>退出命令</strong></p>
+<h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span> <span class="comment"># 查看当前所在目录   即:print wrok directory</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">ls</span> [-[l][,h][,a]] [目录]   <span class="comment"># 查看目录下的所有文件和目录,默认查看当前目录下的   即:list</span></span><br><span class="line"><span class="comment"># 选项 l 代表以列表形式展现,a即 all,显示所有文件包括隐藏的,隐藏文件的特征是文件命名最前面有一个点 .</span></span><br><span class="line"><span class="comment"># ls 命令可配合通配符(即正则表达式)使用</span></span><br><span class="line"><span class="comment"># 通配符 :  * 代表任意个字符  ? 代表任意一个字符  [] 代表字符组中的任意一个(即范围)(如[abc]代表有abc中任意一个,[a-z]代表任意一个小写字母)</span></span><br><span class="line"></span><br><span class="line">tree [目录名]  <span class="comment"># 以树状图的形式列出文件目录</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> 目录名   <span class="comment">#切换目录</span></span><br><span class="line"><span class="comment"># 目录名可以使用相对路径和绝对路径  相对路径中:  . 代表当前目录, .. 代表上一级目录  即:change directory</span></span><br><span class="line"><span class="comment"># cd ~ 切换到该用户的Home目录</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> 目录名 <span class="comment"># 创建目录    即:make directory     选项: -p可以创建多级目录  </span></span><br><span class="line"><span class="built_in">touch</span> 文件名 <span class="comment"># 创建文件    如果不存在则新建文件,存在则修改文件末次修改时间 </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> 文件名  <span class="comment">#删除(不经过回收站),也可结合通配符使用    即: remove  选项 -r 则删除目录, 默认删除文件  -f 不提示删除</span></span><br><span class="line">clear  <span class="comment">#清屏 </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> 原文件 目标文件   <span class="comment">#即: copy,拷贝文件  </span></span><br><span class="line"><span class="built_in">mv</span> 原文件 目标文件   <span class="comment">#即: move 移动文件或者重命名文件</span></span><br><span class="line"><span class="comment"># cp和mv均有命令选项 -i , 覆盖前提示, 默认不提示,  -r 操作目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看文件内容</span></span><br><span class="line"><span class="built_in">cat</span> 文件名  <span class="comment">#即:concatenate, 查看文件内容,创建文件,合并文件,追加文件内容等功能    </span></span><br><span class="line"><span class="comment">#选项: -n 对所有行进行编号(行号) ,   -b 对非空行进行编号</span></span><br><span class="line">more 文件名 <span class="comment">#以分页模式查看,按空格键下一页,回车下一行, b 回滚前一页,f前滚一页, /word 即可搜索word字符串</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查找文件</span></span><br><span class="line">find [路径] -name <span class="string">&quot;查找内容&quot;</span> <span class="comment"># 查找文件,可结合正则表达式使用,不写目录默认在当前目录查找,</span></span><br><span class="line"><span class="comment">#选项-name,代表根据文件名查找 , 如 find -name &quot;.txt&quot;  查找当前目录下后缀名为txt的文件</span></span><br><span class="line"></span><br><span class="line">grep 搜索内容(如果有空格,用引号包裹) 文件   <span class="comment">#即:搜索指定文件的内容,可结合正则表达式使用</span></span><br><span class="line"><span class="comment">#选项: -n 显示匹配的行及行号,  -i 忽略大小写 , -v显示不包括匹配文本的所有行(相当于求反)</span></span><br><span class="line"><span class="comment">#命令参数: ^string  行首匹配,如  grep ^string a.txt 搜索以stirng开头的行; str$       行尾匹配,搜索str结尾的行</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 参数(可以是文本或者执行命令后的结果)  <span class="comment">#输出参数,默认输出到终端,通常配合重定向使用;</span></span><br><span class="line"><span class="comment">#重定向 &gt; 和 &gt;&gt;  </span></span><br><span class="line"><span class="comment"># &gt; 文件  代表将文件内容重写,不存在则新建文件, &gt;&gt; 文件 代表向文件追加内容</span></span><br><span class="line"><span class="comment">#如 echo hello &gt; a.txt   则会向a.txt中内容重写为 hello ,       ls &gt; a.txt 则向文件中输出 ls命令的结果内容</span></span><br><span class="line">管道 |     <span class="comment"># 即: 将一个命令的输出可以通过管道作为另一个命令的输出</span></span><br><span class="line"><span class="comment"># 如 ls -lha ~ | more    将用户home目录分页显示, ls -lha ~ | grep -n root    查找用户home目录中带有root的记录</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="系统与设备信息"><a href="#系统与设备信息" class="headerlink" title="系统与设备信息"></a>系统与设备信息</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#关机/重启</span></span><br><span class="line">shutdown [选项] [时间]   <span class="comment">#不写选项默认是关机, 不写时间默认一分钟后</span></span><br><span class="line"><span class="comment">#选项: -r  重启  -c 取消执行计划         时间:  now 现在执行,  20:00  今天晚上8点执行, +10 10分钟后执行</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看或配置网卡信息</span></span><br><span class="line">ping ip地址  <span class="comment">#即:访问ip, 按 CTRL C 退出命令</span></span><br><span class="line">ifconfig  <span class="comment">#即: configure a network interface , 查看网卡配置信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用SSH命令远程控制</span></span><br><span class="line">ssh [-p port] user@remote  <span class="comment">#不设置选项默认为ssh默认端口22, remote可以是IP地址,域名,或者别名</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">date</span>  <span class="comment">#显示系统时间</span></span><br><span class="line">cal   <span class="comment"># 显示系统日历, calendar 的缩写</span></span><br><span class="line"><span class="built_in">df</span> -h  <span class="comment"># disk free 显示磁盘剩余量, 选项 -h 显示得更人性化 </span></span><br><span class="line"><span class="built_in">du</span> -h  [目录名]  <span class="comment"># 显示目录的文件大小, 不写目录名默认是当前目录, 选项 -h 显示更加人性化</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进程信息</span></span><br><span class="line">ps aux  <span class="comment"># process status 查看进程详细情况,参数 a 代表 所有用户的进程, u显示详细状态, x显示没用控制终端的进程 ,</span></span><br><span class="line">top  <span class="comment">#动态显示运行的进程并且排序 , 退出直接输入 q </span></span><br><span class="line"><span class="built_in">kill</span> [-9] 进程<span class="built_in">id</span>   <span class="comment"># 结束进程, 选项 -9 代表强行终止</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看端口占用情况(查看占用端口的PID)</span></span><br><span class="line">sudo netstat -nultp   <span class="comment">#查看所有得端口占用情况,状态为listen则表示为占用</span></span><br><span class="line">sudo netstat -anp |grep 端口号   <span class="comment">#查看指定端口的PID</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="权限与用户组"><a href="#权限与用户组" class="headerlink" title="权限与用户组"></a>权限与用户组</h2><p>使用 ls 命令查看文件列表时, 可以看到文件所属的用户和组,以及相关权限</p>
+<p><img src="image-20220202193549623.png" alt="image-20220202193549623"></p>
+<p><strong>在/etc/passwd文件中,保存了用户的信息</strong></p>
+<p><img src="image-20220203183038509.png" alt="image-20220203183038509"></p>
+<h3 id="权限管理命令"><a href="#权限管理命令" class="headerlink" title="权限管理命令"></a>权限管理命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 权限管理</span></span><br><span class="line"><span class="built_in">chmod</span> +或- 权限(rwx均可) <span class="comment">#文件或者目录    即: 增加(+) 或减少(-) 权限  ,</span></span><br><span class="line"><span class="comment">#针对目录而言, x即可执行权限决定目录是否能打开或执行命令, </span></span><br><span class="line"><span class="comment">#目录的可读权限决定目录能否查看目录里的内容,</span></span><br><span class="line"><span class="comment">#可写权限决定是否能修改目录的内容(比如增减文件)</span></span><br><span class="line"><span class="comment">#并且可指定用户的权限 , u (代表user) , g(代表group), o(代表other)</span></span><br><span class="line"><span class="comment">#例如:  chmod o-rwx file 代表其他人不能读写执行此文件, chomd u+rw file 代表文件所属用户可以读写文件</span></span><br><span class="line"><span class="built_in">chmod</span> 权限(数字表示) 文件或目录名   <span class="comment"># 修改权限 , 选项 -R 递归修改子目录</span></span><br><span class="line"><span class="comment">#拓展: chmod 命令的权限用数字表示,  单个权限数字表示:  r 对应 4, w 对应 2 ,  x 对应 1 ,</span></span><br><span class="line"><span class="comment">#多个权限将权限数字加起来 如 rwx 权限为 7, rw- 权限为 6, r-w为 5, -wx 为3, 无任何权限为0</span></span><br><span class="line"><span class="comment">#例如: chmod 763 文件或目录  # 这样即为数字表示,其中763依次代表 文件拥有者, 所属组, 其他用户 所对应的权限</span></span><br><span class="line"></span><br><span class="line">sudo 命令 <span class="comment">#借用root用户权限执行命令,管理组只能由超级用户root权限执行  su 即 substitute user 的缩写</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 管理组</span></span><br><span class="line"><span class="built_in">chgrp</span> 组名 文件或目录      <span class="comment"># 修改组,选项 -R 递归修改子目录</span></span><br><span class="line">groupadd 组名   <span class="comment">#即: 添加组</span></span><br><span class="line">groupdel 组名   <span class="comment">#即: 删除组</span></span><br><span class="line"><span class="built_in">chgrp</span> 组名 文件或目录   <span class="comment">#即: 修改文件或目录的所属组,  选项 -R 递归的修改目录所属组(即该目录以及所有子目录都修改所属组)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#用户管理</span></span><br><span class="line">su 用户名   <span class="comment"># 切换用户, 选项 -l  切换的同时切换home目录</span></span><br><span class="line"><span class="built_in">chown</span> 用户名 文件名或目录名  <span class="comment"># 修改文件所属者</span></span><br><span class="line">useradd 用户名  <span class="comment">#即 添加用户, 但是这样添加的用户默认是没有管理员权限,无法使用 sudo命令, </span></span><br><span class="line"><span class="comment"># 选项:  -m 自动创建用户home目录,默认不创建, -g 指定所在的组,默认在创建一个同名的组加入</span></span><br><span class="line">userdel  用户名   <span class="comment">#即 删除用户, 选项 -r 删除该用户的 home目录,默认不删除home目录</span></span><br><span class="line">passwd  新密码   <span class="comment">#即修改当前用户密码</span></span><br><span class="line"><span class="built_in">id</span> [用户名]   <span class="comment">#即 :  查询用户的id和所属的组的id,  不指定用户名则查询当前用户</span></span><br><span class="line"><span class="built_in">who</span>  <span class="comment">#即 查询当前主机登陆了哪些用户</span></span><br><span class="line">usermod [-g或-G] 组 用户名   <span class="comment"># 设置用户的主组或者附加组,设置后需要重新登陆,选项 -g 设置主组, -G设置附加组, -s 设置登陆shell</span></span><br><span class="line"><span class="comment"># 主组,即用户所属的组, 附加组为用户附加的权限,常见的附加组有: sudo ,adm,cdrom等</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">which</span> 命令(如<span class="built_in">ls</span>, passwd等命令)   <span class="comment"># 查看命令程序文件所在的目录位置</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="image-20220203193314724.png" alt="image-20220203193314724"></p>
+<h2 id="文件打包压缩与软件安装管理"><a href="#文件打包压缩与软件安装管理" class="headerlink" title="文件打包压缩与软件安装管理"></a>文件打包压缩与软件安装管理</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打包压缩</span></span><br><span class="line">tar 命令只打包不压缩</span><br><span class="line">tar -cvf 要打包文件名.tar 被打包的文件    <span class="comment"># 打包 ,选项带 -c</span></span><br><span class="line">tar -xvf 包文件名.tar     <span class="comment"># 打开被打包的文件, 选择带 -x</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#gzip压缩</span></span><br><span class="line"><span class="comment">#压缩要使用到gzip 命令,压缩包的后缀是 xxx.tar.gz,但可在tar命令添加选项 -z自动调用压缩命令</span></span><br><span class="line">tar -zcvf 压缩包文件名.tar.gz       <span class="comment">#被压缩的文件,多个文件用空格隔开   # 压缩文件</span></span><br><span class="line">tar -zxvf 压缩包文件名.tar.gz  [-C 目标路径]   <span class="comment"># 解压文件, 其中 -C 选项可以指定解压路径</span></span><br><span class="line">bzip2(读two)压缩</span><br><span class="line">与gzip 压缩差不多, 区别是在 tar命令第一个命令选项将z替换成 j</span><br><span class="line"></span><br><span class="line"><span class="comment">#软件安装卸载/更新(需使用root 权限),需说明一下,Linux分两大类,ubuntu这种通常用apt-get, CentOS通常用yum,d</span></span><br><span class="line">apt install 软件名  	<span class="comment">#安装, 其中apt 是 Advanced Package Tool</span></span><br><span class="line">apt remove 软件名  	<span class="comment">#卸载</span></span><br><span class="line">apt upgrade  		<span class="comment">#检查更新软件</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="常见软件环境安装"><a href="#常见软件环境安装" class="headerlink" title="常见软件环境安装"></a>常见软件环境安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ssh</span></span><br><span class="line">sudo apt-get install openssh-server <span class="comment">#安装ssh</span></span><br><span class="line">sudo service ssh start <span class="comment">#启动ssh</span></span><br><span class="line">sudo ps -e |grep ssh <span class="comment">#查看ssh服务是否启动</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="vim编辑器使用"><a href="#vim编辑器使用" class="headerlink" title="vim编辑器使用"></a>vim编辑器使用</h2><p>vim 有三种模式: </p>
+<ul>
+<li><strong>只读模式(打开默认进入)</strong> </li>
+<li> <strong>可写模式(在只读模式下按a键或i键可切换)</strong> ,在此模式下按 Esc 可以退出可写模式重新回到只读模式</li>
+<li> <strong>命令行模式(按shift + ; 或者大写模式下的 :)</strong> ,</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim 文件名  <span class="comment">#使用vim 打开文件(文件不存在则新建)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>保存或者退出:</strong> 在命令行模式下, 输入:  ==q!==  <strong>强制退出不保存</strong> ,  ==wq== <strong>保存退出</strong> </p>
+<p><strong>显示/隐藏行号:</strong> 在命令行模式下, 输入:  set nu   /  set nonu</p>
+<p><strong>搜索关键字:</strong> 在命令行模式下 , 输入 :  ==/ 搜索的内容==</p>
+<p><strong>撤回:</strong> 在命令行模式下 ,输入:  u</p>
+<p><strong>取消撤回:</strong> 在只读模式下 , 按 Ctrl  和 r</p>
+<p><strong>删除行和转换至某行:</strong> 在只读模式下 , 按 dd 删除某行 , 按  n 和 shift 跳转到某行</p>
+<h2 id="软连接和硬链接"><a href="#软连接和硬链接" class="headerlink" title="软连接和硬链接"></a>软连接和硬链接</h2><p><strong>在Linux中,文件名与文件数据是分开存储的</strong></p>
+<p><img src="image-20220206135757684.png" alt="image-20220206135757684"></p>
+<p><strong>软连接相当于window系统的快捷方式</strong></p>
+<p>软连接与硬链接的区别是被链接的源文件删除后,软连接就会失效,但硬链接依然不受影响</p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><h3 id="shell基本概念"><a href="#shell基本概念" class="headerlink" title="shell基本概念:"></a>shell基本概念:</h3><h4 id="什么是shell"><a href="#什么是shell" class="headerlink" title="什么是shell ?"></a>什么是shell ?</h4><p>shell(外壳) 是一个用c语言编写的程序 , 它是用户使用linux的桥梁, shell 既是一种命令语言 , 又是一种程序设计语言</p>
+<p>shell 是指一种应用程序, 这个应用程序提供了一个界面, 用户通过这个界面访问操作系统内核的服务 </p>
+<h4 id="什么是脚本"><a href="#什么是脚本" class="headerlink" title="什么是脚本?"></a>什么是脚本?</h4><p>脚本简单说就是一条条的文字命令 , 这些命令是可以看到的(可以用文本编辑器编辑) , 常见的脚本: JavaScript , VBscript , ASP , JSP, PHP , Shell , python ,Ruby , JavaFx</p>
+<h4 id="Shell-种类"><a href="#Shell-种类" class="headerlink" title="Shell 种类"></a>Shell 种类</h4><p>在linux中有很多类型的shell , 不同的shell 具备不同的功能 ,shell还决定了脚本中函数的语法, linux中默认的shell 是 ==/bin/bash== , 流行的shell 有 : ash , bash , ksh , csh , zsh </p>
+<h3 id="shell-入门"><a href="#shell-入门" class="headerlink" title="shell 入门"></a>shell 入门</h3><p>编写一个hello.sh , 内容如下:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world&quot;</span> ; </span><br></pre></td></tr></table></figure>
+
+<p>随后使用<code>chmod hello.sh +rwx</code> 给文件添加权限 , 最后运行命令 <code>./hello.sh</code>  , **注意: 即使在当前目录下也不能使用<code>hello.sh</code>**去运行 , 因为这样系统会去寻找Path(即系统环境变量)下的路径,而Path里只有: /bin ,  /sbin  ,  /user/sbin 等路径</p>
+<h3 id="Shell变量"><a href="#Shell变量" class="headerlink" title="Shell变量"></a>Shell变量</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义变量:</span></span><br><span class="line">变量名=值  <span class="comment">#注意:变量后的等号前后不能空格</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用变量: $变量</span></span><br><span class="line"><span class="built_in">echo</span> $变量名    <span class="comment">#打印变量</span></span><br></pre></td></tr></table></figure>
+
+<p>==注意事项:==</p>
+<p>变量命名规范与大多数C语言类似,不支持中文汉字,<strong>并且在变量名后面的等号不能有空格</strong> ,不可使用关键字(可用help命令查询) </p>
+<h4 id="反引号引用自带命令"><a href="#反引号引用自带命令" class="headerlink" title="反引号引用自带命令"></a>反引号引用自带命令</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#内置显示时间命令</span></span><br><span class="line">data +<span class="string">&quot;%F %T&quot;</span>  <span class="comment">#显示当前时间,格式为 年-月-日 00:00:00</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#shell内容</span></span><br><span class="line">mg=`data +<span class="string">&#x27;%F %T&#x27;</span>` ;</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$mg</span> ;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="接受用户输入"><a href="#接受用户输入" class="headerlink" title="接受用户输入"></a>接受用户输入</h4><p>语法格式;</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;提示信息&quot;</span> 变量名</span><br></pre></td></tr></table></figure>
+
+<p>如下例子演示接受用户输入的文件路径然后根据此字符串创建文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;Enter the path name of the file you want to create!&quot;</span> filePath ;</span><br><span class="line"><span class="built_in">touch</span> <span class="variable">$filePath</span> ;</span><br><span class="line"><span class="built_in">echo</span> the file created! ;  <span class="comment">#打印提示信息</span></span><br><span class="line"><span class="built_in">ls</span> -lh <span class="variable">$filePath</span> <span class="comment">#显示文件信息</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><em>扩展:只读变量</em>(常量):</p>
+<p>语法格式:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">readonly</span> 变量名  <span class="comment">#此变量会被修饰被常量</span></span><br></pre></td></tr></table></figure>
+
+<p><em>扩展:删除变量:</em></p>
+<p>语法格式:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> 变量名 </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="条件判断语句"><a href="#条件判断语句" class="headerlink" title="条件判断语句"></a>条件判断语句</h3><blockquote>
+<p>参考:<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-shell-process-control.html">Shell 流程控制 | 菜鸟教程 (runoob.com)</a></p>
+</blockquote>
+<p>shell 中貌似没有 switch 语句,</p>
+<p><strong>与大多数编程语言不同: 没有{} ,而是采用了then ,  if语句最后结束要加个 fi , 条件内容不需要加括号 , else if 写成了 elif</strong></p>
+<p><strong>注意!!! 条件表达式 想使用 &lt;, &gt; , =&lt;, &gt;= 等符号 表达式格式为: (( 条件 ))</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">语法1:</span></span><br><span class="line">if 条件</span><br><span class="line">then </span><br><span class="line">	语句(块)</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">语法2:</span></span><br><span class="line">if 条件</span><br><span class="line">then </span><br><span class="line">	语句(块)</span><br><span class="line">else </span><br><span class="line">	语句(块)</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">语法3;</span></span><br><span class="line">if 条件3</span><br><span class="line">then </span><br><span class="line">   语句(块)</span><br><span class="line">elif 条件</span><br><span class="line">then </span><br><span class="line">	语句(块)</span><br><span class="line">else </span><br><span class="line">	语句(块)</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><p>**原生bash不支持简单的数学运算 ,但是可以通过其他命令来实现,例如 awk , expr(最常用) , ==注意:除了赋值等号之间不能用空格隔开,其大多数都必须用空格隔开== ** </p>
+<p>expr是一款表达式计算工具, 如可以在终端中使用命令<code>expr 2 + 2 </code> , 需要注意的是:</p>
+<ul>
+<li><p><strong>==表达式中的运算数和运算符之间要有空格隔开,这里与大多数编程语言不同==</strong></p>
+</li>
+<li><p>由于expr也是一个原生命令 , 故在shell中使用时需要用 <strong>反引号包裹</strong> 例如:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val=`<span class="built_in">expr</span> 2 + 2` ; </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$val</span>&quot;</span> ; </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h4><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">说明</th>
+<th align="left">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">+</td>
+<td align="left">加法</td>
+<td align="left"><code>expr $a + $b</code> 结果为 30。</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">减法</td>
+<td align="left"><code>expr $a - $b</code> 结果为 -10。</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">乘法</td>
+<td align="left"><code>expr $a \* $b</code> 结果为  200。</td>
+</tr>
+<tr>
+<td align="left">/</td>
+<td align="left">除法</td>
+<td align="left"><code>expr $b / $a</code> 结果为 2。</td>
+</tr>
+<tr>
+<td align="left">%</td>
+<td align="left">取余</td>
+<td align="left"><code>expr $b % $a</code> 结果为 0。</td>
+</tr>
+<tr>
+<td align="left">=</td>
+<td align="left">赋值</td>
+<td align="left">a=$b 把变量 b 的值赋给 a。</td>
+</tr>
+<tr>
+<td align="left">==</td>
+<td align="left">相等。用于比较两个数字，相同则返回 true。</td>
+<td align="left"><strong>[ $a == $b ] 返回 false</strong>。</td>
+</tr>
+<tr>
+<td align="left">!=</td>
+<td align="left">不相等。用于比较两个数字，不相同则返回 true。</td>
+<td align="left"><strong>[ $a != $b ] 返回 true</strong>。</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong>==条件表达式要放在方括号之间，并且要有空格==，例如: <strong>[$a==$b]</strong> 是错误的，必须写成 **[ $a == $b ]**。</p>
+<p>例:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a=10 ;</span><br><span class="line">b=20 ;</span><br><span class="line"></span><br><span class="line">echo &quot;a=$a,b=$b&quot;</span><br><span class="line"></span><br><span class="line">echo &quot;a+b=&quot; `expr $a + $b`</span><br><span class="line">echo &quot;a-b=&quot; `expr $a - $b`</span><br><span class="line">echo &quot;a*b=&quot; `expr $a \* $b`   # 注意:*原指的 通配符 , 所以乘法需要转义 \*</span><br><span class="line">echo &quot;a/b=&quot; `expr $a / $b`</span><br><span class="line">echo &quot;a%b=&quot; `expr $a % $b`</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h4><p>关系运算符<strong>只支持数字，不支持字符串，除非字符串的值是数字</strong>。</p>
+<p>下表列出了常用的关系运算符，假定变量 a 为 10，变量 b 为 20：</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">说明</th>
+<th align="left">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-eq</td>
+<td align="left">检测两个数是否相等，相等返回 true。**(equal)**</td>
+<td align="left">[ $a -eq $b ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">-ne</td>
+<td align="left">检测两个数是否不相等，不相等返回 true。 <strong>(not equal )</strong></td>
+<td align="left">[ $a -ne $b ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left">-gt</td>
+<td align="left">检测左边的数是否大于右边的，如果是，则返回 true。**(相当于 &gt;  , greater than)**</td>
+<td align="left">[ $a -gt $b ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">-lt</td>
+<td align="left">检测左边的数是否小于右边的，如果是，则返回 true。**(相当于 &lt; , less than)**</td>
+<td align="left">[ $a -lt $b ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left">-ge</td>
+<td align="left">检测左边的数是否大于等于右边的，如果是，则返回 true。**( &gt;=  ,greater than equal)**</td>
+<td align="left">[ $a -ge $b ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">-le</td>
+<td align="left">检测左边的数是否小于等于右边的，如果是，则返回 true。**(&lt;=  , less than equal)**</td>
+<td align="left">[ $a -le $b ] 返回 true。</td>
+</tr>
+</tbody></table>
+<h4 id="逻辑-布尔-运算符"><a href="#逻辑-布尔-运算符" class="headerlink" title="逻辑(布尔)运算符"></a>逻辑(布尔)运算符</h4><p>下表列出了常用的布尔运算符，假定变量 a 为 10，变量 b 为 20：</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">说明</th>
+<th align="left">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">!</td>
+<td align="left">非运算，表达式为 true 则返回 false，否则返回 true。</td>
+<td align="left">[ ! false ] 返回 true。</td>
+</tr>
+</tbody></table>
+<p>注意: 使用下面的逻辑运算符需要 用两个 <strong>方括号d</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">说明</th>
+<th align="left">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&amp;&amp;</td>
+<td align="left">逻辑的 AND</td>
+<td align="left">[[ $a -lt 100 &amp;&amp; $b -gt 100 ]] 返回 false</td>
+</tr>
+<tr>
+<td align="left">||</td>
+<td align="left">逻辑的 OR</td>
+<td align="left">[[ $a -lt 100 || $b -gt 100 ]] 返回 true</td>
+</tr>
+</tbody></table>
+<h4 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h4><p>下表列出了常用的字符串运算符，假定变量 a 为 “abc”，变量 b 为 “efg”：</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">说明</th>
+<th align="left">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">=</td>
+<td align="left">检测两个字符串是否相等，相等返回 true。</td>
+<td align="left">[ $a = $b ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">!=</td>
+<td align="left">检测两个字符串是否不相等，不相等返回 true。</td>
+<td align="left">[ $a != $b ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left">-z</td>
+<td align="left">检测字符串长度是否为0，为0返回 true。</td>
+<td align="left">[ -z $a ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">-n</td>
+<td align="left">检测字符串长度是否不为 0，不为 0 返回 true。</td>
+<td align="left">[ -n “$a” ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left">$</td>
+<td align="left">检测字符串是否为空，不为空返回 true。</td>
+<td align="left">[ $a ] 返回 true。</td>
+</tr>
+</tbody></table>
+<h4 id="文件测试运算符d"><a href="#文件测试运算符d" class="headerlink" title="文件测试运算符d"></a>文件测试运算符d</h4><table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">说明</th>
+<th align="left">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>-e file</strong></td>
+<td align="left"><strong>检测文件（包括目录）是否存在，如果是，则返回 true。</strong></td>
+<td align="left">[ -e $file ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left"><strong>-d file</strong></td>
+<td align="left"><strong>检测文件是否是目录，如果是，则返回 true。</strong></td>
+<td align="left">[ -d $file ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left"><strong>-f file</strong></td>
+<td align="left"><strong>检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。</strong></td>
+<td align="left">[ -f $file ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left"><strong>-s file</strong></td>
+<td align="left"><strong>检测文件是否为空（文件大小是否大于0），不为空返回 true。</strong></td>
+<td align="left">[ -s $file ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left"><strong>-r file</strong></td>
+<td align="left"><strong>检测文件是否可读，如果是，则返回 true。</strong></td>
+<td align="left">[ -r $file ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left"><strong>-w file</strong></td>
+<td align="left"><strong>检测文件是否可写，如果是，则返回 true。</strong></td>
+<td align="left">[ -w $file ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left"><strong>-x file</strong></td>
+<td align="left"><strong>检测文件是否可执行，如果是，则返回 true。</strong></td>
+<td align="left">[ -x $file ] 返回 true。</td>
+</tr>
+<tr>
+<td align="left">-b file</td>
+<td align="left">检测文件是否是块设备文件(如u盘之类的)，如果是，则返回 true。</td>
+<td align="left">[ -b $file ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">-c file</td>
+<td align="left">检测文件是否是字符设备文件，如果是，则返回 true。</td>
+<td align="left">[ -c $file ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">-g file</td>
+<td align="left">检测文件是否设置了 SGID 位，如果是，则返回 true。</td>
+<td align="left">[ -g $file ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">-k file</td>
+<td align="left">检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。</td>
+<td align="left">[ -k $file ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">-p file</td>
+<td align="left">检测文件是否是有名管道，如果是，则返回 true。</td>
+<td align="left">[ -p $file ] 返回 false。</td>
+</tr>
+<tr>
+<td align="left">-u file</td>
+<td align="left">检测文件是否设置了 SUID 位，如果是，则返回 true。</td>
+<td align="left">[ -u $file ] 返回 false。</td>
+</tr>
+</tbody></table>
+<h3 id="shell脚本附带参数选项"><a href="#shell脚本附带参数选项" class="headerlink" title="shell脚本附带参数选项"></a>shell脚本附带参数选项</h3><p><strong>自定义的shell 脚本其实也可以设置命令选项, 接收选项的方式通过 <code>$1 $2 $3 $4  </code>等去接受, 分别代表了第一个选项,第二个选项第三个选型 …</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#讲命令选型打印出来 , $0表示脚本文件自身</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$2</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$3</span></span><br></pre></td></tr></table></figure>
+
+<p>案例:自定义命令<code>user -add 用户名</code>  添加用户,  <code>user -del 用户名</code> 删除用户 , </p>
+<ol>
+<li> 编写shell文件, </li>
+</ol>
+   <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [<span class="variable">$1</span> = <span class="string">&quot;-add&quot;</span>]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	useradd <span class="variable">$2</span> ; </span><br><span class="line"><span class="keyword">elif</span> [<span class="variable">$1</span> = -del]</span><br><span class="line"><span class="keyword">then</span> </span><br><span class="line">	userdel -r <span class="variable">$2</span> ;</span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;命令有误!&quot;</span></span><br><span class="line"><span class="keyword">if</span> </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>随后定义别名 , 在<code>~/.bashrc</code>文件中添加如下内容:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> user=<span class="string">&#x27;shell文件路径及文件名.sh&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="别名-alias"><a href="#别名-alias" class="headerlink" title="别名(alias)"></a>别名(alias)</h2><p>Linux允许我们给脚本文件或者内置命令自定义别名 , 别名配置信息都存储在<code>~/.bashrc</code>,文件,</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> -p  <span class="comment">#查看已经设置的别名</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="image-20220313000429055.png" alt="image-20220313000429055"></p>
+<p><strong>==注意:添加别名后需要切换一下用户才能生效==</strong></p>
+<h2 id="SSH远程链接"><a href="#SSH远程链接" class="headerlink" title="SSH远程链接"></a>SSH远程链接</h2><ol>
+<li>安装SSH</li>
+<li>根据主机ip进行链接</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Luo Qianyou
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lqy679.github.io/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux快速入门">https://lqy679.github.io/2020/01/01/Linux常用命令/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/01/01/JSON/" rel="prev" title="JSON">
+                  <i class="fa fa-chevron-left"></i> JSON
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/01/Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/" rel="next" title="Maven课程教案">
+                  Maven课程教案 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo Qianyou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/LQY679" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+<meting-js server="tencent" type="playlist" id="8809238545" fixed="true"  autoplay="false" loop="all" order="list" list-folded="ture" list-max-height="500px" ><!-- hexo injector body_end end --></body>
+</html>

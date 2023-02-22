@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lqy679.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Git分布式版本控制系统, 此外还有 SVN (集中式版本控制系统) 下载地址(阿里云镜像) :CNPM Binaries Mirror (npmmirror.com) Git Bash : Linux命令行风格 (推荐使用)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git">
+<meta property="og:url" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="南城记录倌">
+<meta property="og:description" content="Git分布式版本控制系统, 此外还有 SVN (集中式版本控制系统) 下载地址(阿里云镜像) :CNPM Binaries Mirror (npmmirror.com) Git Bash : Linux命令行风格 (推荐使用)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220211224327434.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220211185841447.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220211192428390.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220212122417566.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220212123821424.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220212124323578.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220212191854458.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220212192018869.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220211235015698.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220212152505836.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220213000759563.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220213002242587.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220213233655862.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220213234836763.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220214002359002.png">
+<meta property="article:published_time" content="2020-01-01T10:57:32.000Z">
+<meta property="article:modified_time" content="2023-02-22T05:00:47.818Z">
+<meta property="article:author" content="Luo Qianyou">
+<meta property="article:tag" content="Java,Python,web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/image-20220211224327434.png">
+
+
+<link rel="canonical" href="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/","path":"2020/01/01/Git基础/","title":"git"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>git | 南城记录倌</title>
+  
+
+
+
+
+
+
+
+
+  <!--
+    引用自作者
+    <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  -->
+  <script src="/live2d-widget/autoload.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/site_images/logo.jpg" alt="南城记录倌">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">南城记录倌</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">往昔皆为过眼云烟,一切尽随风而逝;此刻之行终将化未来的救赎之刃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git"><span class="nav-number">1.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Git%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.1.</span> <span class="nav-text">Git配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-%E7%90%86%E8%AE%BA"><span class="nav-number">1.2.</span> <span class="nav-text">Git基本原理(理论)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#git%E7%AE%A1%E7%90%86%E7%9A%84%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">git管理的文件状态:</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E8%B7%9F%E8%B8%AA-untrack-track"><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">是否跟踪(untrack,track):</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E6%9A%82%E5%AD%98-unstage-stage"><span class="nav-number">1.2.1.1.2.</span> <span class="nav-text">是否暂存 (unstage,stage):</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B7%B2%E4%BF%AE%E6%94%B9-modfiied"><span class="nav-number">1.2.1.1.3.</span> <span class="nav-text">已修改(modfiied):</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B7%B2%E6%8F%90%E4%BA%A4-commited"><span class="nav-number">1.2.1.1.4.</span> <span class="nav-text">已提交(commited):</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4-%E9%80%9F%E6%9F%A5"><span class="nav-number">1.3.</span> <span class="nav-text">命令(速查)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%94%AF"><span class="nav-number">1.4.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C-%E5%91%BD%E4%BB%A4"><span class="nav-number">1.4.1.</span> <span class="nav-text">分支操作(命令)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C"><span class="nav-number">1.5.</span> <span class="nav-text">团队协作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.5.1.</span> <span class="nav-text">远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">相关命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%83%E9%99%90"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">权限</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B"><span class="nav-number">1.6.</span> <span class="nav-text">样例:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E6%AC%A1%E6%8F%90%E4%BA%A4"><span class="nav-number">1.6.1.</span> <span class="nav-text">初次提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E4%BF%AE%E6%94%B9"><span class="nav-number">1.6.2.</span> <span class="nav-text">后续修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E7%A9%BF%E6%A2%AD-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A"><span class="nav-number">1.6.3.</span> <span class="nav-text">版本穿梭,代码回滚</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF-%E5%A4%9A%E5%88%86%E6%94%AF%E6%8F%90%E4%BA%A4"><span class="nav-number">1.6.4.</span> <span class="nav-text">查看创建分支,多分支提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6-%E6%97%A0%E5%86%B2%E7%AA%81"><span class="nav-number">1.6.5.</span> <span class="nav-text">分支合并(无冲突)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81"><span class="nav-number">1.6.6.</span> <span class="nav-text">合并冲突</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%88%AB%E5%90%8D"><span class="nav-number">1.6.7.</span> <span class="nav-text">创建别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E5%92%8C%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">1.6.8.</span> <span class="nav-text">推送和拉取远程库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSH%E5%85%AC%E9%92%A5%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86"><span class="nav-number">1.7.</span> <span class="nav-text">SSH公钥免密登陆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E7%BB%93%E5%90%88IDE%E4%BD%BF%E7%94%A8"><span class="nav-number">1.8.</span> <span class="nav-text">Git结合IDE使用</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Luo Qianyou"
+      src="/site_images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Luo Qianyou</p>
+  <div class="site-description" itemprop="description">清醒,知趣 明得失,知进退</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LQY679" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LQY679" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/QianyouLuo" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;QianyouLuo" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com" rel="noopener" target="_blank">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/site_images/logo.jpg">
+      <meta itemprop="name" content="Luo Qianyou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南城记录倌">
+      <meta itemprop="description" content="清醒,知趣 明得失,知进退">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="git | 南城记录倌">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-01 18:57:32" itemprop="dateCreated datePublished" datetime="2020-01-01T18:57:32+08:00">2020-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-22 13:00:47" itemprop="dateModified" datetime="2023-02-22T13:00:47+08:00">2023-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p>分布式版本控制系统, 此外还有 SVN (集中式版本控制系统)</p>
+<p>下载地址(阿里云镜像) :<a target="_blank" rel="noopener" href="https://registry.npmmirror.com/binary.html?path=git-for-windows/">CNPM Binaries Mirror (npmmirror.com)</a></p>
+<p><strong>Git Bash :</strong> Linux命令行风格 (推荐使用)</p>
+<p><strong>Git CMD:</strong> window命令行风格</p>
+<p><strong>Git UID :</strong> 图形界面</p>
+<p>工具使用技巧: <em>命令行切换目录麻烦,可以在直接打开该目录,再鼠标右击进入Git Bash</em></p>
+<p><img src="image-20220211224327434.png" alt="image-20220211224327434"></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>使用Git必须配置用户名和邮箱(不需要是真实的邮箱)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list   <span class="comment"># 查看全局配置,即用户配置</span></span><br><span class="line">git config --system --list   <span class="comment"># 查看系统配置</span></span><br><span class="line">git config --global user.name <span class="string">&quot;名字&quot;</span></span><br><span class="line">git config --global user.email 318482536@qq.com</span><br></pre></td></tr></table></figure>
+
+<h4 id="Git配置文件"><a href="#Git配置文件" class="headerlink" title="Git配置文件"></a>Git配置文件</h4><p>系统配置文件在:      安装路径\Git\etc\gitconfig  </p>
+<p>用户配置文件     C:\Users\当前用户名.gitconfig   </p>
+<h3 id="Git基本原理-理论"><a href="#Git基本原理-理论" class="headerlink" title="Git基本原理(理论)"></a>Git基本原理(理论)</h3><blockquote>
+<p>工作区域</p>
+</blockquote>
+<p>Git <strong>在本地有三个工作区域:</strong>, ==工作目录(Working Directory) , 暂存区(Stage/index) , 资源库(Git Directory或Repsoitory),== <strong>远程的Git仓库如GItHub或Gitee码云(Remole Directory)共四个工作区域</strong>,转换关系如下:</p>
+<p><img src="image-20220211185841447.png" alt="image-20220211185841447"></p>
+<p>​                                                                                                                                                        <em>(图片来自狂神说)</em></p>
+<p><strong>工作目录 add =&gt; 添加到暂存区 , commit =&gt; 提交到本地仓库  ,push =&gt; 推送到远程仓库</strong>  </p>
+<p><strong>到达工作目录 checkout &lt;= 存放到暂存区 , reset &lt;= 下载到本地仓库  ,pull &lt;= 远程仓库</strong>  </p>
+<ul>
+<li><p><strong>工作区:</strong> 平时项目代码存放的地方,是真实的目录</p>
+</li>
+<li><p><strong>暂存区:</strong> 用于临时存代码的改动,实际上<strong>只是一个文件,记录了即将提交到文件列表的信息</strong>,并不是真实目录</p>
+</li>
+<li><p><strong>本地仓库:</strong> 安全存放数据的位置(实际上存在于.git目录中),存有所有版本的数据,<strong>其中HEAD文件指向最新放入仓库的版本</strong></p>
+</li>
+<li><p>**远程仓库:**相当于网盘</p>
+<p><em>注: HEAD文件在仓库目录的隐藏文件.git文件中,此文件记录了分支数</em>以及分支指向,</p>
+</li>
+</ul>
+<p><img src="image-20220211192428390.png" alt="image-20220211192428390"></p>
+<h4 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h4><ol>
+<li>在工作目录添加,修改文件;     ==相当于我们日常Coding的项目文件目录==</li>
+<li>将需要进行版本管理的文件放入暂存区   ==对应命令 git add== </li>
+<li>将暂存区的文件提交到本地仓库               ==对应命令 git commit== </li>
+<li>(可选) 提交到远程仓库                               ==对应命令 git add push==</li>
+</ol>
+<h5 id="git管理的文件状态"><a href="#git管理的文件状态" class="headerlink" title="git管理的文件状态:"></a>git管理的文件状态:</h5><h6 id="是否跟踪-untrack-track"><a href="#是否跟踪-untrack-track" class="headerlink" title="是否跟踪(untrack,track):"></a>是否跟踪(untrack,track):</h6><p> 文件在<strong>工作目录且未被git管理就是属于未跟踪</strong>,并且是属于未暂存的,</p>
+<h6 id="是否暂存-unstage-stage"><a href="#是否暂存-unstage-stage" class="headerlink" title="是否暂存 (unstage,stage):"></a>是否暂存 (unstage,stage):</h6><p> 当文件已经被<strong>添加到暂存区后,就属于暂存状态</strong>了,但是git管理的文件<strong>被修改后,又会变成未暂存状态</strong></p>
+<h6 id="已修改-modfiied"><a href="#已修改-modfiied" class="headerlink" title="已修改(modfiied):"></a>已修改(modfiied):</h6><p>顾名思义,也就是当暂存区的文件被修改后,文件会变成已经修改状态,并且属于未状态,不过请注意,未跟踪的文件由于是未被git管理,故<strong>未跟踪的文件即使被修改也还是未跟踪状态</strong></p>
+<h6 id="已提交-commited"><a href="#已提交-commited" class="headerlink" title="已提交(commited):"></a>已提交(commited):</h6><p>顾名思义,也就是被提交到本地仓库的文件,此外,请注意本地仓库在隐藏目录.git中,并且只保存一些修改记录信息,所以<strong>并不能在本地仓库中真实的查看到代码或文件内容</strong> ,咱们能正常查看到的文件是属于工作区的(这也就意味着我们修改文件后,并不能直接查看到原来的文件内容)</p>
+<p><img src="image-20220212122417566.png" alt="image-20220212122417566"></p>
+<h3 id="命令-速查"><a href="#命令-速查" class="headerlink" title="命令(速查)"></a>命令(速查)</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">git init  # 在当前目录初始化git项目</span><br><span class="line">git clone url  #克隆一个远程仓库项目到本地,url是项目链接; 克隆会初始化本地库,拉去代码,起一个默认别名</span><br><span class="line">git status [文件名]# 查看仓库(文件)状态</span><br><span class="line">git add 文件名 # 添加文件到暂存区</span><br><span class="line">git rm --cached 文件名  # 将文件从暂存区移除,相当于标记为未跟踪,不删除本地文件</span><br><span class="line">git commit -m &quot;日志信息&quot; 文件名  # 提交到本地仓库</span><br><span class="line">git reflog # 查看历代版本信息</span><br><span class="line">git log # 查看详细版本</span><br><span class="line">git reset --hard 版本号  # 回滚,即切换版本</span><br><span class="line">git push 远程库的别名或url 分支名  #将本地库推送到远程库</span><br><span class="line">git pull 远程库的别名或url 分支名  #将本地库拉取到远程库</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以下不常用</span></span><br><span class="line">git git restore 文件名 #恢复,这个命令针对已修改但还未添加到暂存区的文件,撤销本次修改操作,文件将恢复成未修改之前的样子</span><br><span class="line">git restore --staged 文件名 #恢复暂存的文件,这个命令针对已修改并且已经添加到暂存区的文件,相当于撤销本次添加到暂存区操作</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">分支管理命令</span></span><br><span class="line">git branch 分支名  # 创建分支</span><br><span class="line">git branch -v + # 查看分支</span><br><span class="line">git checkout 分支名  # 切换分支</span><br><span class="line">git merge 分支名 # 把指定的分支合并到当前分支下</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">别名管理命令</span></span><br><span class="line">git remote -v  #查看所有远程链接别名</span><br><span class="line">git remote add 别名 远程地址url   #添加别名</span><br><span class="line">git remote remove 别名 #删除别名</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>为了提高开发效率,开建立多个分支进行协同开发,分支可简单理解为一个单独的副本(底层是指针的引用), </p>
+<p><strong>基本开发流程</strong></p>
+<p><img src="image-20220212123821424.png" alt="image-20220212123821424"></p>
+<p>​                                                                                                                                                                                                    ( <em>图片来自尚硅谷</em> )</p>
+<p><strong>分支协同开发</strong></p>
+<p><img src="image-20220212124323578.png" alt="image-20220212124323578"></p>
+<p>​                                                                                                                                                                        <em>( 图片来自尚硅谷 )</em></p>
+<p>master分支:代表项目上线正式版本</p>
+<p>hot-fix 分支: 项目热维护分支,不需要将部署的项目停止运行</p>
+<p>feature-bule: 开发分支</p>
+<p>feature-game: 开发分支</p>
+<h4 id="分支操作-命令"><a href="#分支操作-命令" class="headerlink" title="分支操作(命令)"></a>分支操作(命令)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名  # 创建分支</span><br><span class="line">git branch -v  # 查看分支</span><br><span class="line">git checkout # 切换分支</span><br><span class="line">git merge 分支名 # 把指定的分支合并到当前分支下</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="团队协作"><a href="#团队协作" class="headerlink" title="团队协作"></a>团队协作</h3><p><strong>团队内协作</strong></p>
+<p><img src="image-20220212191854458.png" alt="image-20220212191854458"></p>
+<p>​                                                                                                                                                                                                    <em>(图片来自尚硅谷)</em></p>
+<p><strong>跨团队协作</strong></p>
+<p><img src="image-20220212192018869.png" alt="image-20220212192018869"></p>
+<p>​                                                                                                                                                                                                    <em>(图片来自尚硅谷)</em></p>
+<h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><h5 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git remote -v  <span class="comment">#查看所有远程链接别名</span></span><br><span class="line">git remote add 别名 远程地址url   <span class="comment">#添加别名</span></span><br><span class="line">git push 远程库别名或url <span class="comment"># 将本地框推送至远程库</span></span><br><span class="line">git pull 远程库别名或url <span class="comment"># 将远程库拉取到本地</span></span><br><span class="line">git remote remove 别名 <span class="comment">#删除别名</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h5><p>以下针对Gitee来说,GitHub同理</p>
+<p>仓库的团队内成员(以下简称团队成员,实际上还细分开发者,观察者等不做讨论,并且均当作拥有开发者及以上的权限)</p>
+<p><strong>push的时候,输入的登陆信息尽量选择邮箱名或手机号作为用户名</strong>,输入gitee用户名可能会失败</p>
+<p><strong>团队成员在push到远程库的时候,无需管理员同意,并且分支也是同步的</strong>,也就是说团队的成员在哪个分支下进行的推送,远程也只有那个分支下进行改变</p>
+<p><strong>团队外成员无法直接Push</strong>,可以<strong>在Gitee通过fork叉入生成自己远程库</strong>,随后在<strong>克隆到到自己本地</strong>,修改完后<strong>push到自己的远程库</strong>,然后<strong>在Gitee上通过发起Pull Resquest到团队的远程库</strong>,随后管理员会<strong>看到申请,决定是否合并</strong></p>
+<h3 id="样例"><a href="#样例" class="headerlink" title="样例:"></a>样例:</h3><p>以下所有案例都是连续的操作</p>
+<h4 id="初次提交"><a href="#初次提交" class="headerlink" title="初次提交"></a><strong>初次提交</strong></h4><p>有如下案例,在testGit项目中存在一个hello.txt文件,从未追踪到提交到本地库生成版本信息如下:</p>
+<p><img src="image-20220211235015698.png" alt="image-20220211235015698"></p>
+<h4 id="后续修改"><a href="#后续修改" class="headerlink" title="后续修改"></a>后续修改</h4><p>如下代码赋值终端信息为了方便观看,接上面的案例</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">ls</span> -lh     <span class="comment"># 查看当前所有文件信息</span></span><br><span class="line">total 1.0K</span><br><span class="line">-rw-r--r-- 1 Lenovo 197609 12 Feb 11 22:55 hello.txt    <span class="comment"># 当前目录存在一个hello.txt文件</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt    <span class="comment"># 查看文件内容,内容为: \n hello java</span></span><br><span class="line"></span><br><span class="line">hello java</span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;hello javaweb!!!&quot;</span> &gt;&gt; hello.txt     <span class="comment"># Linux命令(通过管道)向hello.txt文件追加内容,模拟修改代码</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello javawebcat hello.txt !&quot;</span> &gt;&gt; hello.txt</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt   <span class="comment"># 再次查看文件内容 文件内容为: \n hello javahello javawebcat hello.txt !</span></span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git status  <span class="comment"># 查看状态,可发现文件被修改后又变成了未暂存状态</span></span><br><span class="line">On branch master</span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">&quot;git restore &lt;file&gt;...&quot;</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line">        modified:   hello.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use <span class="string">&quot;git add&quot;</span> and/or <span class="string">&quot;git commit -a&quot;</span>)</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git add hello.txt   <span class="comment"># 添加文件到暂存区</span></span><br><span class="line">warning: LF will be replaced by CRLF <span class="keyword">in</span> hello.txt.</span><br><span class="line">The file will have its original line endings <span class="keyword">in</span> your working directory</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git status    <span class="comment"># 再次查看状态,和第一提交差不多,文件已经在暂存区中,但还未提交</span></span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">&quot;git restore --staged &lt;file&gt;...&quot;</span> to unstage)</span><br><span class="line">        modified:   hello.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git commit -m <span class="string">&quot;second commit&quot;</span> hello.txt  <span class="comment"># 将修改后的文件提交到本地仓库</span></span><br><span class="line">warning: LF will be replaced by CRLF <span class="keyword">in</span> hello.txt.  <span class="comment"># 这里的警告是说window和linux换行符不同的原因,不用在意</span></span><br><span class="line">The file will have its original line endings <span class="keyword">in</span> your working directory</span><br><span class="line">[master 1db21ac] second commit  <span class="comment"># 提交成功后,又有一个版本号,以及提交者编写的信息</span></span><br><span class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git reflog  <span class="comment"># 查看日志</span></span><br><span class="line">1db21ac (HEAD -&gt; master) HEAD@&#123;0&#125;: commit: second commit</span><br><span class="line">63c7412 HEAD@&#123;1&#125;: commit (initial): frist commit  </span><br><span class="line">  <span class="comment">#(HEAD -&gt; master)所在的版本号表示master分支的当前版本(指向)</span></span><br><span class="line">  </span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git <span class="built_in">log</span>   <span class="comment"># 查看详细日志</span></span><br><span class="line">commit 1db21ac75f97fdd8bc9dfed2e57eb430c3153b5b (HEAD -&gt; master)  </span><br><span class="line">Author: lqy &lt;318482536@qq.com&gt;</span><br><span class="line">Date:   Sat Feb 12 00:00:04 2022 +0800</span><br><span class="line"></span><br><span class="line">    second commit</span><br><span class="line"></span><br><span class="line">commit 63c7412ca2d0c639542c5a4a6a4cd1770e1e75a7</span><br><span class="line">Author: lqy &lt;318482536@qq.com&gt;</span><br><span class="line">Date:   Fri Feb 11 23:20:39 2022 +0800</span><br><span class="line"></span><br><span class="line">    frist commit</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="版本穿梭-代码回滚"><a href="#版本穿梭-代码回滚" class="headerlink" title="版本穿梭,代码回滚"></a>版本穿梭,代码回滚</h4><p>接上面两个案例,将版本切换为初代版本</p>
+<p>版本切换会将<strong>造成本地工作区的文件内容修改</strong>,但本质是git在操作HEAD指针</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git reflog <span class="comment"># 查看历代版本</span></span></span><br><span class="line">1db21ac (HEAD -&gt; master) HEAD@&#123;0&#125;: commit: second commit</span><br><span class="line">63c7412 HEAD@&#123;1&#125;: commit (initial): frist commit</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git reset --hard 63c7412  <span class="comment"># 切换版本</span></span></span><br><span class="line">HEAD is now at 63c7412 frist commit  # 提示HEAD指针现在指向第一个版本</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="查看创建分支-多分支提交"><a href="#查看创建分支-多分支提交" class="headerlink" title="查看创建分支,多分支提交"></a>查看创建分支,多分支提交</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git branch -v   <span class="comment"># 查看分支,目录名后面的括号代表了当前所处分支.即现在在master分支下</span></span><br><span class="line">* master 1db21ac second commit</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git branch hot-fix  <span class="comment">#创建分支</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git branch -v   <span class="comment"># 查看分支</span></span><br><span class="line">  hot-fix 1db21ac second commit</span><br><span class="line">* master  1db21ac second commit</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git checkout hot-fix   <span class="comment"># 切换到hot-fix分支,模拟热维护</span></span><br><span class="line">Switched to branch <span class="string">&#x27;hot-fix&#x27;</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)  <span class="comment">#切换后,目录后面的括号内容发生改变</span></span><br><span class="line">$ <span class="built_in">ls</span> -lh</span><br><span class="line">total 1.0K</span><br><span class="line">-rw-r--r-- 1 Lenovo 197609 42 Feb 12 10:45 hello.txt</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt   <span class="comment"># 查看文件内容</span></span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;\n hello Git! and Java yyds&quot;</span> &gt;&gt; hello.txt  <span class="comment"># 追加文件内容</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt  <span class="comment"># 再次查看文件内容,检查是添加成功,发现已经添加</span></span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ git status .</span><br><span class="line">On branch hot-fix</span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">&quot;git restore &lt;file&gt;...&quot;</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line">        modified:   hello.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use <span class="string">&quot;git add&quot;</span> and/or <span class="string">&quot;git commit -a&quot;</span>)</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ git add .</span><br><span class="line">warning: LF will be replaced by CRLF <span class="keyword">in</span> hello.txt.</span><br><span class="line">The file will have its original line endings <span class="keyword">in</span> your working directory</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ git status</span><br><span class="line">On branch hot-fix</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">&quot;git restore --staged &lt;file&gt;...&quot;</span> to unstage)</span><br><span class="line">        modified:   hello.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ git commit -m <span class="string">&quot;hot-fix frist commit&quot;</span> . <span class="comment"># hot-fix分支,添加,提交到本地仓库成功</span></span><br><span class="line">warning: LF will be replaced by CRLF <span class="keyword">in</span> hello.txt.</span><br><span class="line">The file will have its original line endings <span class="keyword">in</span> your working directory</span><br><span class="line">[hot-fix f804008] hot-fix frist commit</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ git checkout master  <span class="comment"># 切换回 master分支</span></span><br><span class="line">Switched to branch <span class="string">&#x27;master&#x27;</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt   <span class="comment"># 查看 master 分支下的文件内容(查看在别的分支下修改文件是否会受到影响)</span></span><br><span class="line"> <span class="comment">#发现和切换到 hot-fix分支之前的文件内容一样,说明每个分支修改都是独立的</span></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git reflog  <span class="comment"># 下面都是查看历史版本和日志</span></span><br><span class="line">1db21ac (HEAD -&gt; master, checkout) HEAD@&#123;0&#125;: checkout: moving from hot-fix to master</span><br><span class="line">f804008 (hot-fix) HEAD@&#123;1&#125;: commit: hot-fix frist commit</span><br><span class="line">1db21ac (HEAD -&gt; master, checkout) HEAD@&#123;2&#125;: checkout: moving from master to hot-fix</span><br><span class="line">1db21ac (HEAD -&gt; master, checkout) HEAD@&#123;3&#125;: reset: moving to 1db21ac</span><br><span class="line">63c7412 HEAD@&#123;4&#125;: reset: moving to 63c7412</span><br><span class="line">1db21ac (HEAD -&gt; master, checkout) HEAD@&#123;5&#125;: commit: second commit</span><br><span class="line">63c7412 HEAD@&#123;6&#125;: commit (initial): frist commit</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 1db21ac75f97fdd8bc9dfed2e57eb430c3153b5b (HEAD -&gt; master, checkout)</span><br><span class="line">Author: lqy &lt;318482536@qq.com&gt;</span><br><span class="line">Date:   Sat Feb 12 00:00:04 2022 +0800</span><br><span class="line"></span><br><span class="line">    second commit</span><br><span class="line"></span><br><span class="line">commit 63c7412ca2d0c639542c5a4a6a4cd1770e1e75a7</span><br><span class="line">Author: lqy &lt;318482536@qq.com&gt;</span><br><span class="line">Date:   Fri Feb 11 23:20:39 2022 +0800</span><br><span class="line"></span><br><span class="line">    frist commit</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git checkout hot-fix  <span class="comment"># 再次切换回 hot-fix分支</span></span><br><span class="line">Switched to branch <span class="string">&#x27;hot-fix&#x27;</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt  <span class="comment"># 查看文件还是 之前自己(hot-fix分支)修改提交后的样子</span></span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="分支合并-无冲突"><a href="#分支合并-无冲突" class="headerlink" title="分支合并(无冲突)"></a>分支合并(无冲突)</h4><p>接上面的例子,将hot-fix修改的内容合并到master分支上,并且两者是没有修改到重复的地方(也就是无冲突)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ git checkout master  <span class="comment"># 切换回master分支,因为我们要将 hot-fix 合并到当前的分支(也就是master)下</span></span><br><span class="line">Switched to branch <span class="string">&#x27;master&#x27;</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git merge hot-fix  <span class="comment"># 合并</span></span><br><span class="line">Updating 1db21ac..f804008</span><br><span class="line">Fast-forward</span><br><span class="line"> hello.txt | 1 +  <span class="comment">#共一行受到影响,添加了内容(之前hot-fix分支添加了\n hello Git! and Java yyds)</span></span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt <span class="comment"># 查看文件,注意:此时在master分支下,查看的是master的文件,发现已经合并了</span></span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="合并冲突"><a href="#合并冲突" class="headerlink" title="合并冲突"></a>合并冲突</h4><p>出现的原因: 多个分支同时修改了==同一个文件的同一个位置==,这时git不会自动处理(仅仅把冲突标记)<strong>,需要人为修改</strong></p>
+<p>下面例子演示了hot-fex分支和master同时在hello.txt最后一行添加数据合并的情况</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt  <span class="comment"># 查看原来的文件,请注意最后一行</span></span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt  <span class="comment">#在最后一行添加内容,修改过程已省略,需要注意的是修改后需要commit</span></span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line">hot-fix <span class="built_in">test</span></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ git commit -m <span class="string">&quot;2&quot;</span> .  <span class="comment"># 需要提交,不提交合并的还是之前的版本</span></span><br><span class="line">[hot-fix 2d3540a] 2</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ git checkout master  <span class="comment"># 切换回 master 分支,除了合并,其他操作与 hot-fix分支一致,文件修改内容不一样罢了</span></span><br><span class="line">Switched to branch <span class="string">&#x27;master&#x27;</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt</span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt</span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line">master <span class="built_in">test</span></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git commit -m <span class="string">&quot;2&quot;</span> .</span><br><span class="line">[master 73cb316] 2</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git merge hot-fix  <span class="comment"># 进行合并</span></span><br><span class="line">Auto-merging hello.txt</span><br><span class="line">CONFLICT (content): Merge conflict <span class="keyword">in</span> hello.txt <span class="comment">#提示我们发现了(内容)冲突,发生在hello.txt文件</span></span><br><span class="line">Automatic merge failed; fix conflicts and <span class="keyword">then</span> commit the result.</span><br><span class="line"><span class="comment"># 自动合并失败,让我们修复冲突然后进行提交, 注意,之后的提交命令接文件名</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master|MERGING)</span><br><span class="line">$ git status  <span class="comment"># 查看状态</span></span><br><span class="line">On branch master</span><br><span class="line">You have unmerged paths.</span><br><span class="line">  (fix conflicts and run <span class="string">&quot;git commit&quot;</span>)</span><br><span class="line">  (use <span class="string">&quot;git merge --abort&quot;</span> to abort the merge)</span><br><span class="line"></span><br><span class="line">Unmerged paths:</span><br><span class="line">  (use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to mark resolution)</span><br><span class="line">        both modified:   hello.txt   <span class="comment"># 提示都修改</span></span><br><span class="line"></span><br><span class="line">no changes added to commit (use <span class="string">&quot;git add&quot;</span> and/or <span class="string">&quot;git commit -a&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后我们打开文件观看发现</p>
+<p><img src="image-20220212152505836.png" alt="image-20220212152505836"></p>
+<p><strong>注意!!!我们修改后的提交命令也不能带文件名了,因为如果携带文件名他就不知道该提交哪个</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master|MERGING)</span><br><span class="line">$ git add hello.txt</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master|MERGING)</span><br><span class="line">$ git commit -m <span class="string">&quot;merge test&quot;</span> hello.txt</span><br><span class="line">fatal: cannot <span class="keyword">do</span> a partial commit during a merge. <span class="comment"># 提交失败,致命(错误),合并过程中不能部分提交</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master|MERGING)</span><br><span class="line">$ git commit -m <span class="string">&quot;merge test&quot;</span>   <span class="comment"># 提交成功,又生成了一个新的版本号</span></span><br><span class="line">[master d74e6d6] merge <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>不过,<strong>合并只会改变被合并的分支,不会改变拿来合并的分支</strong>,如下所示,切换到hot-fix分支文件内容依然没变</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt</span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line">master <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git checkout hot-fix</span><br><span class="line">Switched to branch <span class="string">&#x27;hot-fix&#x27;</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt</span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line">hot-fix <span class="built_in">test</span></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (hot-fix)</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="创建别名"><a href="#创建别名" class="headerlink" title="创建别名"></a>创建别名</h4><p>远程库链接太长,为了方便管理,我们通常会给远程库起一个别名替代远程库链接</p>
+<p>如下演示:我们在码云创建一个仓库,并且起一个别名,在上面的本地仓库进行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git remote -v  <span class="comment"># 查看别名,发现没有</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git remote add testGit https://gitee.com/LQY679/test-git.git   <span class="comment">#从gitee获得链接,并且起一个别名testGit</span></span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git remote -v  <span class="comment"># 发现有两个,因为需要拉去和推送,实际上是同一个仓库</span></span><br><span class="line">testGit https://gitee.com/LQY679/test-git.git (fetch)</span><br><span class="line">testGit https://gitee.com/LQY679/test-git.git (push)</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="推送和拉取远程库"><a href="#推送和拉取远程库" class="headerlink" title="推送和拉取远程库"></a>推送和拉取远程库</h4><p>请注意:无论是push 远程库还是pull 远程库时,都==需要指定分支==,</p>
+<p>并且在push可能因为远程库被修改过了(如远程库比本地库多了些本地库没有的文件),会导致push失败,==所以在push失败时可以先尝试pull在push==</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git push testGit master  <span class="comment">#将本地仓库推送至远程库的master分支,出现下面信息代表成功</span></span><br><span class="line">Enumerating objects: 37, <span class="keyword">done</span>.</span><br><span class="line">Counting objects: 100% (37/37), <span class="keyword">done</span>.</span><br><span class="line">Delta compression using up to 12 threads</span><br><span class="line">Compressing objects: 100% (24/24), <span class="keyword">done</span>.</span><br><span class="line">Writing objects: 100% (37/37), 3.10 KiB | 528.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">Total 37 (delta 7), reused 0 (delta 0), pack-reused 0</span><br><span class="line">remote: Powered by GITEE.COM [GNK-6.2]</span><br><span class="line">To https://gitee.com/LQY679/test-git.git</span><br><span class="line"> * [new branch]      master -&gt; master</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ git pull testGit master  <span class="comment"># 将远程库拉取到本地库的master,出现下面信息代表成功</span></span><br><span class="line">From https://gitee.com/LQY679/test-git</span><br><span class="line"> * branch            master     -&gt; FETCH_HEAD</span><br><span class="line">Updating d74e6d6..d9ec34f</span><br><span class="line">Fast-forward</span><br><span class="line"> hello.txt | 1 +</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$ <span class="built_in">cat</span> hello.txt  <span class="comment"># 查看文件发现发现了在gitee上的修改</span></span><br><span class="line"></span><br><span class="line">hello javahello javawebcat hello.txt !</span><br><span class="line">\n hello Git! and Java yyds</span><br><span class="line">master <span class="built_in">test</span></span><br><span class="line"> 在gitee上做的修改</span><br><span class="line"></span><br><span class="line">Lenovo@DESKTOP-2U25RBA MINGW64 /e/Code/gitCode/testGit (master)</span><br><span class="line">$</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="SSH公钥免密登陆"><a href="#SSH公钥免密登陆" class="headerlink" title="SSH公钥免密登陆"></a>SSH公钥免密登陆</h3><p>gitee和gitHub都支持使用ssh公钥免密登陆,我们在自己电脑绑定公钥后以后进行Git操作就不需要频繁输入密码了</p>
+<blockquote>
+<p>生成公钥命令</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C 自己之前的邮箱   <span class="comment"># 使用真实邮箱,rsa是一种加密算法, 注意 -C选项的C 是大小</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>生成并且查看公钥</p>
+</blockquote>
+<p>生成的公钥在用户目录中,用户目录即 C:\Users\自己电脑的登陆名,由于我还未生生成,故是没有的,</p>
+<p><img src="image-20220213000759563.png" alt="image-20220213000759563"></p>
+<p>在此目录下右击鼠标打开Git命令行工具,随后输入命令</p>
+<p><img src="image-20220213002242587.png" alt="image-20220213002242587"></p>
+<p>随后进入.ssh目录,会有两个文件 id_rsa ,这个文件内容是私钥, <strong>id_rsa.pub 文件的内容是公钥,</strong></p>
+<blockquote>
+<p>复制公钥在平台(Gitee或GitHub)里绑定</p>
+</blockquote>
+<p>登陆Gitee或租GitHub,在个<strong>人信息找到相关设置将id_rsa.pub 文件的内容复制后.粘贴到对应平台所需要填写的公钥即可</strong></p>
+<h3 id="Git结合IDE使用"><a href="#Git结合IDE使用" class="headerlink" title="Git结合IDE使用"></a>Git结合IDE使用</h3><p><strong>忽略项配置文件</strong>,建议命名成 git.ignore,<strong>文件名随意,但后缀名务必为ignore</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Compiled class file</span><br><span class="line">*.class</span><br><span class="line"></span><br><span class="line"># Log file</span><br><span class="line">*.log</span><br><span class="line"></span><br><span class="line"># BlueJ files</span><br><span class="line">*.ctxt</span><br><span class="line"></span><br><span class="line"># Mobile Tools for Java (J2ME)</span><br><span class="line">.mtj.tmp/# Package Files #</span><br><span class="line">*.jar</span><br><span class="line">*.war</span><br><span class="line">*.nar</span><br><span class="line">*.ear</span><br><span class="line">*.zip</span><br><span class="line">*.tar.gz</span><br><span class="line">*.rar</span><br><span class="line"></span><br><span class="line">hs_err_pid*</span><br><span class="line"></span><br><span class="line">.classpath</span><br><span class="line">.project</span><br><span class="line">.settings</span><br><span class="line">target</span><br><span class="line">.idea</span><br><span class="line">*.iml</span><br></pre></td></tr></table></figure>
+
+<p><strong>复制上面的内容创建忽略项配置文件,其实放哪都行,但是为了方便~/git.config使用,一般也放在 ~/目录下 (注: 学过Linux的应该知道,</strong>~代表用户家目录,window则是C盘下的用户目录下自己的用户命目录**)</p>
+<p><img src="image-20220213233655862.png" alt="image-20220213233655862"></p>
+<p><strong>随后打开在用户家目录下的git.config文件</strong>,文件内容中<strong>添加</strong>如下配置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[core] excludesfile = 刚才的git.ignore文件地址 </span><br><span class="line"><span class="comment"># 注意: 使用正斜线 &quot;/&quot; ,不要用反斜线 &quot;\&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="image-20220213234836763.png" alt="image-20220213234836763"></p>
+<p>在idea使用Git插件在Gitee上分享项目创建远程库的时候,会遇到如下对话框</p>
+<p><img src="image-20220214002359002.png" alt="image-20220214002359002"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Luo Qianyou
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lqy679.github.io/2020/01/01/Git%E5%9F%BA%E7%A1%80/" title="git">https://lqy679.github.io/2020/01/01/Git基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/01/01/HTML5%E6%96%B0%E5%A2%9E%E7%9F%A5%E8%AF%86/" rel="prev" title="HTML5新增知识">
+                  <i class="fa fa-chevron-left"></i> HTML5新增知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/01/JSON/" rel="next" title="JSON">
+                  JSON <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2020/01/01/Git%E5%9F%BA%E7%A1%80/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2020/01/01/Git%E5%9F%BA%E7%A1%80/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo Qianyou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/LQY679" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+<meting-js server="tencent" type="playlist" id="8809238545" fixed="true"  autoplay="false" loop="all" order="list" list-folded="ture" list-max-height="500px" ><!-- hexo injector body_end end --></body>
+</html>

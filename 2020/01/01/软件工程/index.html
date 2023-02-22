@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lqy679.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="软件工程UML统一建模语言(Unified Modeling Language，UML)是一种为面向对象系统的产品进行说明、可视化和编制文档的一种标准语言，是非专利的第三代建模和规约语言。UML是面向对象设计的建模工具，独立于任何具体程序设计语言。  类图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件工程">
+<meta property="og:url" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/index.html">
+<meta property="og:site_name" content="南城记录倌">
+<meta property="og:description" content="软件工程UML统一建模语言(Unified Modeling Language，UML)是一种为面向对象系统的产品进行说明、可视化和编制文档的一种标准语言，是非专利的第三代建模和规约语言。UML是面向对象设计的建模工具，独立于任何具体程序设计语言。  类图">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220421102918887.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220421103317967.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220421103416538.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220421103528770.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220421103640417.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220915090728762.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220915090755426.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423093950053.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423094111845.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423094336686.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423160925454.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423160937585.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423161144191.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423102506092.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220914115134455.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220914115325212.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423151343823.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423161609932.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423161724199.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423161758804.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423161847934.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423162218154.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423162351361.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423162414157.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423162548699.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423162716530.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423172937507.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423173404629.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423174603453.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423175256802.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423181440823.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423181653365.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423182654991.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423183044900.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2521636-20210927113113784-413050521.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423183318088.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423184029673.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423183417342.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423184320418.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423184412863.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423184454035.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423184714385.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423184837571.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423185001987.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220423185425035.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220612215700193.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220612224047966.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220612224246921.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220612224310282.png">
+<meta property="article:published_time" content="2020-01-01T10:57:32.000Z">
+<meta property="article:modified_time" content="2023-02-22T09:17:18.637Z">
+<meta property="article:author" content="Luo Qianyou">
+<meta property="article:tag" content="Java,Python,web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20220421102918887.png">
+
+
+<link rel="canonical" href="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/","path":"2020/01/01/软件工程/","title":"软件工程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>软件工程 | 南城记录倌</title>
+  
+
+
+
+
+
+
+
+
+  <!--
+    引用自作者
+    <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  -->
+  <script src="/live2d-widget/autoload.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/site_images/logo.jpg" alt="南城记录倌">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">南城记录倌</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">往昔皆为过眼云烟,一切尽随风而逝;此刻之行终将化未来的救赎之刃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">软件工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UML"><span class="nav-number">1.1.</span> <span class="nav-text">UML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9B%BE"><span class="nav-number">1.1.1.</span> <span class="nav-text">类图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">类的内容:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">类之间的关系:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF-%E6%B3%9B%E5%8C%96-%E5%85%B3%E7%B3%BB%EF%BC%9A-%E4%B8%89%E8%A7%92%E5%BD%A2-%E5%AE%9E%E7%BA%BF"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">继承(泛化)关系： 三角形 + 实线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%85%B3%E7%B3%BB%EF%BC%9A%E4%B8%89%E8%A7%92%E5%BD%A2-%E8%99%9A%E7%BA%BF"><span class="nav-number">1.1.1.2.2.</span> <span class="nav-text">实现关系：三角形 + 虚线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB%EF%BC%9A-%E5%AE%9E%E7%BA%BF%E7%AE%AD%E5%A4%B4"><span class="nav-number">1.1.1.2.3.</span> <span class="nav-text">关联关系： 实线箭头</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%EF%BC%9A-%E8%99%9A%E7%BA%BF%E7%AE%AD%E5%A4%B4"><span class="nav-number">1.1.1.2.4.</span> <span class="nav-text">依赖关系： 虚线箭头</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%85%B3%E7%B3%BB%EF%BC%9A-%E5%AE%9E%E5%BF%83%E7%9A%84%E8%8F%B1%E5%BD%A2-%E5%AE%9E%E7%BA%BF%E7%AE%AD%E5%A4%B4"><span class="nav-number">1.1.1.2.5.</span> <span class="nav-text">组合关系： 实心的菱形 + 实线箭头</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%85%B3%E7%B3%BB%EF%BC%88%E5%8C%85%E5%90%AB%E5%85%B3%E7%B3%BB%EF%BC%89%EF%BC%9A-%E7%A9%BA%E5%BF%83%E7%9A%84%E8%8F%B1%E5%BD%A2-%E5%AE%9E%E7%BA%BF%E7%AE%AD%E5%A4%B4"><span class="nav-number">1.1.1.2.6.</span> <span class="nav-text">聚合关系（包含关系）： 空心的菱形 + 实线箭头</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%9B%BE"><span class="nav-number">1.1.2.</span> <span class="nav-text">对象图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%9B%BE%E4%B8%8E%E7%B1%BB%E5%9B%BE%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">对象图与类图的区别:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%E5%9B%BE-%E6%9C%9F%E6%9C%AB%E8%80%83"><span class="nav-number">1.1.3.</span> <span class="nav-text">用例图  [期末考]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">组成部分:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">表示形式:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB"><span class="nav-number">1.1.3.2.1.</span> <span class="nav-text">关联关系:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BD%92%E7%BA%B3%EF%BC%88%E6%B3%9B%E5%8C%96%EF%BC%89%E5%85%B3%E7%B3%BB"><span class="nav-number">1.1.3.2.2.</span> <span class="nav-text">归纳（泛化）关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8C%85%E5%90%AB%E5%85%B3%E7%B3%BB"><span class="nav-number">1.1.3.2.3.</span> <span class="nav-text">包含关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%85%B3%E7%B3%BB"><span class="nav-number">1.1.3.2.4.</span> <span class="nav-text">拓展关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="nav-number">1.1.4.</span> <span class="nav-text">时序图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%9B%BE%E4%B8%AD%E6%B6%89%E5%8F%8A%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%9A"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">序列图中涉及的元素：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E7%BA%BF"><span class="nav-number">1.1.4.1.1.</span> <span class="nav-text">生命线:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%B6%88%E6%81%AF"><span class="nav-number">1.1.4.1.2.</span> <span class="nav-text">同步消息:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E6%B6%88%E6%81%AF"><span class="nav-number">1.1.4.1.3.</span> <span class="nav-text">异步消息:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">1.1.4.1.4.</span> <span class="nav-text">注释:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.1.4.1.5.</span> <span class="nav-text">约束:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%89%E6%8B%A9%EF%BC%88Alt%EF%BC%89"><span class="nav-number">1.1.4.1.6.</span> <span class="nav-text">抉择（Alt）:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%89%E9%A1%B9%EF%BC%88Opt%EF%BC%89"><span class="nav-number">1.1.4.1.7.</span> <span class="nav-text">选项（Opt）:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%EF%BC%88Loop%EF%BC%89"><span class="nav-number">1.1.4.1.8.</span> <span class="nav-text">循环（Loop）:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%EF%BC%88Par%EF%BC%89"><span class="nav-number">1.1.4.1.9.</span> <span class="nav-text">并行（Par）:</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9B%BE"><span class="nav-number">1.2.</span> <span class="nav-text">其他常用的图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE-DFD-%E6%9C%9F%E6%9C%AB%E8%80%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">数据流图(DFD) [期末考]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%BD%A2%E7%AC%A6%E5%8F%B7"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">基本图形符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">数据字典</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ER%E5%9B%BE"><span class="nav-number">1.2.2.</span> <span class="nav-text">ER图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%AF%8D%E5%85%B8"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">数据词典</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%AD%97%E6%AE%B5%E4%B8%8E%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.2.1.1.</span> <span class="nav-text">常用字段与示例:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E5%85%B3%E7%B3%BB%E5%9B%BE-ER%E5%9B%BE"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">实体关系图(ER图)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%9C%E5%9B%BE%E8%A7%84%E8%8C%83"><span class="nav-number">1.2.2.2.1.</span> <span class="nav-text">作图规范:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">1.2.3.</span> <span class="nav-text">系统流程图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">样例:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E5%9B%BE-%E6%9C%AA%E7%9F%A5"><span class="nav-number">1.2.4.</span> <span class="nav-text">系统结构图(未知)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">1.2.5.</span> <span class="nav-text">程序流程图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E6%84%8F%E4%B9%89"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">符号意义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84-if-else-switch"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">选择结构(if  else , switch)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">循环结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#N-S%E5%9B%BE-%E7%9B%92%E5%9B%BE-%E6%9C%9F%E6%9C%AB%E8%80%83"><span class="nav-number">1.2.6.</span> <span class="nav-text">N-S图(盒图)  [期末考]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">顺序结构:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">条件结构:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.6.2.1.</span> <span class="nav-text">多分支结构:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84-1"><span class="nav-number">1.2.6.3.</span> <span class="nav-text">循环结构:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BD%93%E5%9E%8B-while"><span class="nav-number">1.2.6.3.1.</span> <span class="nav-text">当型(while)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E5%88%B0%E5%9E%8B-do-while%E6%88%96until"><span class="nav-number">1.2.6.3.2.</span> <span class="nav-text">直到型(do.. while或until)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">1.2.6.4.</span> <span class="nav-text">案例:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PAD%E5%9B%BE-%E6%9C%9F%E6%9C%AB%E8%80%83"><span class="nav-number">1.2.7.</span> <span class="nav-text">PAD图 [期末考]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%A0%E7%A7%8D%E7%BB%93%E6%9E%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">几种结构表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-1"><span class="nav-number">1.2.7.2.</span> <span class="nav-text">案例:</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Luo Qianyou"
+      src="/site_images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Luo Qianyou</p>
+  <div class="site-description" itemprop="description">清醒,知趣 明得失,知进退</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LQY679" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LQY679" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/QianyouLuo" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;QianyouLuo" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com" rel="noopener" target="_blank">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/site_images/logo.jpg">
+      <meta itemprop="name" content="Luo Qianyou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南城记录倌">
+      <meta itemprop="description" content="清醒,知趣 明得失,知进退">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="软件工程 | 南城记录倌">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          软件工程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-01 18:57:32" itemprop="dateCreated datePublished" datetime="2020-01-01T18:57:32+08:00">2020-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-22 17:17:18" itemprop="dateModified" datetime="2023-02-22T17:17:18+08:00">2023-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">计算机基础理论</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="软件工程"><a href="#软件工程" class="headerlink" title="软件工程"></a>软件工程</h1><h2 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h2><p>统一建模语言(Unified Modeling Language，UML)是一种为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/2262089">面向对象</a>系统的产品进行说明、可视化和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BC%96%E5%88%B6/9907954">编制</a>文档的一种标准语言，是非专利的第三代建模和规约语言。<strong>UML是面向对象设计的建模工具，独立于任何具体程序设计语言。</strong> </p>
+<h3 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h3><blockquote>
+<p>转载自:<a target="_blank" rel="noopener" href="https://blog.csdn.net/Yearingforthefuture/article/details/115522510">(19条消息) 通俗易懂教你画类图_Java追求者的博客-CSDN博客_类图怎么画</a></p>
+</blockquote>
+<p>类图是以反映类的结构(属性,操作)以及类之间的关系为主要目的,描述了软件系统的结构,是一种静态建模方法</p>
+<p>如屠所示表示一个用户类User, 属性有 uid ,name, age ,birthday</p>
+<p><img src="image-20220421102918887.png" alt="image-20220421102918887"></p>
+<h4 id="类的内容"><a href="#类的内容" class="headerlink" title="类的内容:"></a>类的内容:</h4><p>第一层：类的名称，如果是<strong>抽象类</strong>，则就用<strong>斜体</strong>显示。</p>
+<p>第二层：字段和属性。</p>
+<p>第三层：方法。</p>
+<p>前面的符号表示访问修饰符：</p>
+<ul>
+<li><strong>“+” 表示public</strong></li>
+<li><strong>“-“ 表示private</strong></li>
+<li><strong>“#”表示protected</strong></li>
+</ul>
+<h4 id="类之间的关系"><a href="#类之间的关系" class="headerlink" title="类之间的关系:"></a>类之间的关系:</h4><h5 id="继承-泛化-关系：-三角形-实线"><a href="#继承-泛化-关系：-三角形-实线" class="headerlink" title="继承(泛化)关系： 三角形 + 实线"></a>继承(泛化)关系： 三角形 + 实线</h5><p>鸟也有生命这种属性，也有新陈代谢和繁殖的行为。</p>
+<p><img src="image-20220421103317967.png" alt="image-20220421103317967"></p>
+<p>==代码实现: 即Java中父类子类之间的继承关系,关键字<code>extend</code>==  </p>
+<h5 id="实现关系：三角形-虚线"><a href="#实现关系：三角形-虚线" class="headerlink" title="实现关系：三角形 + 虚线"></a>实现关系：三角形 + 虚线</h5><p>大雁可以各种各样的飞翔方式。</p>
+<p><img src="image-20220421103416538.png" alt="image-20220421103416538"></p>
+<p>==代码实现: 即 Java中的接口与实现类 ,关键字 <code>implements</code>==</p>
+<h5 id="关联关系：-实线箭头"><a href="#关联关系：-实线箭头" class="headerlink" title="关联关系： 实线箭头"></a>关联关系： 实线箭头</h5><p>企鹅需要知道气候的变化，需要了解气候规律</p>
+<p>关联关系:==<strong>强调的是被引用关联的其它类型实例要作为本类的字段属性</strong>==(静态或非静态)</p>
+<p>具体代码实现: <strong>一个类中的用其他类作为自己的类的成员变量</strong></p>
+<p><img src="image-20220421103528770.png" alt="image-20220421103528770"></p>
+<h5 id="依赖关系：-虚线箭头"><a href="#依赖关系：-虚线箭头" class="headerlink" title="依赖关系： 虚线箭头"></a>依赖关系： 虚线箭头</h5><p>动物需要依赖氧气和水进行生存。</p>
+<p>依赖关系只是在==<strong>本类方法内部使用到某类而已，严格来说不是这个类的一部分</strong>==。</p>
+<p>具体代码实现: <em><em>一个类中需要调用其他类的方法(服务)从而需要用到其他类的对象</em>(注意:并不是作为的成员变量)</em>**</p>
+<p><img src="image-20220421103640417.png" alt="image-20220421103640417"></p>
+<p><strong>==值得一提的是: 组合关系 和 聚合关系 是 关联 的两种表现形式==</strong></p>
+<h5 id="组合关系：-实心的菱形-实线箭头"><a href="#组合关系：-实心的菱形-实线箭头" class="headerlink" title="组合关系： 实心的菱形 + 实线箭头"></a>组合关系： 实心的菱形 + 实线箭头</h5><p>心脏是人==不可或缺的一部分==。</p>
+<p>代码实现: <strong>在构造器中自己new 对象</strong></p>
+<p><img src="image-20220915090728762.png" alt="image-20220915090728762"></p>
+<h5 id="聚合关系（包含关系）：-空心的菱形-实线箭头"><a href="#聚合关系（包含关系）：-空心的菱形-实线箭头" class="headerlink" title="聚合关系（包含关系）： 空心的菱形 + 实线箭头"></a>聚合关系（包含关系）： 空心的菱形 + 实线箭头</h5><p>人在人群这个集合里面,但人群里==多一个人少一个人无所谓,并不是不可或缺的==。</p>
+<p>代码实现: <strong>在构造器中通过形数传入一个对象</strong></p>
+<p><img src="image-20220915090755426.png" alt="image-20220915090755426"></p>
+<h3 id="对象图"><a href="#对象图" class="headerlink" title="对象图"></a>对象图</h3><blockquote>
+<p>摘抄至 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/372860982">五大部分讲透UML对象图 - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p>对象是类的实例，是一个封装了状态和行为的实体。对象通过其类型、名称和状态区别于其他对象而存在。</p>
+<p>对象名：在矩形框的顶端显示。<br>类型：具体的类目<br>状态：由对象的所有属性以及运行时的当前值组成。<br>表示法：在对象名后跟一个冒号加上类型名，并且使用下划线与类进行区分。</p>
+<p><img src="image-20220423093950053.png" alt="image-20220423093950053"></p>
+<hr>
+<p><img src="image-20220423094111845.png" alt="image-20220423094111845"></p>
+<h4 id="对象图与类图的区别"><a href="#对象图与类图的区别" class="headerlink" title="对象图与类图的区别:"></a>对象图与类图的区别:</h4><p><img src="image-20220423094336686.png" alt="image-20220423094336686"></p>
+<h3 id="用例图-期末考"><a href="#用例图-期末考" class="headerlink" title="用例图  [期末考]"></a>用例图  [期末考]</h3><p>用例图是被称为参与者的外部用户所能观察到的系统功能的模型图,用例图列出系统中的用例和系统外的参与者,并显示哪个参与者参与了哪个用例执行</p>
+<h4 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分:"></a>组成部分:</h4><ol>
+<li>参与者</li>
+</ol>
+<p>　　参与者（Actor）是指存在于系统外部并直接与系统进行交互的人、系统、子系统或类的外部实体的抽象。<br>每个参与者可以参与一个或多个用例，每个用例也可以有一个或多个参与者。<br>　　在用例图中使用一个人形图标来表示参与者，参与者的名字写在人形图标下面。</p>
+<p><img src="image-20220423160925454.png" alt="image-20220423160925454"></p>
+<ol start="2">
+<li>参与者间的的关系</li>
+</ol>
+<p>　　由于参与者实质上也是类，所以它拥有与类相同的关系描述，即参与者与参与者之间主要是泛化关系（或称为“继承”关系）。<br>泛化关系的含义是把某些参与者的共同行为提取出来表示成通用行为，并描述成超类。泛化关系表示的是参与者之间的一般/特殊关系，在UML图中，使用带空心三角箭头的实线表示泛化关系。</p>
+<p><img src="image-20220423160937585.png" alt="image-20220423160937585"></p>
+<ol start="3">
+<li>系统边界</li>
+</ol>
+<p>　　在项目开发过程中，边界是一个非常重要的概念。这里说的系统边界是指系统与系统之间的界限。通常我们所说的系统可以认为是由一系列的相互作用的元素形成的具有特定功能的有机整体。<br>　　系统同时又是相对的，一个系统本身又可以是另一个更大系统的组成部分，因此，系统与系统之间需要使用系统边界进行区分开来。我们把系统边界以外的同系统相关联的其他部分，称之为系统环境。</p>
+<p><img src="image-20220423161144191.png" alt="image-20220423161144191"></p>
+<h4 id="表示形式"><a href="#表示形式" class="headerlink" title="表示形式:"></a>表示形式:</h4><h5 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系:"></a>关联关系:</h5><p><strong>关系说明：</strong>表示参与者与用例之间的关系</p>
+<p><strong>表示方法：</strong>带箭头的实线，箭头指向用例。</p>
+<p><strong>举例说明：</strong>用户登录系统</p>
+<p><img src="image-20220423102506092.png" alt="image-20220423102506092"></p>
+<h5 id="归纳（泛化）关系"><a href="#归纳（泛化）关系" class="headerlink" title="归纳（泛化）关系"></a>归纳（泛化）关系</h5><p><strong>关系说明：</strong>表示参与者与参与者之间、用例与用例之间的关系。**==类似Java中的继承==,一个用例可以被特别列举为一个或多个子用例，这被称为用例泛化。**</p>
+<p><strong>表示方法：</strong>带<strong>空心箭头的实线</strong>，箭头指向被泛化（被继承）的用例，即基础用例/父用例。<em>（注意：泛化关系的箭头不是指向被泛化，而是指向被继承。泛化和继承是不同的方向。泛化是从下到上的抽象过程，继承是从上到下，从一般到特殊的过程。）</em></p>
+<p><strong>举例说明：</strong>VIP会员和普通用户，归纳为用户；账号登录与微信登录，也可归纳为登录系统。</p>
+<p><img src="image-20220914115134455.png" alt="image-20220914115134455"></p>
+<h5 id="包含关系"><a href="#包含关系" class="headerlink" title="包含关系"></a>包含关系</h5><p><strong>关系说明：</strong>表示用例与用例之间的关系，其中**==执行基础用例前必须执行被包含用例==,一个用例（基础用例）的行为包含了另一个用例（包含用例）的行为。**</p>
+<p><strong>表示方法：虚线箭头+<code>&lt;include&gt;</code>字样</strong>，==箭头指向被包含的用例==</p>
+<p><strong>举例说明：</strong>用户在账号登录过程中，包括输入账号、输入密码、确认登录等操作</p>
+<p><img src="image-20220914115325212.png" alt="image-20220914115325212"></p>
+<h5 id="拓展关系"><a href="#拓展关系" class="headerlink" title="拓展关系"></a>拓展关系</h5><p>关系说明：表示用例与用例之间的关系；用于拓展用例对基础用例的<strong>增强</strong>；**==拓展用例是在特定条件出现时(不是必须执行的)，才会被执行的用例(不同于之包含关系的必须执行)==。**</p>
+<p>表示方法：<strong>虚线箭头+<code>&lt;extend&gt;</code>字样</strong>，==箭头指向被扩展的用例（即基础用例）==</p>
+<p>举例说明：用户在登录过程中忘记了密码</p>
+<p><img src="image-20220423151343823.png" alt="image-20220423151343823"></p>
+<h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><blockquote>
+<p>参考自:<a target="_blank" rel="noopener" href="http://www.trufun.net/UML/UMLwendang/2016/0115/138.html">UML序列图总结_西安楚凡科技有限公司 - 企业级UML2.x建模工具 | 应用生命周期管理工具 | 需求管理工具| 中国最专业的UML解决方案提供商 (trufun.net)</a></p>
+</blockquote>
+<p>序图更多只是一种叫法，平常我们所说的顺序图、序列图也是在称呼它。<strong>时序图是基于交互的对象行为建模，是 UML 用于描述对象之间信息的交互过程的方法，是描述对象间协作关系的模型。</strong></p>
+<p>时序图用<strong>于捕获系统运行中对象之间有时间顺序的交互，是由生命线和消息组成。</strong></p>
+<p>时序图将交互关系表示为一个二维图。<strong>纵向是时间轴，时间沿竖线向下延伸。横向轴代表了在协作中各独立对象的类元角色。</strong>类元角色用生命线表示。当对象存在时，角色用一条虚线表示，当对象的过程处于激活状态时，生命线是一个双道线。消息用从一个对象的生命线到另一个对象生命线的箭头表示。箭头以时间顺序在图中从上到下排列。</p>
+<h4 id="序列图中涉及的元素："><a href="#序列图中涉及的元素：" class="headerlink" title="序列图中涉及的元素："></a>序列图中涉及的元素：</h4><h5 id="生命线"><a href="#生命线" class="headerlink" title="生命线:"></a>生命线:</h5><p>生命线名称可带下划线。当使用下划线时，意味着序列图中的生命线代表一个类的特定实例。</p>
+<p><img src="image-20220423161609932.png" alt="image-20220423161609932"></p>
+<h5 id="同步消息"><a href="#同步消息" class="headerlink" title="同步消息:"></a>同步消息:</h5><p>发送人在它继续之前，将等待同步消息响应。</p>
+<p><img src="image-20220423161724199.png" alt="image-20220423161724199"></p>
+<h5 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息:"></a>异步消息:</h5><p> 在发送方继续之前，无需等待响应的消息。</p>
+<p><img src="image-20220423161758804.png" alt="image-20220423161758804"></p>
+<h5 id="注释"><a href="#注释" class="headerlink" title="注释:"></a>注释:</h5><p>折页角的内容就是注释内容</p>
+<p><img src="image-20220423161847934.png" alt="image-20220423161847934"></p>
+<h5 id="约束"><a href="#约束" class="headerlink" title="约束:"></a>约束:</h5><p>约束的符号很简单；格式是: [Boolean Test]</p>
+<p><img src="image-20220423162218154.png" alt="image-20220423162218154"></p>
+<p>组合片段:<strong>组合片段用来解决交互执行的条件及方式。它允许在序列图中直接表示逻辑组件，用于通过指定条件或子进程的应用区域，为任何生命线的任何部分定义特殊条件和子进程。</strong></p>
+<p><strong>常用的组合片段有：</strong></p>
+<h5 id="抉择（Alt）"><a href="#抉择（Alt）" class="headerlink" title="抉择（Alt）:"></a>抉择（Alt）:</h5><p>  抉择用来指明在两个或更多的消息序列之间的互斥的选择，<strong>相当于经典的if..else..。</strong><br>  抉择在任何场合下只发生一个序列。 可以在每个片段中设置一个临界来指示该片段可以运行的条件。else 的临界指示其他任何临界都不为 True 时应运行的片段。如果所有临界都为 False 并且没有 else，则不执行任何片段。</p>
+<p><img src="image-20220423162351361.png" alt="image-20220423162351361"></p>
+<h5 id="选项（Opt）"><a href="#选项（Opt）" class="headerlink" title="选项（Opt）:"></a>选项（Opt）:</h5><p>包含一个可能发生或不发生的序列</p>
+<p><img src="image-20220423162414157.png" alt="image-20220423162414157"></p>
+<h5 id="循环（Loop）"><a href="#循环（Loop）" class="headerlink" title="循环（Loop）:"></a>循环（Loop）:</h5><p>片段重复一定次数。 可以在临界中指示片段重复的条件。</p>
+<p><img src="image-20220423162548699.png" alt="image-20220423162548699"></p>
+<h5 id="并行（Par）"><a href="#并行（Par）" class="headerlink" title="并行（Par）:"></a>并行（Par）:</h5><p><img src="image-20220423162716530.png" alt="image-20220423162716530"></p>
+<h2 id="其他常用的图"><a href="#其他常用的图" class="headerlink" title="其他常用的图"></a>其他常用的图</h2><h3 id="数据流图-DFD-期末考"><a href="#数据流图-DFD-期末考" class="headerlink" title="数据流图(DFD) [期末考]"></a>数据流图(DFD) [期末考]</h3><p> 数据流图，简称DFD，是<strong>SA方法(结构化分析方法)中用于表示系统逻辑模型的一种工具</strong>，它以图形的方式描绘数据在系统中流动和处理的过程，由于它只<strong>反映系统必须完成的逻辑功能</strong>，所以它是一种功能模型。</p>
+<p>下图是一个飞机机票预订系统的数据流图，它反映的功能是：旅行社把预订机票的旅客信息 (姓名、年龄、单位、身份证号码、旅行时间、目的地等)输入机票预订系统。系统为旅客安排航班，打印出取票通知单(附有应交的账款)。旅客在飞机起飞的前一天凭取票通知单交款取票，系统检验无误，输出机票给旅客。</p>
+<p><img src="image-20220423172937507.png" alt="image-20220423172937507"></p>
+<h4 id="基本图形符号"><a href="#基本图形符号" class="headerlink" title="基本图形符号"></a>基本图形符号</h4><p>数据流图有四种基本图形符号：</p>
+<p>箭头: 表示数据流；</p>
+<p>  〇：圆或椭圆，表示加工；</p>
+<p>  = ：双杠，表示数据存储；</p>
+<p>  □：方框，表示数据的源点或终点。</p>
+<p>   (1) 数据流。数据流是数据在系统内传播的路径，因此由一组成分固定的数据组成。如订票单由旅客姓名、年龄、单位、身份证号、日期、目的地等数据项组成。由于数据流是流动中的数据，所以必须有流向，除了与数据存储之间的数据流不用命名外，数据流应该用名词或名词短语命名。</p>
+<p>   (2)加工(又称为数据处理)。对数据流进行某些操作或变换。每个加工也要有名字，通常是动词短语，简明地描述完成什么加工。在分层的数据流图中，加工还应编号。</p>
+<p>   (3)数据存储(又称为文件)，指暂时保存的数据，它可以是数据库文件或任何形式的数据组织。</p>
+<p>   (4)数据源点或终点，是本软件系统外部环境中的实体(包括人员、组织或其他软件系统)，统称外部实体。一般只出现在数据流图的顶层图。</p>
+<p><strong>注意事项:</strong></p>
+<p>   ①命名。不论数据流、数据存储还是加工，合适的命名使人们易于理解其含义。</p>
+<p>   ②画数据流而不是控制流。数据流反映系统“做什么”，不反映“如何做”，因此箭头上的数据流名称只能是名词或名词短语，整个图中不反映加工的执行顺序。</p>
+<p>   ③一般不画物质流。数据流反映能用计算机处理的数据，并不是实物，因此对目标系统的数据流图一般不要画物质流。</p>
+<p>   ④每个加工至少有一个输入数据流和一个输出数据流，反映出此加工数据的来源与加工的结果。</p>
+<p>   ⑤编号。如果一张数据流图中的某个加工分解成另一张数据流图时，则上层图为父图，直接下层图为子图。子图及其所有的加工都应编号。</p>
+<p><img src="image-20220423173404629.png" alt="image-20220423173404629"></p>
+<h4 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h4><p>数据字典是指对数据的数据项,数据结构,数据流,数据存储,处理逻辑,外部实体等进行<strong>定义和描述</strong>,其目的是对<strong>数据流图中的各个元素作出详细的说明</strong>.数据字典的条目有<strong>数据流,数据项,数据存储,基本加工(注: 不包括外部实体)</strong>.</p>
+<h3 id="ER图"><a href="#ER图" class="headerlink" title="ER图"></a>ER图</h3><p>在数据库设计中很常用</p>
+<h4 id="数据词典"><a href="#数据词典" class="headerlink" title="数据词典"></a>数据词典</h4><blockquote>
+<p>引用自:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Allen-rg/p/9274895.html">数据字典 - 静悟生慧 - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<p>数据字典是<strong>描述数据的信息集合，是对系统中使用的所有数据元素的定义的集合</strong>。通常一般用户是无法修改数据字典的，只有程序维护人员有编辑、修改数据字典的权限<br>在开发的程序中，数据字典可以帮助开发人员理解各个数据项目的类型、数值和它们与现实世界中的对象的关系</p>
+<h5 id="常用字段与示例"><a href="#常用字段与示例" class="headerlink" title="常用字段与示例:"></a>常用字段与示例:</h5><ul>
+<li>字段</li>
+<li>描述</li>
+<li>数据类型</li>
+<li>约束</li>
+</ul>
+<p><img src="image-20220423174603453.png" alt="image-20220423174603453"></p>
+<h4 id="实体关系图-ER图"><a href="#实体关系图-ER图" class="headerlink" title="实体关系图(ER图)"></a>实体关系图(ER图)</h4><blockquote>
+<p>参考自:<a target="_blank" rel="noopener" href="https://blog.csdn.net/Edraw_Max/article/details/110244759">(20条消息) ER图（实体关系图）怎么画？_亿图图示的博客-CSDN博客_er图怎么画</a></p>
+</blockquote>
+<p>E-R图又称实体关系图，是一种提供了实体，属性和联系的方法，用来描述现实世界的概念模型。通俗点讲就是，当我们理解了实际问题的需求之后，需要用一种方法来表示这种需求，概念模型就是用来描述这种需求。</p>
+<p>例如:</p>
+<p><img src="image-20220423175256802.png" alt="image-20220423175256802"></p>
+<p><strong>E-R图中的基本元素:</strong> </p>
+<ul>
+<li><strong>实体</strong>:实际问题中客观存在的并且可以相互区别的事物称为实体。实体是现实世界中的对象，可以具体到人，事，物。比如：上图中的饭卡、学生、办公室、食堂、超市。</li>
+<li><strong>属性</strong>:实体所具有的某一个特性称为属性，在E-R图中属性用来描述实体。比如上图中的学生，可以用“姓名”、“院系”、“班级”、“手机号”进行属性描述。</li>
+<li><strong>实体集</strong>:具有相同属性的实体的集合称为实体集。例如：全体学生就是一个实体集，（983573，李刚，男，2000/12/12）是学生实体集中的一个实体。</li>
+<li><strong>实体型</strong>:具有相同的特征和性质的实体一定有相同的属性，用实体名及其属性名集合来抽象和刻画同类实体称为实体型，其表示格式为：实体名（属性1，属性2，……）</li>
+<li><strong>键</strong>:在描述实体集的所有属性中，可以唯一标识每个实体的属性称为键。键也是属于实体的属性，作为键的属性取值必须唯一且不能“空置”。比如：不重复的学生号，就可以作为学生的“键”。</li>
+<li><strong>联系</strong>:世界上任何事物都不是孤立存在的，事物内部和事物之间都有联系的，实体之间的联系通常有3种类型：一对一联系，一对多联系，多对多联系。</li>
+</ul>
+<h5 id="作图规范"><a href="#作图规范" class="headerlink" title="作图规范:"></a>作图规范:</h5><p><strong>1）矩形框：</strong>表示实体，在框中记入实体名。</p>
+<p><strong>2）菱形框：</strong>表示联系，在框中记入联系名</p>
+<p><strong>3）椭圆形框</strong>：表示实体或联系的属性，将属性名记入框中。对于<strong>主属性名(主键)，则在其名称下划一下划线。</strong></p>
+<p><strong>4）连线：</strong>实体与属性之间；实体与联系之间；联系与属性之间用直线相连，并在直线上标注联系的类型。（对于一对一联系，要在两个实体连线方向各写1； <strong>对于一对多联系，要在一的一方写1，多的一方写N；对于多对多关系，则要在两个实体连线方向各写N，M。</strong>)</p>
+<h3 id="系统流程图"><a href="#系统流程图" class="headerlink" title="系统流程图"></a>系统流程图</h3><blockquote>
+<p>参考自:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/johnnyzen/p/14644010.html#_label1">系统建模之程序流程图|系统流程图|数据流图 - 千千寰宇 - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<p>系统流程图用于描绘系统物理模型，表达<strong>数据在系统各个部件之间（程序、文件、数据库、表格、人工过程等）流动的情况。</strong></p>
+<p>系统流程图是概括的描绘系统物理模型的工具。 它的基本思想是用图形符号以黑盒子形式描绘系统里面的每个具体部件(程序、文件、数据库、表格、人工过程等），表达数据在系统各个部件之间流动的情况。 而不是对数据加工处理的过程，他是<strong>物理数据流图而不是程序流程图。</strong></p>
+<p><img src="image-20220423181440823.png" alt="image-20220423181440823"></p>
+<h4 id="样例"><a href="#样例" class="headerlink" title="样例:"></a>样例:</h4><ul>
+<li><p>某生鲜品牌有一个前置仓，存放其业务配送所需的各种生鲜，前置仓的各种生鲜的数量及其库存量临界值等数据记录在前置仓主文件上，当前置仓中生鲜数量发生变化时，应更改库存文件。</p>
+<p>若某种生鲜的库存量少于库存临界值，则立即报告采购部门以便订货，规定每天向采购部门送一份采购报告。</p>
+</li>
+<li><p>用系统流程图的符号进行解释<br>生鲜的发放和接受称为变更记录，由键盘输入到计算机中。</p>
+<p>系统中库存清单程序对变更记录进行处理，更新存储在磁盘上的库存清单主文件，并且把必要的订货信息记录写在联机存储上。</p>
+<p>最后，每天由报告生成程序读一次联机存储，并且打印出订货报告。</p>
+</li>
+<li><p>形成系统流程图:</p>
+</li>
+</ul>
+<p><img src="image-20220423181653365.png" alt="image-20220423181653365"></p>
+<h3 id="系统结构图-未知"><a href="#系统结构图-未知" class="headerlink" title="系统结构图(未知)"></a>系统结构图(未知)</h3><blockquote>
+<p>参考:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44611096/article/details/111311549?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1.topblog&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1.topblog&utm_relevant_index=2">(20条消息) 【软件工程】结构图（SC）——期末复习用_程序鸡的博客-CSDN博客_sc图</a></p>
+</blockquote>
+<p><img src="image-20220423182654991.png" alt="image-20220423182654991"></p>
+<h3 id="程序流程图"><a href="#程序流程图" class="headerlink" title="程序流程图"></a>程序流程图</h3><blockquote>
+<p>参考:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lavendery/p/15335568.html">流程图的画法 - 鸢凛 - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<h4 id="符号意义"><a href="#符号意义" class="headerlink" title="符号意义"></a>符号意义</h4><p><img src="image-20220423183044900.png" alt="image-20220423183044900"></p>
+<h4 id="选择结构-if-else-switch"><a href="#选择结构-if-else-switch" class="headerlink" title="选择结构(if  else , switch)"></a>选择结构(if  else , switch)</h4><p>为鼓励居民节约用水，自来水公司采取按用水量阶梯式计价的办法，居民应交水费y（元）</p>
+<p>​         与月用水量x（吨）的关系如下，请编写程序实现水费的计算。</p>
+<p>​    <img src="2521636-20210927113113784-413050521.png" alt="img"></p>
+<p>流程图如下所示:</p>
+<p><img src="image-20220423183318088.png" alt="image-20220423183318088"></p>
+<h4 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h4><p><img src="image-20220423184029673.png" alt="image-20220423184029673"></p>
+<p><strong>for循环:</strong></p>
+<p>  题目：本题要求编写程序，计算表达式 1 + 2 + 3 + … + 100 的值。</p>
+<p><img src="image-20220423183417342.png" alt="image-20220423183417342"></p>
+<h3 id="N-S图-盒图-期末考"><a href="#N-S图-盒图-期末考" class="headerlink" title="N-S图(盒图)  [期末考]"></a>N-S图(盒图)  [期末考]</h3><blockquote>
+<p>参考:<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/360921957">N-S图（盒图）详解（附案例） - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<h4 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构:"></a>顺序结构:</h4><p>所有语句顺序执行，先执行A后执行B</p>
+<p><img src="image-20220423184320418.png" alt="image-20220423184320418"></p>
+<h4 id="条件结构"><a href="#条件结构" class="headerlink" title="条件结构:"></a>条件结构:</h4><p>如果条件P成立，执行A，否则执行B</p>
+<p><img src="image-20220423184412863.png" alt="image-20220423184412863"></p>
+<h5 id="多分支结构"><a href="#多分支结构" class="headerlink" title="多分支结构:"></a>多分支结构:</h5><p>P=1的时候，执行A1，P=2的时候，执行A2，依次类推；</p>
+<p><img src="image-20220423184454035.png" alt="image-20220423184454035"></p>
+<h4 id="循环结构-1"><a href="#循环结构-1" class="headerlink" title="循环结构:"></a>循环结构:</h4><h5 id="当型-while"><a href="#当型-while" class="headerlink" title="当型(while)"></a>当型(while)</h5><p><strong>先判断后执行，</strong>当P1**==先判断在执行==,条件成立的情况下，反复执行A语句**，直到P1条件不成立为止</p>
+<p><img src="image-20220423184714385.png" alt="image-20220423184714385"></p>
+<h5 id="直到型-do-while或until"><a href="#直到型-do-while或until" class="headerlink" title="直到型(do.. while或until)"></a>直到型(do.. while或until)</h5><p><strong>先执行后判断，</strong>当P1条件不成立的情况下，反复执行A语句，**==先执行(A语句),再判断==,直到P1条件成立为止(条件满足不再循环)**(<em>注意这与代码不一样,直到满足条件就不循环了,代码<code>do...while</code>满足会循环的</em>)</p>
+<p><img src="image-20220423184837571.png" alt="image-20220423184837571"></p>
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例:"></a>案例:</h4><p>(1)求1到5所有整数相乘的乘积</p>
+<p><em>注: 图画错了,应该是 <code>t = t * i</code></em></p>
+<p><img src="image-20220423185001987.png" alt="image-20220423185001987"></p>
+<p>(2) 输入三角形三边长，判断三遍构成的是等边，等腰，还是一般三角形</p>
+<p><img src="image-20220423185425035.png" alt="image-20220423185425035"></p>
+<h3 id="PAD图-期末考"><a href="#PAD图-期末考" class="headerlink" title="PAD图 [期末考]"></a>PAD图 [期末考]</h3><p>PAD图（Problem Analysis Diagram），由日本日立公司1973年发明以后，已得到一定程度的推广。它<strong>用二维树形结构的图来表示程序的控制流</strong>，将这种图翻译成程序代码比较容易。它既克服了传统的流程图不能清晰表现程序结构的缺点，又不像N-S图那样受到把全部程序约束在一个方框内的限制，这就是其优势所在。</p>
+<h4 id="几种结构表示"><a href="#几种结构表示" class="headerlink" title="几种结构表示"></a>几种结构表示</h4><p><img src="image-20220612215700193.png" alt="image-20220612215700193"></p>
+<h4 id="案例-1"><a href="#案例-1" class="headerlink" title="案例:"></a>案例:</h4><p>请根据下列伪码画出对应的PAD图。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">定义变量:i=<span class="number">7</span>,S=<span class="number">0</span></span><br><span class="line">DO WHILE i&lt;=<span class="number">1000</span></span><br><span class="line">IF(i被<span class="number">7</span>整除)</span><br><span class="line">THEN</span><br><span class="line">S=S+i</span><br><span class="line">输出:i</span><br><span class="line">ENDIF</span><br><span class="line">i=i+<span class="number">1</span></span><br><span class="line">ENDDO</span><br><span class="line">输出:S</span><br></pre></td></tr></table></figure>
+
+<p>PAD图如图所示:</p>
+<p><img src="image-20220612224047966.png" alt="image-20220612224047966"></p>
+<p>N-S图转换为PAD图</p>
+<p><img src="image-20220612224246921.png" alt="image-20220612224246921"></p>
+<p>转换后的PAD图</p>
+<p><img src="image-20220612224310282.png" alt="image-20220612224310282"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Luo Qianyou
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" title="软件工程">https://lqy679.github.io/2020/01/01/软件工程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/01/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="prev" title="计算机网络">
+                  <i class="fa fa-chevron-left"></i> 计算机网络
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/01/vue%E4%BD%BF%E7%94%A8/" rel="next" title="Vue使用">
+                  Vue使用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo Qianyou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/LQY679" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+<meting-js server="tencent" type="playlist" id="8809238545" fixed="true"  autoplay="false" loop="all" order="list" list-folded="ture" list-max-height="500px" ><!-- hexo injector body_end end --></body>
+</html>

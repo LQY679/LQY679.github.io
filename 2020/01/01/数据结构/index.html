@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lqy679.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="数据结构2.入门概述2.1线性表的概念所谓线性表,就是讲数据排列成一条长线的结构,如:顺序表,数组,链表,栈,队列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构">
+<meta property="og:url" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="南城记录倌">
+<meta property="og:description" content="数据结构2.入门概述2.1线性表的概念所谓线性表,就是讲数据排列成一条长线的结构,如:顺序表,数组,链表,栈,队列">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211021144546659-16347987553071.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211021145619762-16347993817942.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211021151834800-16348007159263.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211021152437784-16348010790944.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211118114852237-16372073344341.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211124145756153-16377370776681.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211124201226076-16377559475862.png">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/01c1755ab0dfc73295291de2245131af.svg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/f990c5e20c6033ea5c9c4a9be4ff8951.svg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/59f30c9e66f5f15028bde1e8e08c8bd8.svg">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211126092132956-16378896943201.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211126140657381-16379068212452.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211112204726067-16367212477031.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211204113210124.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211204113341369.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211204115203311.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211204115236778.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211204134511041.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211204134525392.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211204134350181.png">
+<meta property="article:published_time" content="2020-01-01T10:57:32.000Z">
+<meta property="article:modified_time" content="2023-02-22T09:19:33.123Z">
+<meta property="article:author" content="Luo Qianyou">
+<meta property="article:tag" content="Java,Python,web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/image-20211021144546659-16347987553071.png">
+
+
+<link rel="canonical" href="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/","path":"2020/01/01/数据结构/","title":"数据结构"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据结构 | 南城记录倌</title>
+  
+
+
+
+
+
+
+
+
+  <!--
+    引用自作者
+    <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  -->
+  <script src="/live2d-widget/autoload.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/site_images/logo.jpg" alt="南城记录倌">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">南城记录倌</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">往昔皆为过眼云烟,一切尽随风而逝;此刻之行终将化未来的救赎之刃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%85%A5%E9%97%A8%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">2.入门概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.1线性表的概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">3.数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%89%B9%E6%80%A7-%E9%9A%8F%E6%9C%BA%E8%AE%BF%E9%97%AE"><span class="nav-number">1.2.1.</span> <span class="nav-text">3.1 特性:随机访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84%E5%92%8C%E7%89%A9%E7%90%86%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.2.</span> <span class="nav-text">3.2 逻辑结构和物理结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">3.2.1 数组元素的访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-%E6%95%B0%E7%BB%84%E4%B8%8B%E6%A0%87%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E0-%E5%BC%80%E5%A7%8B"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">3.2.2 数组下标为什么从0 开始</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%95%B0%E7%BB%84%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.3 数组的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-%E9%AB%98%E6%95%88%E7%9A%84%E9%9A%8F%E6%9C%BA%E8%AE%BF%E9%97%AE"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">3.3.1 高效的随机访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-%E4%BD%8E%E6%95%88%E6%8F%92%E5%85%A5%E5%92%8C%E5%88%A0%E9%99%A4"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">3.3.1 低效插入和删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">3.4 数组的应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%93%BE%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">4.链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.3.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">链表的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8D%95%E9%93%BE%E8%A1%A8"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">1. 单链表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%A2%9E%E5%88%A0%E6%93%8D%E4%BD%9C-%E9%AB%98%E6%95%88%E7%8E%87"><span class="nav-number">1.3.2.1.1.</span> <span class="nav-text">链表的增删操作(高效率)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9C-%E4%BD%8E%E6%95%88%E7%8E%87"><span class="nav-number">1.3.2.1.2.</span> <span class="nav-text">查找操作(低效率)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">2.循环链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">3.双向链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">4.双向循环链表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97"><span class="nav-number">1.4.</span> <span class="nav-text">5.栈和队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88"><span class="nav-number">1.4.1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">栈的操作:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E6%A0%88%E5%87%BA%E6%A0%88%E7%9A%84%E5%8F%98%E5%8C%96%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">进栈出栈的变化形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E7%9A%84%E4%BD%9C%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">栈的作用以及应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0-%E5%BE%85%E5%86%99"><span class="nav-number">1.4.1.4.</span> <span class="nav-text">栈的实现(待写)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-number">1.5.</span> <span class="nav-text">递归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">1.5.1.</span> <span class="nav-text">应用:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E9%97%AE%E9%A2%98"><span class="nav-number">1.5.2.</span> <span class="nav-text">递归问题:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%A0%86%E6%A0%88%E6%BA%A2%E5%87%BA"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">(1)堆栈溢出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E9%87%8D%E5%A4%8D%E8%AE%A1%E7%AE%97"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">(2)重复计算</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E4%B8%8E%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.5.3.</span> <span class="nav-text">递归与循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">1.6.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.6.1.</span> <span class="nav-text">时间复杂度:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">时间复杂度分析方法:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E4%BB%A3%E7%A0%81%E5%BE%AA%E7%8E%AF%E6%9C%80%E5%A4%9A%E5%8E%9F%E5%88%99"><span class="nav-number">1.6.1.1.1.</span> <span class="nav-text">1.代码循环最多原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%8A%A0%E6%B3%95%E5%8E%9F%E5%88%99"><span class="nav-number">1.6.1.1.2.</span> <span class="nav-text">2.加法原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E4%B9%98%E6%B3%95%E5%8E%9F%E5%88%99"><span class="nav-number">1.6.1.1.3.</span> <span class="nav-text">3.乘法原则:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">1.6.1.2.</span> <span class="nav-text">常见的时间复杂度分析:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#O-log-n"><span class="nav-number">1.6.1.2.1.</span> <span class="nav-text">O(log n)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#O-nlog-n"><span class="nav-number">1.6.1.2.2.</span> <span class="nav-text">O(nlog n)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.6.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%84%E5%88%A4%E7%AE%97%E6%B3%95%E5%A5%BD%E5%9D%8F%E7%9A%84%E7%9A%84%E6%A0%87%E5%87%86"><span class="nav-number">1.7.0.1.</span> <span class="nav-text">评判算法好坏的的标准</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-number">1.7.0.2.</span> <span class="nav-text">冒泡排序:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.7.0.3.</span> <span class="nav-text">插入排序:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-number">1.7.0.4.</span> <span class="nav-text">选择排序:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6-%E5%88%86%E6%B2%BB-%E6%8E%92%E5%BA%8F"><span class="nav-number">1.7.0.5.</span> <span class="nav-text">归并(分治)排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-O-n-log-n"><span class="nav-number">1.7.0.5.1.</span> <span class="nav-text">时间复杂度: O(n log n)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-O-n"><span class="nav-number">1.7.0.5.2.</span> <span class="nav-text">空间复杂度: O(n)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.7.0.5.3.</span> <span class="nav-text">稳定性:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F-%E5%BE%85%E5%86%99"><span class="nav-number">1.7.1.</span> <span class="nav-text">快速排序(待写)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="nav-number">1.7.2.</span> <span class="nav-text">计数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-1"><span class="nav-number">1.7.2.1.</span> <span class="nav-text">时间复杂度:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-1"><span class="nav-number">1.7.2.2.</span> <span class="nav-text">空间复杂度:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%B3%E5%AE%9A%E6%80%A7-1"><span class="nav-number">1.7.2.3.</span> <span class="nav-text">稳定性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%B6%E6%8E%92%E5%BA%8F-%E5%BE%85%E5%86%99"><span class="nav-number">1.7.3.</span> <span class="nav-text">桶排序(待写)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">1.8.</span> <span class="nav-text">二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%821-%E6%9F%A5%E6%89%BE%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%80%BC"><span class="nav-number">1.8.1.</span> <span class="nav-text">需求1:查找第一个重复值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%822-%E7%9B%B8%E8%BF%91%E5%80%BC"><span class="nav-number">1.8.2.</span> <span class="nav-text">需求2:相近值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8-%E4%BA%86%E8%A7%A3%E5%8D%B3%E5%8F%AF"><span class="nav-number">1.9.</span> <span class="nav-text">散列表(了解即可)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E5%86%B2%E7%AA%81%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.9.1.</span> <span class="nav-text">散列冲突及解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8%E5%BA%94%E7%94%A8"><span class="nav-number">1.9.2.</span> <span class="nav-text">散列表应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.9.3.</span> <span class="nav-text">哈希算法介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%A0%91-%E9%87%8D%E7%82%B9"><span class="nav-number">1.10.</span> <span class="nav-text">6.树(重点)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">1.10.1.</span> <span class="nav-text">树的相关概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.10.2.</span> <span class="nav-text">树的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84-%E5%BE%85%E8%A1%A5%E5%85%85"><span class="nav-number">1.10.3.</span> <span class="nav-text">树的存储结构(待补充)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.10.4.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.10.4.1.</span> <span class="nav-text">特殊的二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.10.4.1.1.</span> <span class="nav-text">满二叉树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.10.4.1.2.</span> <span class="nav-text">完全二叉树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%9C%E6%A0%91"><span class="nav-number">1.10.4.1.3.</span> <span class="nav-text">斜树</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.10.4.2.</span> <span class="nav-text">二叉树的性质</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%9B%BEGraph-%E9%87%8D%E7%82%B9"><span class="nav-number">1.11.</span> <span class="nav-text">7.图Graph(重点)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.11.1.</span> <span class="nav-text">图的定义:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">1.11.2.</span> <span class="nav-text">图的相关概念:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B6%E7%82%B9%E7%9A%84%E5%87%BA%E5%BA%A6%E5%92%8C%E5%85%A5%E5%BA%A6"><span class="nav-number">1.11.2.1.</span> <span class="nav-text">顶点的出度和入度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%82%B9%E5%92%8C%E7%AB%AF%E7%82%B9"><span class="nav-number">1.11.2.2.</span> <span class="nav-text">邻接点和端点:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E5%9B%BE"><span class="nav-number">1.11.2.3.</span> <span class="nav-text">完全图:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A6%E6%9D%83%E5%9B%BE"><span class="nav-number">1.11.2.4.</span> <span class="nav-text">带权图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%A0%E5%AF%86%E5%9B%BE%E5%92%8C%E7%A8%80%E7%96%8F%E5%9B%BE"><span class="nav-number">1.11.2.5.</span> <span class="nav-text">稠密图和稀疏图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E5%9B%BE"><span class="nav-number">1.11.2.6.</span> <span class="nav-text">子图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%92%8C%E8%B7%AF%E5%8A%B2%E9%95%BF%E5%BA%A6"><span class="nav-number">1.11.2.7.</span> <span class="nav-text">路径和路劲长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E8%B7%AF%E5%92%8C%E7%8E%AF"><span class="nav-number">1.11.2.8.</span> <span class="nav-text">回路和环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E9%80%9A%E5%9B%BE-%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="nav-number">1.11.2.9.</span> <span class="nav-text">连通图,连通分量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E7%BB%93%E7%82%B9%E5%92%8C%E9%87%8D%E8%BF%9E%E9%80%9A%E5%9B%BE"><span class="nav-number">1.11.2.10.</span> <span class="nav-text">关结点和重连通图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.11.3.</span> <span class="nav-text">图的存储结构:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%AD%98%E5%82%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.11.3.1.</span> <span class="nav-text">邻接矩阵存储方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%9E%E5%B8%A6%E6%9D%83%E5%9B%BE"><span class="nav-number">1.11.3.1.1.</span> <span class="nav-text">非带权图:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%A6%E6%9D%83%E5%9B%BE-1"><span class="nav-number">1.11.3.1.2.</span> <span class="nav-text">带权图:</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Luo Qianyou"
+      src="/site_images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Luo Qianyou</p>
+  <div class="site-description" itemprop="description">清醒,知趣 明得失,知进退</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LQY679" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LQY679" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/QianyouLuo" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;QianyouLuo" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com" rel="noopener" target="_blank">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/site_images/logo.jpg">
+      <meta itemprop="name" content="Luo Qianyou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南城记录倌">
+      <meta itemprop="description" content="清醒,知趣 明得失,知进退">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据结构 | 南城记录倌">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-01 18:57:32" itemprop="dateCreated datePublished" datetime="2020-01-01T18:57:32+08:00">2020-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-22 17:19:33" itemprop="dateModified" datetime="2023-02-22T17:19:33+08:00">2023-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">计算机基础理论</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="2-入门概述"><a href="#2-入门概述" class="headerlink" title="2.入门概述"></a>2.入门概述</h2><h3 id="2-1线性表的概念"><a href="#2-1线性表的概念" class="headerlink" title="2.1线性表的概念"></a>2.1线性表的概念</h3><p>所谓线性表,就是讲数据排列成一条长线的结构,如:<strong>顺序表,数组,链表,栈,队列</strong></p>
+<p>**非线性结构:**树,堆,图等</p>
+<h2 id="3-数组"><a href="#3-数组" class="headerlink" title="3.数组"></a>3.数组</h2><p>数组是一种线性结构,<strong>他用一组连续的内存空间</strong>,来存储一组具有<strong>相同数据类型</strong>的数据</p>
+<h3 id="3-1-特性-随机访问"><a href="#3-1-特性-随机访问" class="headerlink" title="3.1 特性:随机访问"></a>3.1 特性:随机访问</h3><p><strong>劣势</strong>:<strong>数组插入删除操作效率非常低</strong></p>
+<h3 id="3-2-逻辑结构和物理结构"><a href="#3-2-逻辑结构和物理结构" class="headerlink" title="3.2 逻辑结构和物理结构"></a>3.2 逻辑结构和物理结构</h3><h4 id="3-2-1-数组元素的访问"><a href="#3-2-1-数组元素的访问" class="headerlink" title="3.2.1 数组元素的访问"></a>3.2.1 数组元素的访问</h4><p>计算机给每个内存单元都分配了一个地址,通过地址来访问其数据,因此要访问数组中的某个元素时,,首先要经过一个寻址公式计算要访问的元素在内存中的地址.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[i]  = baseAddress + i * dataTypesize</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-2-数组下标为什么从0-开始"><a href="#3-2-2-数组下标为什么从0-开始" class="headerlink" title="3.2.2 数组下标为什么从0 开始"></a>3.2.2 数组下标为什么从0 开始</h4><p>从数组的存储的内存模型上来看,”下标”最切确的定义应该是“偏移(offset)”,如果用array来表示数组的首地址,array[0]也就是偏移为0的位置,也就是首地址,array[k]就表示偏移k个type_size的位置,所以计算array[k]的内存地址只需要用这个公式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array[k]_address = base_address+k*type_size</span><br></pre></td></tr></table></figure>
+
+<p>如果从1开始,那么计算就会变为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array[k]_address = base_address+k*type_size</span><br></pre></td></tr></table></figure>
+
+<p>对于CPU来说,就多了一次减法指令</p>
+<h3 id="3-3-数组的特点"><a href="#3-3-数组的特点" class="headerlink" title="3.3 数组的特点"></a>3.3 数组的特点</h3><h4 id="3-3-1-高效的随机访问"><a href="#3-3-1-高效的随机访问" class="headerlink" title="3.3.1 高效的随机访问"></a>3.3.1 高效的随机访问</h4><p>数组元素的访问是通过下标来访问的,计算机通过首地址和寻址公式能够很快的找到我们想要访问元素</p>
+<h4 id="3-3-1-低效插入和删除"><a href="#3-3-1-低效插入和删除" class="headerlink" title="3.3.1 低效插入和删除"></a>3.3.1 低效插入和删除</h4><p>由于数据是一段连续的内存空间,因此插入和删除操作会变得非常低效</p>
+<ul>
+<li><p>插入</p>
+<p>比如在a[i] (假设a[i]不是最后一个元素)的元素后面插入一个数据,这时只能将a[i]后面的元素都往后挪一位</p>
+<p>优化方案:如果数组中存储的数据是没用规律的,数组只是被当作一个存储数据的集合,在这种情况下,如果要在第i个位置插入数据,<strong>为了避免大规模数据的搬移,可以直接在最后添加一个元素,然后把原来第i个位置的数据放到最后面,将插入的数据放到第i个位置</strong></p>
+</li>
+<li><p>删除</p>
+<p>如果要删除第i个元素,为了数组的连续性,也需要搬移数据(将要删除的元素的后面的元素往前移)</p>
+<p>优化方案:在某些特定场景下,<strong>不一定非得追求数组在的数据的连续性</strong>,<strong>如果我们将多次删除操作集中在一起执行,效率就会相对提高</strong></p>
+<p>如:假设数组a[6]中有6个元素,a1,a2,a3,a4,a5,a6,现在我们依次要删除a1,a2这两个元素</p>
+<p>为了避免a3,a4,a5,a6.这些数据搬移两次,我们可以先记录下已经删除的数据,<strong>每次删除操作并不是真正的搬移数据,只是记录数据被删除,当数组没有更多的空间存储数据时,在触发执行一次真正的删除操作(搬移数据),这样就大大减少了数据搬移</strong></p>
+<p>就有点类似JVM的标记清楚垃圾回收的核心思想,还有windows操作系统的回收站功能</p>
+</li>
+</ul>
+<h4 id="3-4-数组的应用"><a href="#3-4-数组的应用" class="headerlink" title="3.4 数组的应用"></a>3.4 数组的应用</h4><p>针对数组类型,很多语言都提供了容器类,如java的ArrayList,C++STL中的vector</p>
+<p>ArrayList最大优势就是可以将很多数组操作的细节封装起来,比如数组的插入,删除时需要搬移数据等,另外他还有一个优势,就是<strong>支持动态扩容</strong>,数组本身在定义的时候需要预先指定大小,因为需要分配连续的内存空间,如果我们申请了大小为10 的数组,当第11个数组需要存储时,我们就需要重新分配一块更大的空间,将原来的数据复制过去,然后将新的数据插入.而<strong>ArrayList已经帮我们现实好了,当空间不足时,会自动扩容</strong></p>
+<h2 id="4-链表"><a href="#4-链表" class="headerlink" title="4.链表"></a>4.链表</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>链表是一种<strong>物理<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%98%E5%82%A8%E5%8D%95%E5%85%83/8727749">存储单元</a>上非连续</strong>、非顺序的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/350782">存储结构</a>，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0/715313">数据元素</a>的逻辑顺序是通过链表中的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8C%87%E9%92%88/2878304">指针</a>链接次序实现的。链表由一系列结点（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。每个结点包括两个部分：一个是存储<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0">数据元素</a>的数据域，另一个是存储下一个结点地址的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8C%87%E9%92%88/2878304">指针</a>域。 相比于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E8%A1%A8/3228081">线性表</a><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84/9845234">顺序结构</a>，操作复杂。由于不必须按顺序存储，<strong>链表在插入的时候可以达到O(1)的复杂度，比另一种线性表顺序表快得多，但是查找一个节点或者访问特定编号的节点则需要O(n)的时间，而线性表和顺序表相应的时间复杂度分别是O(logn)和O(1)。</strong></p>
+<h3 id="链表的类型"><a href="#链表的类型" class="headerlink" title="链表的类型"></a>链表的类型</h3><h4 id="1-单链表"><a href="#1-单链表" class="headerlink" title="1. 单链表"></a>1. 单链表</h4><p><img src="image-20211021144546659-16347987553071.png" alt="image-20211021144546659"></p>
+<p><strong>习惯上:<strong>把</strong>第一个结点叫做头结点</strong>,<strong>最后一个结点叫做尾结点</strong></p>
+<h5 id="链表的增删操作-高效率"><a href="#链表的增删操作-高效率" class="headerlink" title="链表的增删操作(高效率)"></a>链表的增删操作(高效率)</h5><p>链表在实现插入和删除操作时,<strong>并不需要搬移数据,只需将指针的指向更改就可以了</strong></p>
+<h5 id="查找操作-低效率"><a href="#查找操作-低效率" class="headerlink" title="查找操作(低效率)"></a>查找操作(低效率)</h5><p>链表无法实现像数组一样随机查找,即使当我们想查找第k个元素时,只能从头结点开始遍历</p>
+<h4 id="2-循环链表"><a href="#2-循环链表" class="headerlink" title="2.循环链表"></a>2.循环链表</h4><p>循环链表与单链表相比,循环链表在尾结点指向头结点</p>
+<p><img src="image-20211021145619762-16347993817942.png" alt="image-20211021145619762"></p>
+<h4 id="3-双向链表"><a href="#3-双向链表" class="headerlink" title="3.双向链表"></a>3.双向链表</h4><p><img src="image-20211021151834800-16348007159263.png" alt="image-20211021151834800"></p>
+<h4 id="4-双向循环链表"><a href="#4-双向循环链表" class="headerlink" title="4.双向循环链表"></a>4.双向循环链表</h4><p><img src="image-20211021152437784-16348010790944.png" alt="image-20211021152437784"></p>
+<h2 id="5-栈和队列"><a href="#5-栈和队列" class="headerlink" title="5.栈和队列"></a>5.栈和队列</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>概念:栈是一种<strong>先进后出</strong>的数据结构,限定仅在表尾进行插入删除操作的线性表,允许插入和删除的一端称为栈顶(top)</p>
+<p>,另一端称为栈尾(bottom),简称LIEF结构</p>
+<p><img src="image-20211118114852237-16372073344341.png" alt="image-20211118114852237"></p>
+<h4 id="栈的操作"><a href="#栈的操作" class="headerlink" title="栈的操作:"></a>栈的操作:</h4><ul>
+<li><strong>入栈(Push):栈的插入数据的操作</strong></li>
+<li><strong>出栈(Pop): 栈的删除数据操作</strong></li>
+</ul>
+<h4 id="进栈出栈的变化形式"><a href="#进栈出栈的变化形式" class="headerlink" title="进栈出栈的变化形式"></a>进栈出栈的变化形式</h4><p>假设进栈顺序为123</p>
+<ol>
+<li>第一种:1,2,3进,   3,2,1 出    </li>
+<li>第二种:1进1出,2进2出,3进3出 (<strong>也就是进一个出一个</strong>)   123</li>
+<li>第三种:213  (<strong>2出栈,1出栈,3进栈再出栈</strong>)</li>
+<li>第四种:132  (<strong>1进栈出栈,2进栈,3进栈,3出栈,2出栈</strong>)</li>
+<li>第五种:231  (<strong>1进栈,2进栈,2出栈,3进栈,3出栈,1出栈</strong>)</li>
+</ol>
+<p>不过不会出现312的情况,因为3出栈意味着,1和2都已经进栈了,而不可能1会比2先出栈</p>
+<h4 id="栈的作用以及应用"><a href="#栈的作用以及应用" class="headerlink" title="栈的作用以及应用"></a>栈的作用以及应用</h4><p>实际上<strong>递归</strong>就是运用到了栈的数据结构,**每次递归一次(自己调用自己),就相当于一次进栈操作,**最后达到终止条件,就开始出栈</p>
+<h4 id="栈的实现-待写"><a href="#栈的实现-待写" class="headerlink" title="栈的实现(待写)"></a>栈的实现(待写)</h4><hr>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>**概念:**程序调用自身的编程技巧称为递归（ recursion）。递归作为一种<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AE%97%E6%B3%95">算法</a>在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80">程序设计语言</a>中广泛应用。 一个过程或<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%87%BD%E6%95%B0">函数</a>在其定义或说明中有直接或间接调用自身的一种方法，它通常把一个大型复杂的问题层层转化为一个与原问题相似的规模较小的问题来求解，递归策略只需少量的程序就可描述出解题过程所需要的多次重复计算，大大地减少了程序的代码量。递归的能力在于用有限的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%AF%AD%E5%8F%A5">语句</a>来定义对象的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%A0%E9%99%90%E9%9B%86%E5%90%88">无限集合</a>。一般来说，递归需要有边界条件、递归前进段和递归返回段。当边界条件不满足时，递归前进；当边界条件满足时，递归返回。</p>
+<p>==即使自己调用自己==</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用:"></a>应用:</h3><p>如求1+2+3…+100 不使用循环而使用递归得Java代码如下所示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Test;</span><br><span class="line"><span class="keyword">public</span> class 递归测试 &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;	</span><br><span class="line">		System.out.println(ff(<span class="number">100</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">ff</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(x==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> ff(x-<span class="number">1</span>)+x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="递归问题"><a href="#递归问题" class="headerlink" title="递归问题:"></a>递归问题:</h3><h4 id="1-堆栈溢出"><a href="#1-堆栈溢出" class="headerlink" title="(1)堆栈溢出"></a>(1)堆栈溢出</h4><p>时间和空间消耗比较大。每一次函数调用都需要在内存栈中分配空间以保存参数，返回地址以及临时变量，而且往栈里面压入数据和弹出都需要时间。每个进程的栈容量是有限的。由于递归需要系统堆栈，所以空间消耗要比非递归代码要大很多。而且，如果递归深度太大，可能系统撑不住。</p>
+<h4 id="2-重复计算"><a href="#2-重复计算" class="headerlink" title="(2)重复计算"></a>(2)重复计算</h4><p>另外递归会有重复的计算。递归本质是把一个问题分解为多个问题，如果这多个问题存在重复计算，有时候会随着n成指数增长。<strong>斐波那契的递归</strong>就是一个例子。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class 递归测试 &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		</span><br><span class="line">		System.out.println(ff(<span class="number">8</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//非波那契数列</span></span><br><span class="line">	<span class="comment">//1,1,2,3,5,8,13,21....</span></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">ff</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(x==<span class="number">1</span>||x==<span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line">		<span class="keyword">return</span> ff(x-<span class="number">1</span>) + ff(x-<span class="number">2</span>) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="image-20211124145756153-16377370776681.png" alt="image-20211124145756153"></p>
+<p>如上图所示,ff(3)就是重复计算了,<strong>故为了避免出现重复计算的问题</strong>,我们可以==通过一个数据结构(散列表)来保存已经求解过的ff(k),当递归调用到了ff(k)时,我们先检查一下是否求解过了,如果已经求解了直接重散列表中返回==</p>
+<h3 id="递归与循环"><a href="#递归与循环" class="headerlink" title="递归与循环"></a>递归与循环</h3><p><strong>递归与循环非常相似,</strong>==循环都能转换成递归,但递归不一定能写成循环==,因为递归会有重复堆栈溢出,重复计算,空间复杂度和时间复杂度过大的风险,但某些情况下(如斐波那契数列,汉诺塔等),用递归更好.</p>
+<p>如下例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class 递归测试 &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		</span><br><span class="line">		System.out.println(f1(<span class="number">100</span>));</span><br><span class="line">		System.out.println(f2(<span class="number">100</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//递归</span></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f1</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(x==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line">		<span class="keyword">return</span> f1(x-<span class="number">1</span>)+x ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//转换成循环</span></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f2</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span><span class="number">1</span>;i&lt;=<span class="number">100</span>;i++) &#123;</span><br><span class="line">			sum = sum + i ;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> sum ; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度:"></a>时间复杂度:</h3><p>在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6">计算机科学</a>中，<strong>时间复杂性</strong>，又称<strong>时间复杂度</strong>，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AE%97%E6%B3%95">算法</a>的<strong>时间复杂度</strong>是一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%87%BD%E6%95%B0">函数</a>，它定性描述该算法的运行时间。这是一个代表算法输入值的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%97%E7%AC%A6%E4%B8%B2">字符串</a>的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%95%BF%E5%BA%A6/1584632">长度</a>的函数。时间复杂度常用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%A7O%E7%AC%A6%E5%8F%B7">大O符号</a>表述，==不包括这个函数的低阶项和首项系数。==使用这种方式时，时间复杂度可被称为是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B8%90%E8%BF%91">渐近</a>的，亦即考察输入值大小趋近<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%A0%E7%A9%B7/8284883">无穷</a>时的情况(常见的时间复杂度有:O(1)        O(n)    O(n<sup>2</sup>)    O(log n))</p>
+<h4 id="时间复杂度分析方法"><a href="#时间复杂度分析方法" class="headerlink" title="时间复杂度分析方法:"></a>时间复杂度分析方法:</h4><h5 id="1-代码循环最多原则"><a href="#1-代码循环最多原则" class="headerlink" title="1.代码循环最多原则"></a>1.代码循环最多原则</h5><p>大O表示法只表示一种变化趋势,<strong>公式中的低阶和常数系数并不左右增长趋势,因此可以忽略</strong></p>
+<h5 id="2-加法原则"><a href="#2-加法原则" class="headerlink" title="2.加法原则"></a>2.加法原则</h5><p>比如有如下代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> x)</span>&#123;</span><br><span class="line">    <span class="comment">//常量级 忽略</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum_1</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//即使循环了100次,也是属于常量级,忽略</span></span><br><span class="line">    <span class="keyword">for</span>(;p&lt;=<span class="number">100</span>;++p)&#123;</span><br><span class="line">        sum_1 = sum_1 + p;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//常量级忽略</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum_2</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 复杂度:O(n)</span></span><br><span class="line">    <span class="keyword">for</span>(;q&lt;n;++q)&#123;</span><br><span class="line">        sum_2 = sum_2 + q;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//常量级,忽略</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum_3</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//嵌套循环,O(n*n)</span></span><br><span class="line">    <span class="keyword">for</span>(;i&lt;=n;i++)&#123;</span><br><span class="line">        j = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(;j&lt;=n;j++)&#123;</span><br><span class="line">            sum_3 = sum+i*j;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum_1+sum_2+sum_3 ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//T(n) = O(n)+O(n*n) = O(n*n)</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-乘法原则"><a href="#3-乘法原则" class="headerlink" title="3.乘法原则:"></a>3.乘法原则:</h5><p><strong>嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</strong></p>
+<hr>
+<h4 id="常见的时间复杂度分析"><a href="#常见的时间复杂度分析" class="headerlink" title="常见的时间复杂度分析:"></a>常见的时间复杂度分析:</h4><h5 id="O-log-n"><a href="#O-log-n" class="headerlink" title="O(log n)"></a>O(log n)</h5><p>如下代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;n)&#123;</span><br><span class="line">        i = i*<span class="number">2</span> ;  <span class="comment">//代码1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">设代码执行次数为x ,则当 2^x = n 时退出循环</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>故解得 x = log<sub>2</sub> n,又由于因为对数有换底公式,所以问题规模可简化成 O (log n) </p>
+<h5 id="O-nlog-n"><a href="#O-nlog-n" class="headerlink" title="O(nlog n)"></a>O(nlog n)</h5><p>如下代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        test1(n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;n)&#123;</span><br><span class="line">        i = i*<span class="number">2</span> ;  <span class="comment">//代码1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//根据乘法原则可知,此算法的时间复杂度为 O(nlog n)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>空间复杂度(Space Complexity)是对一个算法在运行过程中临时占用存储空间大小的量度，记做S(n)=O(f(n))。比如直接<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/7214992">插入排序</a>的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1894057">时间复杂度</a>是O(n^2),空间复杂度是O(1) 。而一般的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/4323575">递归算法</a>就要有O(n)的空间复杂度了，因为每次递归都要<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%98%E5%82%A8/1582924">存储</a>返回信息。一个算法的优劣主要从算法的执行时间和所需要占用的存储空间两个方面<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%A1%A1%E9%87%8F/483075">衡量</a>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//开辟的空间随着问题规模n而增大,所以 空间复杂度为 O(n)</span></span><br><span class="line">    <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">    <span class="keyword">for</span>(;i&lt;n;i++)&#123;</span><br><span class="line">        System.out.println(a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h4 id="评判算法好坏的的标准"><a href="#评判算法好坏的的标准" class="headerlink" title="评判算法好坏的的标准"></a>评判算法好坏的的标准</h4><ul>
+<li>时间复杂度</li>
+<li>空间复杂度</li>
+<li>算法稳定性</li>
+</ul>
+<p>注:所谓稳定性就是指若数据存在值相同的元素,经过排序后,相等元素之间元素之间的先后顺序不变</p>
+<h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序:"></a>冒泡排序:</h4><p><strong>冒泡排序就是遍历n-1次(n为数据个数),每次遍历都两两相邻比较,将较大者交换,每次遍历冒泡后都会将最大值给交换到后面</strong></p>
+<p>视频演示网站: <a target="_blank" rel="noopener" href="https://visualgo.net/zh/sorting">https://visualgo.net/zh/sorting</a></p>
+<p><img src="image-20211124201226076-16377559475862.png" alt="image-20211124201226076"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class 冒泡排序 &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">int</span>[] array = &#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">33</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">7</span>&#125; ;</span><br><span class="line">		System.out.println(Arrays.toString(bubbleSort(array)));</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//冒泡排序</span></span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span>[] bubbleSort(<span class="type">int</span>[] array) &#123;</span><br><span class="line">	<span class="comment">//循环,实际上最后一次不需要再进行交换了</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i&lt;array.length-<span class="number">1</span>;i++) &#123;</span><br><span class="line">		<span class="comment">//每一次都把最大的顶大上去</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;j&lt;array.length-<span class="number">1</span>-i ; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(array[j]&lt;array[j+<span class="number">1</span>]) &#123;</span><br><span class="line">				<span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> array[j] ;</span><br><span class="line">				array[j] = array[j+<span class="number">1</span>];</span><br><span class="line">				array[j+<span class="number">1</span>] = temp ;</span><br><span class="line">			&#125;	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> array;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度:</strong></p>
+<p>**最好情况是正序的时候,时间复杂度是O(n),**最坏情况下即逆序,时间复杂度是O(n<sup>2</sup>)</p>
+<p><strong>空间复杂度:</strong></p>
+<p>由于只涉及到数据交换,所以空间复杂度是O(1)</p>
+<hr>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序:"></a>插入排序:</h4><p>插入排序，一般也被称为直接插入排序。对于少量元素的排序，它是一个有效的算法 [1] 。插入排序是一种最简单的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F/1066239">排序</a>方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增1的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动 [2] 。</p>
+<p><strong>总结:将数据分成两组,以此遍历后面的数据,与前面的一组比较,选择合适的位置插入</strong></p>
+<p>如下代码通过<strong>交换位置插入</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 排序;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class 插入排序 &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">int</span> [] arr = &#123;<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>&#125; ;</span><br><span class="line">		System.out.println(Arrays.toString(insertionSort1(arr)));</span><br><span class="line">	&#125;</span><br><span class="line"> <span class="comment">// 遍历插缝搬移元素实现(待写)</span></span><br><span class="line">   <span class="keyword">static</span> <span class="type">int</span>[] insertionSort2(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">	   <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> arr.length;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;i&lt;length;i++) &#123;</span><br><span class="line">            <span class="comment">//如果前面一个大于后面的</span></span><br><span class="line">			<span class="keyword">if</span>(arr[i-<span class="number">1</span>]&gt;arr[i]) &#123;</span><br><span class="line">				<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i ;</span><br><span class="line">				<span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[j] ;</span><br><span class="line">				<span class="comment">//当前面的数大于当前的数时,数组元素后移</span></span><br><span class="line">				<span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;arr[j-<span class="number">1</span>]&gt;temp) &#123;</span><br><span class="line">					<span class="comment">//数组元素往后移</span></span><br><span class="line">					arr[j] = arr[j-<span class="number">1</span>] ;</span><br><span class="line">					j--;</span><br><span class="line">				&#125;</span><br><span class="line">				arr[j] = temp ;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;	</span><br><span class="line">	   <span class="keyword">return</span> arr;</span><br><span class="line">   &#125; 	</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 交换实现</span></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span>[]  insertionSort1(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> arr.length;</span><br><span class="line">		<span class="keyword">if</span>(length&lt;=<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> arr;</span><br><span class="line">		&#125;	</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;length;i++) &#123;</span><br><span class="line">			<span class="comment">//有序序列的最后一个元素</span></span><br><span class="line">			<span class="type">int</span> <span class="variable">prveIndex</span> <span class="operator">=</span> i-<span class="number">1</span>;</span><br><span class="line">			<span class="comment">// 无序序列第一个元素小于前一个元素时</span></span><br><span class="line">			<span class="keyword">while</span>(prveIndex&gt;=<span class="number">0</span>&amp;&amp;arr[prveIndex]&gt;arr[prveIndex+<span class="number">1</span>]) &#123;</span><br><span class="line">				<span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span>arr[prveIndex] ;</span><br><span class="line">				arr[prveIndex] = arr[prveIndex+<span class="number">1</span>] ;</span><br><span class="line">				arr[prveIndex+<span class="number">1</span>] = temp ;</span><br><span class="line">				prveIndex--;</span><br><span class="line">				<span class="comment">//if(prveIndex&lt;0) break ;  //可通过短路实现</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> arr;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度:</strong></p>
+<p>在插入排序中，<strong>当待排序数组是有序时，是最优的情况</strong>，只需当前数跟前一个数比较一下就可以了，这时一共需要比较N- 1次，时间复杂度为</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/01c1755ab0dfc73295291de2245131af.svg" alt="img"></p>
+<p>最坏的情况是<strong>待排序数组是逆序的，此时需要比较次数最多</strong>，总次数记为：1+2+3+…+N-1，所以，插入排序最坏情况下的时间复杂度为</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/f990c5e20c6033ea5c9c4a9be4ff8951.svg" alt="img"></p>
+<p>平均来说，A[1..j-1]中的一半元素小于A[j]，一半元素大于A[j]。插入排序在平均情况运行时间与最坏情况运行时间一样，是输入规模的二次函数 [1] 。</p>
+<hr>
+<p><strong>空间复杂度:</strong></p>
+<p>插入排序的空间复杂度为常数阶</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/59f30c9e66f5f15028bde1e8e08c8bd8.svg" alt="img"></p>
+<p><strong>稳定性:</strong></p>
+<p>如果待排序的序列中存在两个或两个以上具有相同关键词的数据，排序后这些数据的相对次序保持不变，即它们的位置保持不变，通俗地讲，就是两个相同的数的相对顺序不会发生改变，则该算法是稳定的；如果排序后，数据的相对次序发生了变化，则该算法是不稳定的。关键词相同的数据元素将保持原有位置不变，所以该算法是稳定的 [5] 。</p>
+<hr>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序:"></a>选择排序:</h4><p><strong>选择排序即每次都选出后续元素的最小值,以此排放,即第一次选出最小的放在最前面,第二次选出第二小的放在第二位,以此类推</strong></p>
+<p>注:原来的第一位将与最小值的位置交换位置避免丢失数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 排序;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class 选择排序 &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">int</span> [] arr = &#123;<span class="number">4</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">7</span>,<span class="number">8</span>&#125;;</span><br><span class="line">		System.out.println(Arrays.toString(selectSort(arr)));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span>[] selectSort(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> arr.length;</span><br><span class="line">		<span class="keyword">if</span>(length&lt;=<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> arr;</span><br><span class="line">		<span class="comment">//遍历数组位置	</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i&lt;length-<span class="number">1</span>;i++) &#123;</span><br><span class="line">            <span class="comment">//假设当前值是最小值</span></span><br><span class="line">			<span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> arr[i] ;</span><br><span class="line">            <span class="comment">//j代表当前元素的后一个元素索引</span></span><br><span class="line">			<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i+<span class="number">1</span> ;</span><br><span class="line">            <span class="comment">//设置一个标志flag,用于记录最小值的索引</span></span><br><span class="line">			<span class="type">int</span> <span class="variable">flag</span> <span class="operator">=</span> i ;</span><br><span class="line">            <span class="comment">//遍历寻找最小值</span></span><br><span class="line">			<span class="keyword">for</span>(;j&lt;length;j++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(arr[j]&lt;min) &#123;</span><br><span class="line">					min = arr[j] ;</span><br><span class="line">					flag = j ;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//将最小值与当前遍历的位置元素交换</span></span><br><span class="line">			<span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[i];</span><br><span class="line">			arr[i] = min ;</span><br><span class="line">		    arr[flag] = temp;	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> arr;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度:</strong></p>
+<p>选择排序的交换操作介于 0 和 (n - 1)次之间。选择排序的比较操作为 n (n - 1） / 2 次之间。选择排序的赋值操作介于 0 和 3 (n - 1）  次之间。比较次数O(n^2），比较次数与关键字的初始状态无关，总的比较次数N=(n-1）+(n-2）+…+1=n*(n-1）/2。<strong>交换次数O(n），最好情况是，已经有序，交换0次；最坏情况交换n-1次，逆序交换n/2次。</strong>交换次数比<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序</a>少多了，由于交换所需CPU时间比比较所需的CPU时间多，<strong>n值较小时，选择排序比冒泡排序快</strong>。</p>
+<p><strong>空间复杂度:O(1)</strong></p>
+<p><strong>稳定性:</strong></p>
+<p>由于要交换位置,所以可能导致相同值的位置不一样,故是不稳定</p>
+<hr>
+<h4 id="归并-分治-排序"><a href="#归并-分治-排序" class="headerlink" title="归并(分治)排序"></a>归并(分治)排序</h4><p><strong>即将一个数组逐渐拆分,最后每个数组只剩下一个元素,然后两两按顺序合并成一个新数组</strong></p>
+<p><img src="image-20211126092132956-16378896943201.png" alt="image-20211126092132956"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 排序;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class 归并排序 &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">int</span> [] arr1 = &#123;<span class="number">1</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">9</span>&#125; ;</span><br><span class="line">		<span class="type">int</span> [] arr2 = &#123;<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>&#125; ;</span><br><span class="line">		System.out.println(Arrays.toString(mergeSort(arr1)));</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span>[] mergeSort(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">		<span class="comment">// 数组长度为1时直接返回</span></span><br><span class="line">		<span class="keyword">if</span>(arr.length&lt;<span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> arr;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//将数组平均拆分成两个数组</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> arr.length/<span class="number">2</span>;</span><br><span class="line">		<span class="type">int</span>[] left = Arrays.copyOfRange(arr, <span class="number">0</span>, mid) ;  <span class="comment">//复制数组</span></span><br><span class="line">		<span class="type">int</span>[] right = Arrays.copyOfRange(arr, mid, arr.length) ; <span class="comment">//复制数组</span></span><br><span class="line">		<span class="comment">//返回合并的数组</span></span><br><span class="line">		<span class="keyword">return</span> merge(mergeSort(left), mergeSort(right));  <span class="comment">//递归拆分直到每个数组只有一个元素</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//合并成一个有序数组</span></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span>[] merge(<span class="type">int</span>[] left ,<span class="type">int</span>[] right) &#123;</span><br><span class="line">		<span class="type">int</span>[] newArr = <span class="keyword">new</span> <span class="title class_">int</span>[left.length+right.length] ;</span><br><span class="line">		<span class="type">int</span> <span class="variable">lIndex</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">rIndex</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="comment">//遍历合并数组</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;newArr.length;i++) &#123;</span><br><span class="line">			<span class="comment">//如果左边的数组已经排完,则合并数组之后的元素等于右边剩余的元素</span></span><br><span class="line">			<span class="keyword">if</span>(lIndex==left.length) &#123;</span><br><span class="line">				newArr[i] = right[rIndex++];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//和上面同理</span></span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(rIndex==right.length) &#123;</span><br><span class="line">				newArr[i] = left[lIndex++];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//左右数组比较,小的放入合并数组,同时放入后的数组索引后移</span></span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(left[lIndex]&lt;right[rIndex]) &#123;</span><br><span class="line">				newArr[i] = left[lIndex++] ;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//和上面同理</span></span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				newArr[i] = right[rIndex++] ;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> newArr;	</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="时间复杂度-O-n-log-n"><a href="#时间复杂度-O-n-log-n" class="headerlink" title="时间复杂度: O(n log n)"></a>时间复杂度: O(n log n)</h5><p>归并排序,<strong>可分为两个过程,即拆分,和合并(排序)</strong>,其中<strong>拆分是不随着问题规模n变大而影响的,即为常数级,可忽略</strong>,主要是看合并过程,</p>
+<p><img src="image-20211126140657381-16379068212452.png" alt="image-20211126140657381"></p>
+<p>如图所示,<strong>总共需要进行 log<sub>2</sub> n 次合并</strong>,因为对于满二叉树来说,</p>
+<p>设二叉树的层次为 x ,则叶子数目为 2<sup>x -1</sup> ,</p>
+<p>则可求得满二叉树的层次为 x = log<sub>2</sub> n +1 ,但是到最后一层已经是结果了,就不需要再遍历了</p>
+<p>所以,**总共需要进行 log<sub>2</sub> n 次合并 ,**而每次合并需要O(n),故时间复杂度为 O (n log n)</p>
+<h5 id="空间复杂度-O-n"><a href="#空间复杂度-O-n" class="headerlink" title="空间复杂度: O(n)"></a>空间复杂度: O(n)</h5><p>由于需要开辟一个与原来的数组等长的数组来临时存放,故 O(n)</p>
+<h5 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性:"></a>稳定性:</h5><p>归并排序是稳定的</p>
+<h3 id="快速排序-待写"><a href="#快速排序-待写" class="headerlink" title="快速排序(待写)"></a>快速排序(待写)</h3><h3 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h3><p>计数排序是一个非基于比较的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/5399605">排序算法</a>，该算法于1954年由 Harold H. Seward 提出。它的优势在于在对一定范围内的整数排序时，它的复杂度为Ο(n+k)（其中k是整数的范围），快于任何比较排序算法。 [1]  当然这是一种牺牲空间换取时间的做法，而且当O(k)&gt;O(n<em>log(n))的时候其效率反而不如基于比较的排序（基于比较的排序的时间复杂度在理论上的下限是O(n</em>log(n)), 如归并排序，堆排序）</p>
+<p><strong>即将序列分到若干个桶里,其中设桶的编号为序列的最大值,桶中的值代表该数据在原始序列中出现了多少次</strong>,例如编号为5的桶,值为3,即使原序列中有值为5的值,且有5个, 比如 2,5,3,5,6,7,5</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 排序;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">public</span> class 计数排序 &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">int</span> [] arr = &#123;<span class="number">6</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">7</span>,<span class="number">7</span>,<span class="number">7</span>&#125; ;</span><br><span class="line">		System.out.println(Arrays.toString(CountSort2(arr)));</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 即桶排序的特殊情况:</span></span><br><span class="line"><span class="comment"> * 将序列分为最大值个桶,每个值放入与桶编号相同的桶里,若有相同的,则桶的元素+1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span>[] CountSort(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">		<span class="keyword">if</span>(arr.length&lt;<span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> arr ; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> arr[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[i]&gt;max) &#123;</span><br><span class="line">				max = arr[i] ;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//由于下标是最大值,所以长度应该是最大值+1</span></span><br><span class="line">		<span class="type">int</span>[] bucket = <span class="keyword">new</span> <span class="title class_">int</span>[max+<span class="number">1</span>] ;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++) &#123;</span><br><span class="line">			<span class="comment">//遍历到匹配的桶,则桶的结果+1</span></span><br><span class="line">			bucket[arr[i]]++;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//将桶元素取出来</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;bucket.length;i++) &#123;  <span class="comment">//遍历桶</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;j&lt;bucket[i];j++) &#123;   <span class="comment">//判断需要桶中的数据有几个</span></span><br><span class="line">				arr[index++] = i ;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> arr;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//与上面的从桶中取出数据的方式不一样</span></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span>[] CountSort2(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> arr[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++) &#123;  </span><br><span class="line">			<span class="keyword">if</span>(arr[i]&gt;max) &#123;</span><br><span class="line">				max = arr[i] ;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//放进桶中</span></span><br><span class="line">		<span class="type">int</span>[] bucket = <span class="keyword">new</span> <span class="title class_">int</span>[max+<span class="number">1</span>] ;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i&lt;arr.length;i++) &#123;</span><br><span class="line">			bucket[arr[i]]++;   <span class="comment">//计数</span></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span><span class="number">0</span>;i&lt;bucket.length;i++) &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">while</span>(bucket[i]!=<span class="number">0</span>) &#123;  <span class="comment">//当i号桶有元素(即不为0)</span></span><br><span class="line">				arr[index++] = i;</span><br><span class="line">				bucket[i]--;   <span class="comment">//取出一个减一个</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> arr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度:"></a>时间复杂度:</h4><p>O(n+k) 其中k是整数的范围(如序列的最大值是1000,则k为1000)</p>
+<h4 id="空间复杂度-1"><a href="#空间复杂度-1" class="headerlink" title="空间复杂度:"></a>空间复杂度:</h4><p>O(n+k)</p>
+<h4 id="稳定性-1"><a href="#稳定性-1" class="headerlink" title="稳定性"></a>稳定性</h4><p>计数排序是稳定的</p>
+<hr>
+<h3 id="桶排序-待写"><a href="#桶排序-待写" class="headerlink" title="桶排序(待写)"></a>桶排序(待写)</h3><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>二分查找又叫做折半查找</p>
+<p>如下代码分别使用了递归和循环来实现二分查找</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 查找;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class 简单的二分查找 &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">7</span>];</span><br><span class="line">		arr[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">		arr[<span class="number">1</span>] = <span class="number">4</span>;</span><br><span class="line">		arr[<span class="number">2</span>] = <span class="number">5</span>;</span><br><span class="line">		arr[<span class="number">3</span>] = <span class="number">7</span>;</span><br><span class="line">		arr[<span class="number">4</span>] = <span class="number">8</span>;</span><br><span class="line">		arr[<span class="number">5</span>] = <span class="number">12</span>;</span><br><span class="line">		arr[<span class="number">6</span>] = <span class="number">17</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">		System.out.println(<span class="string">&quot;查找值为:&quot;</span>+value+<span class="string">&quot;在数组中的下标为:&quot;</span>+binarySearch(arr,value));</span><br><span class="line">		System.out.println(<span class="string">&quot;查找值为:&quot;</span>+value+<span class="string">&quot;在数组中的下标为:&quot;</span>+binarySearch2(arr,value,<span class="number">0</span>,arr.length-<span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">binarySearch</span><span class="params">(<span class="type">int</span>[] arr,<span class="type">int</span> value)</span> &#123;</span><br><span class="line">		<span class="comment">//左边界</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">lIndex</span> <span class="operator">=</span> <span class="number">0</span> ; </span><br><span class="line">		<span class="comment">//右边界</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">rIndex</span> <span class="operator">=</span> arr.length-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(lIndex&lt;=rIndex) &#123;</span><br><span class="line">			<span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (lIndex+rIndex)/<span class="number">2</span> ;</span><br><span class="line">			<span class="comment">//查找值在中间值的左边</span></span><br><span class="line">			<span class="keyword">if</span>(value&lt;arr[mid]) &#123;</span><br><span class="line">				<span class="comment">//rIndex = mid;  注意:这样是错误的,因为每次都重复查找了arr[mid]</span></span><br><span class="line">				rIndex = mid -<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//查找值在中间值的右边</span></span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(value&gt;arr[mid]) &#123;</span><br><span class="line">				<span class="comment">//注意: lIndex = mid 这样是错误的,每次会重复查找相同的arr[mid],导致死循环</span></span><br><span class="line">				lIndex = mid+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//当查找值等于中间值</span></span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> mid ;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//递归实现二分查找</span></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">binarySearch2</span><span class="params">(<span class="type">int</span>[] arr,<span class="type">int</span> value,<span class="type">int</span> lIndex,<span class="type">int</span> rIndex)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(lIndex&gt;rIndex) &#123;</span><br><span class="line">			<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (lIndex+rIndex)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>(value==arr[mid]) &#123;</span><br><span class="line">			<span class="keyword">return</span> mid;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(value&lt;arr[mid]) &#123;</span><br><span class="line">			<span class="keyword">return</span> binarySearch2(arr, value, lIndex, mid-<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(value&gt;arr[mid]) &#123;</span><br><span class="line">			<span class="keyword">return</span> binarySearch2(arr, value, mid+<span class="number">1</span>, rIndex);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="需求1-查找第一个重复值"><a href="#需求1-查找第一个重复值" class="headerlink" title="需求1:查找第一个重复值"></a>需求1:查找第一个重复值</h3><p>如果查找的值有重复值,则<strong>查找到第一个重复值的下标</strong></p>
+<p><em>自己也可实现一下查找最后一个重复值</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 查找;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class 二分查找第一个重复值 &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">7</span>];</span><br><span class="line">		arr[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">		arr[<span class="number">1</span>] = <span class="number">7</span>;</span><br><span class="line">		arr[<span class="number">2</span>] = <span class="number">7</span>;</span><br><span class="line">		arr[<span class="number">3</span>] = <span class="number">7</span>;</span><br><span class="line">		arr[<span class="number">4</span>] = <span class="number">7</span>;</span><br><span class="line">		arr[<span class="number">5</span>] = <span class="number">12</span>;</span><br><span class="line">		arr[<span class="number">6</span>] = <span class="number">17</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> <span class="number">7</span>;</span><br><span class="line">		System.out.println(<span class="string">&quot;查找值为:&quot;</span>+value+<span class="string">&quot;在数组中的下标为:&quot;</span>+binarySearch_same(arr,value));</span><br><span class="line"></span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">binarySearch_same</span><span class="params">(<span class="type">int</span>[] arr,<span class="type">int</span> value)</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">lIndex</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">rIndex</span> <span class="operator">=</span> arr.length-<span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(lIndex&lt;=rIndex) &#123;</span><br><span class="line">		  <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (lIndex+rIndex)/<span class="number">2</span>;</span><br><span class="line">		  </span><br><span class="line">		  <span class="keyword">if</span>(value==arr[mid]) &#123;</span><br><span class="line">			  <span class="keyword">if</span>(mid==<span class="number">0</span>||value!=arr[mid-<span class="number">1</span>]) &#123;</span><br><span class="line">				  <span class="keyword">return</span> mid;</span><br><span class="line">			  &#125;</span><br><span class="line">			  <span class="keyword">else</span> &#123;  <span class="comment">//如果前面有重复值</span></span><br><span class="line">				  rIndex = mid-<span class="number">1</span>;</span><br><span class="line">			  &#125;</span><br><span class="line">		  &#125;</span><br><span class="line">		  <span class="keyword">else</span> <span class="keyword">if</span>(value&lt;arr[mid]) &#123;</span><br><span class="line">			  rIndex = mid-<span class="number">1</span>;</span><br><span class="line">		  &#125;</span><br><span class="line">		  <span class="keyword">else</span> <span class="keyword">if</span>(value&gt;arr[mid])&#123;</span><br><span class="line">			  lIndex = mid+<span class="number">1</span>;</span><br><span class="line">		  &#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="需求2-相近值"><a href="#需求2-相近值" class="headerlink" title="需求2:相近值"></a>需求2:相近值</h3><p>查找序列中的值大于等于查找值的下标</p>
+<p><em>可自己实现查找系列中小于等于查找值的下标</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 查找;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 查找序列中大于等于查找值的第一个元素的下标</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> class 二分查找近似值 &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">7</span>];</span><br><span class="line">		arr[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">		arr[<span class="number">1</span>] = <span class="number">4</span>;</span><br><span class="line">		arr[<span class="number">2</span>] = <span class="number">7</span>;</span><br><span class="line">		arr[<span class="number">3</span>] = <span class="number">9</span>;</span><br><span class="line">		arr[<span class="number">4</span>] = <span class="number">13</span>;</span><br><span class="line">		arr[<span class="number">5</span>] = <span class="number">15</span>;</span><br><span class="line">		arr[<span class="number">6</span>] = <span class="number">17</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">		System.out.println(<span class="string">&quot;查找值为:&quot;</span>+value+<span class="string">&quot;在数组中的下标为:&quot;</span>+binarySearch_near(arr,value));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">binarySearch_near</span><span class="params">(<span class="type">int</span>[] arr,<span class="type">int</span> value)</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">lIndex</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">rIndex</span> <span class="operator">=</span> arr.length-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(lIndex&lt;=rIndex) &#123;</span><br><span class="line">			<span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (lIndex+rIndex)/<span class="number">2</span>;</span><br><span class="line">			<span class="comment">//查找值在中间值的左边时</span></span><br><span class="line">			<span class="keyword">if</span>(value&lt;=arr[mid]) &#123;</span><br><span class="line">				<span class="comment">//如果value小于于等于第一个元素或者value大于中间值的前一个元素的时候</span></span><br><span class="line">				<span class="keyword">if</span>(mid==<span class="number">0</span>||value&gt;arr[mid-<span class="number">1</span>]) &#123;</span><br><span class="line">					<span class="keyword">return</span> mid;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">//中间值的前一个元素也大于等于value时</span></span><br><span class="line">				<span class="keyword">else</span> &#123;</span><br><span class="line">					rIndex = mid-<span class="number">1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//查找值在中间值的右边时</span></span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				lIndex = mid+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="散列表-了解即可"><a href="#散列表-了解即可" class="headerlink" title="散列表(了解即可)"></a>散列表(了解即可)</h2><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%A3%E5%88%97%E8%A1%A8/10027933">散列表</a>（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1450">数据结构</a>。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0/2366288">散列函数</a>，存放记录的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E7%BB%84/3794097">数组</a>叫做<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%A3%E5%88%97%E8%A1%A8/10027933">散列表</a>。</p>
+<p>给定表M，存在函数f(key)，对任意给定的关键字值key，代入函数后若能得到包含该关键字的记录在表中的地址，则称表M为哈希(Hash）表，函数f(key)为哈希(Hash) 函数。</p>
+<h3 id="散列冲突及解决方案"><a href="#散列冲突及解决方案" class="headerlink" title="散列冲突及解决方案"></a>散列冲突及解决方案</h3><h3 id="散列表应用"><a href="#散列表应用" class="headerlink" title="散列表应用"></a>散列表应用</h3><h3 id="哈希算法介绍"><a href="#哈希算法介绍" class="headerlink" title="哈希算法介绍"></a>哈希算法介绍</h3><h2 id="6-树-重点"><a href="#6-树-重点" class="headerlink" title="6.树(重点)"></a>6.树(重点)</h2><p>树型结构是<strong>一类非常重要的非线性数据结构，其中以树和二叉树最为常用。</strong>在介绍二叉树之前，我们先简单了解一下树的相关内容</p>
+<h3 id="树的相关概念"><a href="#树的相关概念" class="headerlink" title="树的相关概念"></a>树的相关概念</h3><p>**结点的高度:结点到叶子结点的最长路径(边数),所有叶子结点的高度为0 **  (从下往上)</p>
+<p><strong>结点的深度:根结点到这个结点所经历的边的个数,所以根的深度为0</strong>     (从上往下)</p>
+<p><strong>结点的层数:结点的深度+1</strong>      (因为没有0层的说法,所以根是一层)</p>
+<hr>
+<p><strong>度:结点的分支数(如叶子结点的度数为0)</strong></p>
+<p><strong>森林:是指m(m&gt;=0)颗互不相交的树的集合</strong></p>
+<h3 id="树的性质"><a href="#树的性质" class="headerlink" title="树的性质"></a>树的性质</h3><blockquote>
+<p>参考文章 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/little-whilte/p/14612800.html">https://www.cnblogs.com/little-whilte/p/14612800.html</a></p>
+</blockquote>
+<p><strong>==（1）总结点数=总度数和（分支数）+1=n0+n1+n2+~~总度数和+1：==</strong></p>
+<p>解释:除根节点外，每个结点都是一个分支，分支数=总度数和(每个结点的度数的和)，所以总结点个数=总度数和（分支数）+1</p>
+<p> n0+n1+n2+~~:n0为叶子结点个数，各级结点个数之和=总结点个数</p>
+<h3 id="树的存储结构-待补充"><a href="#树的存储结构-待补充" class="headerlink" title="树的存储结构(待补充)"></a>树的存储结构(待补充)</h3><blockquote>
+<p>双亲表示法:</p>
+</blockquote>
+<blockquote>
+<p>孩子表示法</p>
+</blockquote>
+<blockquote>
+<p>孩子兄弟表示法</p>
+</blockquote>
+<h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><p>定义:<strong>最多只有两个子结点的树叫做二叉树,左子树右子树是有顺序的,不能颠倒,即使只有一颗子树,也区分左右子树</strong></p>
+<p>(二叉查找)</p>
+<p>二叉树的五种基本形态</p>
+<ol>
+<li>空二叉树</li>
+<li>只有一个根结点的二叉树</li>
+<li>根结点只有左子树</li>
+<li>根结点只有右子树</li>
+<li>根结点既有左子树又有右子树</li>
+</ol>
+<h4 id="特殊的二叉树"><a href="#特殊的二叉树" class="headerlink" title="特殊的二叉树"></a>特殊的二叉树</h4><h5 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h5><p>即所有分结点<strong>都有左子树和右子树</strong></p>
+<h5 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h5><p>对二叉树的每个结点<strong>按顺序进行编号,与满二叉树进行对比,没有编号空档的树就完全二叉树</strong>,同理可以,<strong>满二叉树一定是完全二叉树,但完全二叉树不一定是满二叉树</strong></p>
+<p><img src="image-20211112204726067-16367212477031.png" alt="image-20211112204726067"></p>
+<h5 id="斜树"><a href="#斜树" class="headerlink" title="斜树"></a>斜树</h5><p>只有左子树或者右子树的二叉树</p>
+<h4 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h4><p><strong>性质一:<strong>在二叉树的</strong>第i层==至多有2^(i-1)个结点==(i&gt;=1)</strong></p>
+<p>解释:第一层1个,第二层2个,第三层4个 …….</p>
+<p><strong>性质二:<strong>深度为k的二叉树</strong>==至多有2^k   - 1 个结点==</strong></p>
+<p>解释:</p>
+<p>只有有一层,一个结点</p>
+<p>有两层,1+2 = 3  = 2^2  - 1个</p>
+<p>有三层,1+2+4 = 2^3  - 1  = 7个结点</p>
+<p>有四层, 1+2+4+8 = 2^4 - 1 = 15 个结点</p>
+<p>…….</p>
+<p><strong>性质三:n0 =  n2 + 1 (即叶子结点数 = 度为二的结点数 + 1 )</strong></p>
+<p>解释:</p>
+<p>根据树的性质: <strong>树结点总数n = 总分支数 + 1</strong>    </p>
+<p>总分支数 =  ==n1*1 + n2* 2== (其中n1,n2分别为度为1的结点数和度为2的结点数 )</p>
+<p>此外  ==n = n0 + n1 + n2== ,</p>
+<p>联立等式:  n0 + n1 + n2 = 0*n0 + 1* n1 + 2* n2 ,  ==得  n0 = n2 + 1==</p>
+<p>​    </p>
+<h2 id="7-图Graph-重点"><a href="#7-图Graph-重点" class="headerlink" title="7.图Graph(重点)"></a>7.图Graph(重点)</h2><h3 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义:"></a>图的定义:</h3><p>图是由<strong>顶点(Vertex)和边(Edge)构成的</strong>,记为 <strong>G = (V,E),</strong></p>
+<p>根据图的边是否有方向区分<strong>有向图和无向图</strong>,</p>
+<p><img src="image-20211204113210124.png" alt="image-20211204113210124"></p>
+<p><img src="image-20211204113341369.png" alt="image-20211204113341369"></p>
+<h3 id="图的相关概念"><a href="#图的相关概念" class="headerlink" title="图的相关概念:"></a>图的相关概念:</h3><h4 id="顶点的出度和入度"><a href="#顶点的出度和入度" class="headerlink" title="顶点的出度和入度"></a>顶点的出度和入度</h4><p>顶点所关联的<strong>边的个数称为该顶点的度</strong>,此外,<strong>有向图的度又分为出度和入度</strong></p>
+<h4 id="邻接点和端点"><a href="#邻接点和端点" class="headerlink" title="邻接点和端点:"></a>邻接点和端点:</h4><p>若一条边链接了A,B两个顶点,则称A,B互为<strong>邻接点,此外,有向图还有起始端点和终止端点,出边邻接点和入边邻接点</strong></p>
+<h4 id="完全图"><a href="#完全图" class="headerlink" title="完全图:"></a>完全图:</h4><p><strong>任意顶点之间存在一条边(有向图为两条)的图称为完全图,有 n(n-1)/2条边</strong></p>
+<p><img src="image-20211204115203311.png" alt="image-20211204115203311"></p>
+<p><img src="image-20211204115236778.png" alt="image-20211204115236778"></p>
+<h4 id="带权图"><a href="#带权图" class="headerlink" title="带权图"></a>带权图</h4><h4 id="稠密图和稀疏图"><a href="#稠密图和稀疏图" class="headerlink" title="稠密图和稀疏图"></a>稠密图和稀疏图</h4><h4 id="子图"><a href="#子图" class="headerlink" title="子图"></a>子图</h4><h4 id="路径和路劲长度"><a href="#路径和路劲长度" class="headerlink" title="路径和路劲长度"></a>路径和路劲长度</h4><p>路径长度是指**:经过边的数目**</p>
+<h4 id="回路和环"><a href="#回路和环" class="headerlink" title="回路和环"></a>回路和环</h4><h4 id="连通图-连通分量"><a href="#连通图-连通分量" class="headerlink" title="连通图,连通分量"></a>连通图,连通分量</h4><h4 id="关结点和重连通图"><a href="#关结点和重连通图" class="headerlink" title="关结点和重连通图"></a>关结点和重连通图</h4><h3 id="图的存储结构"><a href="#图的存储结构" class="headerlink" title="图的存储结构:"></a>图的存储结构:</h3><h4 id="邻接矩阵存储方法"><a href="#邻接矩阵存储方法" class="headerlink" title="邻接矩阵存储方法"></a>邻接矩阵存储方法</h4><h5 id="非带权图"><a href="#非带权图" class="headerlink" title="非带权图:"></a>非带权图:</h5><p><img src="image-20211204134511041.png" alt="image-20211204134511041"></p>
+<p><img src="image-20211204134525392.png" alt="image-20211204134525392"></p>
+<p>分析1：<strong>无向图的邻接矩阵是对称的；</strong><br> 分析2：顶点i的度=第i行（列）中1的个数；<br> <strong>特别：完全图的邻接矩阵中，对角元素为0，其余1。</strong></p>
+<h5 id="带权图-1"><a href="#带权图-1" class="headerlink" title="带权图:"></a>带权图:</h5><p><img src="image-20211204134350181.png" alt="image-20211204134350181"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Luo Qianyou
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lqy679.github.io/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构">https://lqy679.github.io/2020/01/01/数据结构/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/01/01/javaSE%E8%BF%9B%E9%98%B6/" rel="prev" title="JavaSE进阶">
+                  <i class="fa fa-chevron-left"></i> JavaSE进阶
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/01/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%B3%BB%E5%88%97/" rel="next" title="第三方支付接口调用系列">
+                  第三方支付接口调用系列 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2020/01/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo Qianyou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/LQY679" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+<meting-js server="tencent" type="playlist" id="8809238545" fixed="true"  autoplay="false" loop="all" order="list" list-folded="ture" list-max-height="500px" ><!-- hexo injector body_end end --></body>
+</html>

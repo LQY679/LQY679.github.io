@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lqy679.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="SQL之增删改查注: 用方括号括起来的内容表示可选,非必填, [可选项 ] 此外,在mysql中,若想用的名称已经有关键字占用了(如user) , 可用反引号包裹,来使用 , 例如: select * from &#96;user&#96; 增删改查(数据表)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql">
+<meta property="og:url" content="https://lqy679.github.io/2020/01/01/sql/index.html">
+<meta property="og:site_name" content="南城记录倌">
+<meta property="og:description" content="SQL之增删改查注: 用方括号括起来的内容表示可选,非必填, [可选项 ] 此外,在mysql中,若想用的名称已经有关键字占用了(如user) , 可用反引号包裹,来使用 , 例如: select * from &#96;user&#96; 增删改查(数据表)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/sql/image-20220325121257418.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/sql/image-20220325121335700.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/sql/image-20220325121354054.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/sql/image-20220325121442451.png">
+<meta property="og:image" content="https://lqy679.github.io/2020/01/01/sql/image-20220325121616374.png">
+<meta property="article:published_time" content="2020-01-01T10:57:32.000Z">
+<meta property="article:modified_time" content="2023-02-22T04:59:36.054Z">
+<meta property="article:author" content="Luo Qianyou">
+<meta property="article:tag" content="Java,Python,web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lqy679.github.io/2020/01/01/sql/image-20220325121257418.png">
+
+
+<link rel="canonical" href="https://lqy679.github.io/2020/01/01/sql/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://lqy679.github.io/2020/01/01/sql/","path":"2020/01/01/sql/","title":"sql"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>sql | 南城记录倌</title>
+  
+
+
+
+
+
+
+
+
+  <!--
+    引用自作者
+    <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  -->
+  <script src="/live2d-widget/autoload.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/site_images/logo.jpg" alt="南城记录倌">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">南城记录倌</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">往昔皆为过眼云烟,一切尽随风而逝;此刻之行终将化未来的救赎之刃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">SQL之增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5-%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">增删改查(数据表)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#insert%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">insert插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-%E6%9B%B4%E6%96%B0-%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">修改(更新)数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.4.</span> <span class="nav-text">查找数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">分页查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6-%E6%A8%A1%E7%B3%8A-%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">条件(模糊)查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2-%E9%80%9A%E9%85%8D%E7%AC%A6%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.4.2.1.</span> <span class="nav-text">模糊查询(通配符使用)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8-%E9%93%BE%E6%8E%A5-%E6%9F%A5%E8%AF%A2-join-lt-%E5%BE%85%E5%86%99-gt"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">多表(链接)查询(join) &lt;待写&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%E6%96%B9%E5%BC%8F%E5%9B%BE%E8%A7%A3"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">链接方式图解:</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Luo Qianyou"
+      src="/site_images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Luo Qianyou</p>
+  <div class="site-description" itemprop="description">清醒,知趣 明得失,知进退</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LQY679" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LQY679" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/QianyouLuo" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;QianyouLuo" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com" rel="noopener" target="_blank">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/sql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/site_images/logo.jpg">
+      <meta itemprop="name" content="Luo Qianyou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南城记录倌">
+      <meta itemprop="description" content="清醒,知趣 明得失,知进退">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="sql | 南城记录倌">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sql
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-01 18:57:32" itemprop="dateCreated datePublished" datetime="2020-01-01T18:57:32+08:00">2020-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-22 12:59:36" itemprop="dateModified" datetime="2023-02-22T12:59:36+08:00">2023-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B8%B8%E7%94%A8%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">常用知识笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="SQL之增删改查"><a href="#SQL之增删改查" class="headerlink" title="SQL之增删改查"></a>SQL之增删改查</h1><p><em><strong>注: 用方括号括起来的内容表示可选,非必填, [可选项 ]</strong></em></p>
+<p><em><strong>此外,在mysql中,若想用的名称已经有关键字占用了(如user) , 可用反引号包裹,来使用</strong></em> , 例如: select * from `user`</p>
+<h2 id="增删改查-数据表"><a href="#增删改查-数据表" class="headerlink" title="增删改查(数据表)"></a>增删改查(数据表)</h2><h3 id="insert插入数据"><a href="#insert插入数据" class="headerlink" title="insert插入数据"></a>insert插入数据</h3><p>指定插入哪些字段(如果有主键,主键必须插入内容); 并且插入是支持多行插入的</p>
+<p>语法：<code>insert into</code> <strong>表名</strong> [（列名1,列名2 ,…….）] <code>values</code> (数据列表)  [ ,(数据列表)…. ]</p>
+<p>假设存在一个学生表,有 sid ,name ,age,score 四个字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 插入多个学生信息,但不插入年龄</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student (sid,name,score) <span class="keyword">values</span></span><br><span class="line">(<span class="number">1001</span>,&quot;南城&quot;,<span class="number">98</span>),</span><br><span class="line">(<span class="number">1002</span>,&quot;南城2&quot;,<span class="number">98</span>),</span><br><span class="line">(<span class="number">1003</span>,&quot;南城3&quot;,<span class="number">98</span>)</span><br></pre></td></tr></table></figure>
+
+<p>当需要插入全部字段时候,可以省略 (列名1, 列名2, 列名n…) ,<strong>但此时values 后面的数据列表顺序必须和表的结构一样</strong> </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 不指定插入字段,全部插入,注意! 插入的数据,数据列表必须对应表的结构(成绩不能写在年龄前面)</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student <span class="keyword">values</span></span><br><span class="line">(<span class="number">1001</span>,&quot;南城&quot;, <span class="number">18</span>,<span class="number">98</span>),</span><br><span class="line">(<span class="number">1002</span>,&quot;南城2&quot;,<span class="number">19</span>,<span class="number">98</span>),</span><br><span class="line">(<span class="number">1003</span>,&quot;南城3&quot;,<span class="number">20</span>,<span class="number">98</span>) </span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><p>语法:<code>delete from</code> <strong>表名</strong>  [<code>where</code> 定位条件] </p>
+<p><strong>若不写定位条件则将表中所有数据全部删除 !!!</strong></p>
+<p><code>where</code>可以配合<strong>多种运算符</strong>使用:</p>
+<p>如: <code>or</code> 逻辑或 , <code>and</code> 逻辑与 , <code>like</code> 匹配 ,<code>in</code> 多项目匹配  比较运算<code>(&gt;  &lt;  !=  = )**</code></p>
+<p><strong><code>in</code>运算符介绍:</strong>  字段 <code>in</code>(value1, value2, value3…)  相当于 字段 = value1  <code>or</code> 字段 =  value2  <code>or</code> 字段 =  value3 …..</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 删除学生表中,年龄大于22,并且学号小于1800的,或者成绩为 0 的学生</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> student</span><br><span class="line"><span class="keyword">where</span> (age<span class="operator">&gt;</span><span class="number">22</span> <span class="keyword">and</span> sid <span class="operator">&lt;</span> <span class="number">1800</span>) <span class="keyword">or</span> score <span class="operator">=</span> <span class="number">0</span>  </span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-更新-数据"><a href="#修改-更新-数据" class="headerlink" title="修改(更新)数据"></a>修改(更新)数据</h3><p>语法：<code>update</code> 表名 <code>set</code> <strong>列名 = 新值</strong> [ <strong>, 列名 = 新值….</strong>] <code>where</code> 定位条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 将学号为1002的学生的成绩改为78 ,名字改为南枫</span></span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> score <span class="operator">=</span> <span class="number">78</span>,name <span class="operator">=</span> <span class="string">&#x27;南枫&#x27;</span> </span><br><span class="line"><span class="keyword">where</span> id <span class="operator">=</span> <span class="string">&#x27;1002&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查找数据"><a href="#查找数据" class="headerlink" title="查找数据"></a>查找数据</h3><p>语法: :<code>select</code>  [top n 指定返回前n行]  <strong>列名1 [as 别名] [,列名2[ as 别名],….]</strong>  <code>from</code>  <strong>表名</strong>  [ <code>where</code>  定位条件 ]</p>
+<p>若不写 <code>where</code> 则查询所有数据行 ; <strong>列名1[,列名2,….]</strong>  代表需要查询数据行的哪些字段, <strong>若要查询所有字段, 可以 用  <code>*</code> 替代</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">-- 查询学生表的所有信息 , 分号可写可不写</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student  ;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询学生表中年龄大于18的,学生的姓名,成绩</span></span><br><span class="line"><span class="keyword">select</span> name,score <span class="keyword">from</span> student <span class="keyword">where</span> age<span class="operator">&gt;</span><span class="number">18</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">-- 此外还可以给查询到的结果集起别名,例如将上例中的name字段, 将以student_name的名字返回</span></span><br><span class="line"><span class="keyword">select</span> name <span class="keyword">as</span> student_name,score <span class="keyword">from</span> student <span class="keyword">where</span> age<span class="operator">&gt;</span><span class="number">18</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h4><p>可在查询语句后追加<code>limit </code>关键字进行结果集分页</p>
+<p><strong>limit [starindex]  pageSize</strong>  </p>
+<p><em>参数:starindex 代表从哪个索引开始分页,第一条数据行索引为0,不写此参数也为0,</em></p>
+<p>参数:pageSize代表每页最多有多少条数据行, 必填项*</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- -- 查询学生表中年龄大于18的,学生的姓名,成绩,并且从结果集的第5行为开始展示,每页展示10个人</span></span><br><span class="line"><span class="keyword">select</span> name,score <span class="keyword">from</span> student <span class="keyword">where</span> age<span class="operator">&gt;</span><span class="number">18</span> limit <span class="number">4</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="条件-模糊-查询"><a href="#条件-模糊-查询" class="headerlink" title="条件(模糊)查询"></a>条件(模糊)查询</h4><p><code>where</code>可以配合<strong>多种运算符</strong>使用:</p>
+<p>如: <code>or</code> 逻辑或 , <code>and</code> 逻辑与 , <code>like</code> 匹配 ,<code>in</code> 多项目匹配  比较运算<code>(&gt;  &lt;  !=  = )**</code></p>
+<p><strong><code>in</code>运算符介绍:</strong>  字段 <code>in</code>(value1, value2, value3…)  相当于 字段 = value1  <code>or</code> 字段 =  value2  <code>or</code> 字段 =  value3 …</p>
+<p>更多详细可查阅资源<a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-in.html">SQL| 菜鸟教程 (runoob.com)</a></p>
+<p>==注意! ! !对于判断 null值==不过对于<strong>列值为null</strong>的，要用 <strong>is null 或 is not null</strong><br>而不能用(!)=)</p>
+<h5 id="模糊查询-通配符使用"><a href="#模糊查询-通配符使用" class="headerlink" title="模糊查询(通配符使用)"></a>模糊查询(通配符使用)</h5><p>模糊查询通常是 <code>like</code> 配合<a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-wildcards.html">SQL 通配符</a>使用</p>
+<table>
+<thead>
+<tr>
+<th align="left">通配符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>%</strong></td>
+<td align="left"><strong>替代 0 个或多个字符</strong></td>
+</tr>
+<tr>
+<td align="left">_</td>
+<td align="left">替代一个字符</td>
+</tr>
+<tr>
+<td align="left">[<em>charlist</em>]</td>
+<td align="left">字符列中的任何单一字符</td>
+</tr>
+<tr>
+<td align="left">[^<em>charlist</em>] 或 [!<em>charlist</em>]</td>
+<td align="left">不在字符列中的任何单一字符</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查找学生表中所有姓张的学生</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;张%&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查找学生学号带有a,b,c任意一个字符的学生</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> sid <span class="keyword">like</span> [<span class="string">&#x27;abc&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查找学生学号不带有1,2,3,任意一个字符的学生</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> sid <span class="keyword">like</span> [<span class="operator">!</span><span class="string">&#x27;123&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="多表-链接-查询-join-lt-待写-gt"><a href="#多表-链接-查询-join-lt-待写-gt" class="headerlink" title="多表(链接)查询(join) &lt;待写&gt;"></a>多表(链接)查询(join) &lt;待写&gt;</h4><p><strong>所谓多表查询,就是把多个表链接起来(通过主键外键)进行查询</strong></p>
+<p>让我们来回顾一下查询语句的语法格式,其实更官方一点应该是这样描述的</p>
+<p>语法: <code>select</code> [top n 指定返回前n行] 列名1[,列名2,或者用* 表示所有的列] [可用 as 来起临时名]<br><code>form</code> <strong>数据源</strong> [ <code>where</code> 条件]</p>
+<p><strong>数据源?</strong></p>
+<p>在前面的例子中, 我们这里的数据源一般是只单张表, <strong>其实这里的数据源也可以是多张表的,使用<code>连接方式关键字</code>将多张表建立链接关系</strong>从而查询到多张表的数据, 使用关键字 <code>on </code> 确定链接的条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> student.<span class="operator">*</span> ,Score.<span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">inner</span> <span class="keyword">join</span> Score <span class="keyword">on</span> student.id<span class="operator">=</span>Score.sid</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/janneystory/p/5618140.html">sql数据库的表连接方式图文详解 - 后知然后觉 - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<p><strong>链接可分为:</strong> </p>
+<ul>
+<li><p><strong>外连接</strong></p>
+<ul>
+<li>左外连接( <code>left join</code> 或 <code>left outer join</code>):<strong>左外连接包括left join左表所有行。</strong>假设左表中某行在右表没有匹配。则结果中相应行右表的部分所有为空(NULL). </li>
+<li>右外链接(<code>right join</code> 或 <code>right outer join</code>) :右外连接包括right join右表所有行，假设左表中某行在右表没有匹配，则结果中相应左表的部分所有为空(NULL)。</li>
+<li>全然外链接(<code>full join</code> 或 <code>full outer join</code>) :全然外连接包括full join左右两表中所有的行，假设右表中某行在左表中没有匹配，则结果中相应行右表的部分所有为空(NULL)，假设左表中某行在右表中没有匹配，则结果中相应行左表的部分所有为空(NULL)。</li>
+</ul>
+</li>
+<li><p><strong>内链接</strong></p>
+<p><code>join</code> 或 <code>inner join</code> : 比较运算符，仅仅返回符合条件的行。</p>
+</li>
+<li><p><strong>交叉连接</strong> </p>
+</li>
+</ul>
+<p>​       <code>cross join</code> :叉联接也称作<strong>笛卡尔积。相当于两个表中的所有行进行排列组合。</strong>若表a有X行，表b有Y行，则将返回XY行记录。</p>
+<h4 id="链接方式图解"><a href="#链接方式图解" class="headerlink" title="链接方式图解:"></a>链接方式图解:</h4><p>假设有两表:</p>
+<p><img src="image-20220325121257418.png" alt="image-20220325121257418"></p>
+<p><strong>左外链接:</strong></p>
+<p><img src="image-20220325121335700.png" alt="image-20220325121335700"></p>
+<p><strong>右外链接:</strong></p>
+<p><img src="image-20220325121354054.png" alt="image-20220325121354054"></p>
+<p><strong>内连接:</strong></p>
+<p><img src="image-20220325121442451.png" alt="image-20220325121442451"></p>
+<p><strong>交叉链接:</strong></p>
+<p><img src="image-20220325121616374.png" alt="image-20220325121616374"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Luo Qianyou
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lqy679.github.io/2020/01/01/sql/" title="sql">https://lqy679.github.io/2020/01/01/sql/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/01/01/javaweb/" rel="prev" title="JavaWeb">
+                  <i class="fa fa-chevron-left"></i> JavaWeb
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/01/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/" rel="next" title="操作系统原理">
+                  操作系统原理 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2020/01/01/sql/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2020/01/01/sql/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo Qianyou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/LQY679" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+<meting-js server="tencent" type="playlist" id="8809238545" fixed="true"  autoplay="false" loop="all" order="list" list-folded="ture" list-max-height="500px" ><!-- hexo injector body_end end --></body>
+</html>
