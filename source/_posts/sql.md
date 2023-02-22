@@ -1,6 +1,7 @@
 ---
 title: sql
-date: 2020-04-12 18:57:32
+date: 2020-01-01 18:57:32
+updated: {{date}}
 categories: 
 - 常用知识笔记
 ---

@@ -1,6 +1,7 @@
 ---
 title: JavaScript
-date: 2020-04-12 18:57:32
+date: 2020-01-01 18:57:32
+updated: {{date}}
 categories: 
 - 大前端
 ---

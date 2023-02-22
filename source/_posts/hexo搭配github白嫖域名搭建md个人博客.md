@@ -1,8 +1,8 @@
 ---
 title: hexo搭配github白嫖域名搭建md个人博客
 disableNunjucks: false
-date: 2020-04-13 08:00:00
-updated: 2023-02-15 22:15:15
+date: 2020-01-02 18:57:32
+updated: {{date}}
 categories: 时记杂谈
 tags:
 ---
@@ -142,8 +142,6 @@ deploy:
 ```sh
 hexo g -d
 ```
-
-
 
 
 

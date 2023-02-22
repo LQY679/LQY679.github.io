@@ -1,8 +1,9 @@
 ---
 title: python快速入门
-date: 2020-04-12 18:57:32
+date: 2020-01-01 18:57:32
+updated: {{date}}
 categories: 
-- python
+- python系列
 ---
 
 # python快速入门

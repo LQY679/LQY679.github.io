@@ -1,6 +1,7 @@
 ---
 title: git
-date: 2020-04-12 18:57:32
+date: 2020-01-01 18:57:32
+updated: {{date}}
 categories: 
 - 运维
 ---
@@ -122,7 +123,7 @@ git git restore 文件名 #恢复,这个命令针对已修改但还未添加到�
 git restore --staged 文件名 #恢复暂存的文件,这个命令针对已修改并且已经添加到暂存区的文件,相当于撤销本次添加到暂存区操作
 # 分支管理命令
 git branch 分支名  # 创建分支
-git branch -v  # 查看分支
+git branch -v + # 查看分支
 git checkout 分支名  # 切换分支
 git merge 分支名 # 把指定的分支合并到当前分支下
 # 别名管理命令
