@@ -182,20 +182,20 @@ select student.* ,Score.* from student inner join Score on student.id=Score.sid
 
 假设有两表:
 
-![image-20220325121257418](sql.assets/image-20220325121257418.png)
+![image-20220325121257418](sql/image-20220325121257418.png)
 
 **左外链接:**
 
-![image-20220325121335700](sql.assets/image-20220325121335700.png)
+![image-20220325121335700](sql/image-20220325121335700.png)
 
 **右外链接:**
 
-![image-20220325121354054](sql.assets/image-20220325121354054.png)
+![image-20220325121354054](sql/image-20220325121354054.png)
 
 **内连接:**
 
-![image-20220325121442451](sql.assets/image-20220325121442451.png)
+![image-20220325121442451](sql/image-20220325121442451.png)
 
 **交叉链接:**
 
-![image-20220325121616374](sql.assets/image-20220325121616374.png)
+![image-20220325121616374](sql/image-20220325121616374.png)

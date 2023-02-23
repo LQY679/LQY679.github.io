@@ -553,7 +553,7 @@ public class HelloControllerAnnotaion{   // 注意!!! 方法一定要是 public
 
 ### @RequestMapping
 
-Spring MVC 的 @RequestMapping 注解能够处理 HTTP 请求的方法, 比如 GET, PUT, POST, DELETE 以及 PATCH。
+Spring MVC 的` @RequestMapping` 注解能够处理 HTTP 请求的方法, 比如 GET, PUT, POST, DELETE 以及 PATCH。
 
 **所有的地址栏请求默认都会是 HTTP GET 类型的。**
 
