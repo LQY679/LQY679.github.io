@@ -230,7 +230,7 @@ categories:
 </html>
 ```
 
-1. audio元素定义音频
+1. video元素定义音频
 
 ```html
 <!DOCTYPE html>
@@ -267,6 +267,8 @@ categories:
 </body>
 </html>
 ```
+
+下面属性都是布尔值
 
 - ==**controls属性:**如果出现该属性,则向**用户显示控件,比如播放按钮。**==
 - autoplay属性:如果出现该属性,**则视频在就绪后马.上播放。**

@@ -499,6 +499,8 @@ docker run -d -p 3306:3306 --privileged=true -v /opt/mysql/log:/var/log/mysql -v
 
 ### 安装Redis
 
+注: Redis的配置文件可以从网上下载到,例如github:https://github.com/redis/redis/blob/6.0.8/redis.conf, 切换到对应版本即可
+
 1. 首先,创建一个存放配置文件的目录: `mkdir -p /opt/redis`
 2. **redis.conf文件用xftp传输到/opt/redis目录下**
 3. /opt/redis目录下修改redis.conf文件

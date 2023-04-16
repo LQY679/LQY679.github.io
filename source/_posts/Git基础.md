@@ -168,7 +168,17 @@ feature-game: 开发分支
 git branch 分支名  # 创建分支
 git branch -v  # 查看分支
 git checkout # 切换分支
-git merge 分支名 # 把指定的分支合并到当前分支下
+git merge 分支名 # 把指定的分支合并到当前分支下，合并要人工处理冲突，改动较多推荐用强制覆盖
+
+git push origin test:master -f     #　将test分支强制（-f）推送到主分支master
+```
+
+还有一种强制覆盖分支的办法：假设
+
+```sh
+git checkout master                          //将当前分支切换到主分支
+git reset --hard test                            //将主分支重置为test分支
+git push origin master -f             //将重置后的master分支强制推送到远程仓库
 ```
 
 

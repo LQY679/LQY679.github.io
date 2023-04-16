@@ -2153,3 +2153,13 @@ Log4j是[Apache](https://baike.baidu.com/item/Apache/8512995)的一个开源项�
         %p    输出优先级，即 FATAL ,ERROR 等 
         %r    输出从启动到显示该log信息所耗费的毫秒数 
         %t    输出产生该日志事件的线程名
+
+
+
+
+
+## 插件快速开发
+
+通过MyBatisCodeHelper-Pro插件,我们可以为我们编写Mybatis提供便利
+
+> 破解方法: [MyBatisCodeHelper-Pro插件破解版[2.9.7\] – 知了 (zhile.io)](https://zhile.io/2019/04/23/mybatis-code-helper-pro-crack.html)

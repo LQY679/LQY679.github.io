@@ -9,7 +9,7 @@ categories:
 
 
 
-# Vue(使用)
+# Vue2(使用)
 
 ## Vue初识
 
@@ -2227,19 +2227,19 @@ Vue.use("插件名")
 
 `beforeCreate()`:
 
-`create():`
+`created():`
 
 #### 挂载:
 
 `beforeMount()` 
 
-`mount()` **(重要)**
+`mounted()` **(重要)**
 
 #### 更新:
 
 `beforeUpate()`:  
 
-`update()` 
+`updated()` 
 
 #### 销毁:
 
@@ -2581,7 +2581,7 @@ export default {
 
 通过全局组件事件,我们可以==实现兄弟组件之间的组件通信==, 其原理是**在Vue的原型组件上添加一个属性`$bus` , 该属性的类型为Vue类型的对象,指向了一个Vue的实例** ,
 
-- **接收数据的组件**,通过`this.$bus.on("全局组件事件名",事件回调函数)`可在组件事件回调函数中接收到数据 
+- **接收数据的组件**,通过`this.$bus.$on("全局组件事件名",事件回调函数)`可在组件事件回调函数中接收到数据 
 
 - **发送数据的组件**通过`this.$bus.$emit("全局组件事件名",数据)` 则可以触发全局组件事件并且传送数据
 
@@ -3491,12 +3491,16 @@ axios({
 ## 组件通信总结
 
 - 父组件 -> 子组件: 通过`props`实现
+
 - 子组件 -> 父组件: **通过事件回调函数传递参数实现**
+
+- 子组件 -> 父组件: **通过作用域插槽实现**
+
 - 兄弟组件之间通信或者任意组件通信: 
   - 通过**全局组件事件`$bus`实现**
   - 通过**订阅发布第三方库如: `Pubsub-js` 实现**
 
-- 子组件 -> 父组件: **通过作用域插槽实现**
+  
 
 
 
@@ -4460,7 +4464,7 @@ this.$router.replace({
 	<router-view></router-view>
 </keep-alive>
 <!-- 若要设置多个缓存路由组件, 则将include属性值设置为数组即可 -->
-<keep-alive :include="["组件名1","组件名2","组件名3"]">
+<keep-alive :include="['组件名1','组件名2','组件名3']">
 	<router-view></router-view>
 </keep-alive>
 ```
@@ -5187,7 +5191,7 @@ axios.all([getUserAccount(), getUserPermissions()])
 
 - `data`是将请求参数**放入请求体中,传递的是一个对象**  , java后端要**通过注解`@@RequestBody`来接收,接收的参数是一个实体类对象**
 
-- `param`是将**放入请求头中,传递的是键值对** , java后端要**通过注解`@@RequestParam`来接收,接收的参数是对应的参数名**
+- `param`是将**放入请求头中,传递的是键值对** , java后端要**通过注解`@RequestParam`来接收,接收的参数是对应的参数名**
 
 详情请查询:[axios中文网](http://www.axios-js.com/zh-cn/docs/)
 
@@ -5363,3 +5367,196 @@ axios({
 }
 ```
 
+
+
+## 打包发布及压缩
+
+> 打包教程参考: [ vue 打包的方式_vue打包_-CSDN博客](https://blog.csdn.net/weixin_60208344/article/details/122266644)
+
+**打包命令:** 
+
+```sj
+npm run build 
+```
+
+该命令有一些命令配置项:
+
+`--target lib` 指定打包目录
+
+`--name` 打包后的文件名字
+
+`--dest `打包后的文件夹名称 
+
+
+
+### 使用 Vue-cli 创建项目:
+
+使用**脚手架生成的项目是没有config文件夹的**，那么就需要我们在根目录下创建一个`vue.config.js`的文件 **而且文件的名称一定要是vue.config.js**,在该文件中编辑如下内容:
+
+```js
+//打包配置文件
+module.exports = {
+  assetsDir: 'static',  // 静态资源目录
+  parallel: false, 
+  publicPath: './',    //生产构建为babel提供loader
+};
+```
+
+**清除生产日志**:
+
+> [Vue-Cli4运行npm run build打包时清除console.log的信息_饥饥对饥饥_叽叽复饥饥的博客-CSDN博客](https://blog.csdn.net/weixin_43750480/article/details/108054010)
+
+安装插件: `npm install babel-plugin-transform-remove-console -D`
+
+然后打开项目根目录下的`babel.config.js`文件, 添加如下代码
+
+```js
+let transformRemoveConsolePlugin = []
+//生产环境
+if (process.env.NODE_ENV === 'production') {
+  transformRemoveConsolePlugin = ['transform-remove-console']
+}
+
+module.exports = {
+  "plugins": [
+    ...transformRemoveConsolePlugin
+  ]
+}
+```
+
+再之后运行打包`npm run build`就发现控制台上的打印已经不见了
+
+
+
+### 使用webpack创建
+
+直接在 config 中 `index.js` 文件下修改 webpack 配置：
+
+```js
+assetsPublicPath: './'
+```
+
+
+
+
+
+
+
+# 前置知识: JavaScript ES6
+
+Vue大量且普遍的使用到了ES6的语法知识, 了解ES6能够提高开发效率和充分了解Vue的相关知识
+
+## 模块化导入导出:
+
+> 参考连接: [彻底弄懂Javascript模块导入导出_js导入_码云笔记的博客-CSDN博客](https://blog.csdn.net/qq_41221596/article/details/128466184)
+
+### export，import 关键字
+
+- **export** 用于对外输出本模块
+- **import** 用于导入模块
+
+js中一切皆对象，所以对象和变量一样可以导出的，并且**有两种写法, 常规导出和默认导出(匿名导出)**
+
+### 常规导出
+
+#### 1.单个变量导出:
+
+```js
+//a.js 导出一个变量，语法如下
+export var site = "www.helloworld.net"
+ 
+//b.js 中使用import 导入上面的变量,注意: 这里的 { site } 一定要和导出时的名字一样
+import { site } from "/.a.js" //路径根据你的实际情况填写
+console.log(site)	//输出： www.helloworld.net
+```
+
+#### 2.导出多个变量
+
+```js
+ //a.js 中定义两个变量，并导出
+ var siteUrl="www.helloworld.net"
+ var siteName="helloworld开发者社区"
+ 
+ //将上面的变量导出
+ export { siteUrl ,siteName }  
+ 
+ 
+ 
+ // b.js 中使用这两个变量  注意: 这里的 导入变量的名字 一定要和导出时的名字一样
+ import { siteUrl , siteName } from "/.a.js" //路径根据你的实际情况填写
+ 
+ console.log(siteUrl)	//输出： www.helloworld.net
+ console.log(siteName)	//输出： helloworld开发者社区
+ 
+```
+
+#### 3.导出函数
+
+导出函数和导出变量基本一致
+
+```js
+//a.js 中定义并导出一个函数
+function sum(a, b) {
+    return a + b
+}
+//将函数sum导出
+export { sum } 
+ 
+ 
+//b.js 中导入函数并使用
+import { sum } from "/.a.js" //路径根据你的实际情况填写
+console.log( sum(4,6) ) //输出： 10
+```
+
+#### 4.导出对象
+
+导出对象也是和上面一样的道理, 就不过多赘述了, 接下来讲一下默认导出, 这个比较常用
+
+
+
+### 默认导出(常用)
+
+默认导出**使用 `default export`关键字进行导出, 并且每个js文件(模块)中只能导出一个东西(变量,对象或函数), 因为只有一个,所以称为匿名导入, 在导入时就可以自定义名字(区别于常规导入限定名字)**, 请看下面的例子:
+
+第一种写法: 不接变量名
+
+```js
+//a.js 中，定义对象并导出, 注意，使用export default 这两个关键字导出一个对象
+export default {
+    siteUrl:'www.helloworld.net',
+    siteName:'helloworld开发者社区'
+}
+ 
+ 
+//b.js 中导入并使用
+import obj from './a.js'   	// 这里不一定要写 obj,因为是匿名的不必和导出时一眼
+console.log(obj.siteUrl)	//输出：www.helloworld.net
+console.log(obj.siteName)	//输出：helloworld开发者社区
+```
+
+第二种写法: 衔接变量,对象中间可能需要执行一些处理操作
+
+```js
+//a.js 中定义对象，并在最后导出
+var obj = {
+   	siteUrl:'www.helloworld.net',
+    siteName:'helloworld开发者社区'
+}
+ 
+export default obj	//导出对象obj
+ 
+ 
+//b.js 中导入并使用
+import obj from './a.js'   	//路径根据你的实际情况填写
+console.log(obj.siteUrl)	//输出：www.helloworld.net
+console.log(obj.siteName)	//输出：helloworld开发者社区
+ 
+```
+
+
+
+### 区别对比:
+
+- **默认导出:** 一个文件只能导出一个, 但是导入时名字可以自定义灵活多变
+
+- **常规导出:** 导入时的名字必须和导出时一致, 但是可以从一个文件中导出多个东西

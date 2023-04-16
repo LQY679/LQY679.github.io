@@ -1499,6 +1499,178 @@ debug=true
 
 
 
+## 配置文件与配置类自定义
+
+### 自定配置文件绑定配置类
+
+在配置类与配置文件属性结构相似甚至相同的时候, 推荐使用配置文件绑定配置类, 这样能更方便的注入配置项
+
+下面以支付宝接口的配置类举例:
+
+`AlipayConfig.java`:
+
+```java
+package com.bike_server.config;
+
+/* *
+ *类名：AlipayConfig
+ *功能：基础配置类
+ *详细：设置帐户有关信息及返回路径
+ *修改日期：2017-04-05
+ *说明：
+ *以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+ *该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
+ */
+
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.io.FileWriter;
+
+@Configuration
+// prefix 表示绑定配置文件的前缀配置项
+@ConfigurationProperties(prefix = "alipay")
+// Spring注入依赖 Setter,Getter, 并且不能注入静态属性
+@Setter
+@Getter
+@ToString
+public class AlipayConfig {
+
+//    注入Spring容器
+    @Bean
+    public AlipayClient getAlipayClient(){
+        //获得初始化的AlipayClient
+        return new DefaultAlipayClient(
+                this.gatewayUrl,
+                this.app_id,
+                this.merchant_private_key, "json",
+                this.charset,
+                this.alipay_public_key,
+                this.sign_type);
+    }
+
+//↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+    // 应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
+    private String app_id;
+
+    // 商户私钥，您的PKCS8格式RSA2私钥
+    private String merchant_private_key;
+    // 支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
+    private String alipay_public_key;
+    // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+    private String notify_url;
+
+    // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+    private String return_url;
+
+    // 签名方式
+    private String sign_type;
+
+    // 字符编码格式
+    private String charset;
+
+    // 支付宝网关
+    private String gatewayUrl;
+
+    // 日志路径
+    private String log_path;
+
+//↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+}
+```
+
+随后在任意路径(推荐在resources, 即classpath路径下面)创建并且编写自己的配置文件, 本案例中: 
+
+路径文件: `classpath:config/AlipayConfig.yaml`
+
+注意: 文件的前缀要和`@ConfigurationProperties(prefix = "alipay")`配置的对应
+
+```yaml
+alipay:
+  # 应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
+  app_id: 2021*****
+
+  # 商户私钥，您的PKCS8格式RSA2私钥
+  merchant_private_key: MIIEvgIBAD....
+
+  # 支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥
+  alipay_public_key: MIIBIjANBg....
+
+  # 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+  # 如果不设置,则支付成功后, 不接收支付宝官方的异步通知,但是同步通知页面路径(return_url)是必填的
+  notify_url: http://localhost:8081/payAsyncNotify
+
+  # 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+  return_url: http://localhost:8081/finishPay
+
+  # 支付宝网关
+  gatewayUrl: https://openapi.alipaydev.com/gateway.do
+
+  log_path: E:\\Code\\共享单车管理系统\\bike_server\\src\\main\\java\\com\\bike_server
+  # 签名方式
+  sign_type: RSA2
+
+  charset: utf-8
+```
+
+随后在SringBoot的主配置文件中引入咱们的配置文件, 在`application.yaml`中,添加如下内容:
+
+```yaml
+spring
+  config:
+    import: classpath:config/AlipayConfig.yaml
+```
+
+tips: 当我们讲自定义配置文件引入到主配置文件中时, 我们编写配置文件的时候会有自动提示
+
+
+
+### 从配置文件中注入配置项的值
+
+这种情况通常是**用于我们某些业务需要部分使用到配置文件的值,的时候, 并且配置文件的结构并没有与之对应的配置类, 这种方式并不要求配置文件需要有前缀**
+
+首先,创建并且编写我们的配置文件:  `classpath:/config/BikeServerConfig.yaml`
+
+```yaml
+# 过期时间(分钟) , 可以通过 #{60 * 24 * 7} 的形式进行计算 !
+tokenExpireTime: 10
+verifyCodeExpireTime: 2
+orderPayExpireTime: 5
+verifyCodeLength: 6
+
+```
+
+业务类:
+
+```java
+@Service
+@Getter
+@Setter
+@PropertySource("classpath:/config/BikeServerConfig.yaml")
+public class UserService{
+    // token 有效期 (单位:分钟)
+    @Value("${tokenExpireTime}")
+    private int TOKEN_EXPIRE_TIME;
+
+    // 验证码有效期 (单位:分钟)
+    @Value("${verifyCodeExpireTime}")
+    private int VerifyCode_EXPIRE_TIME = 2;
+    ...
+}
+```
+
+
+
+
+
 ## Web开发
 
 ### 简介
@@ -2268,6 +2440,76 @@ public class WebMvcAutoConfiguration {
     
 }
 ```
+
+
+
+### 拦截器
+
+Javaweb中有一个过滤器,拦截器跟过滤器非常类似,下面讲一下拦截器的使用方法:
+
+新建一个类(名字自定义), 实现拦截器的口: 比如`WebInterceptor`
+
+```java
+/**
+ * 自定义拦截器类, 配置拦截逻辑
+ */
+public class WebInterceptor implements HandlerInterceptor {// 实现HandlerInterceptor接口
+
+//    访问控制器方法前执行
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
+        System.out.println(new Date() + "--preHandle:" + request.getRequestURL());
+        return true;
+    }
+
+    // 访问控制器方法后执行
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+                           ModelAndView modelAndView) throws Exception {
+        System.out.println(new Date() + "--postHandle:" + request.getRequestURL());
+    }
+
+    // postHandle方法执行完成后执行，一般用于释放资源
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+        System.out.println(new Date() + "--afterCompletion:" + request.getRequestURL());
+    }
+}
+```
+
+再新建一个拦截器配置类,,配置类的接口, 如: `WebConfig`  
+
+```java
+/**
+ * Web配置类
+ */
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    
+    // 注意!!! 如果不将拦截器注入, 拦截器无法注入 Spring Bean 
+    @Bean
+    public WebInterceptor webInterceptor(){
+        return new WebInterceptor();
+    }
+    
+    /**
+     * 添加Web项目的拦截器的拦截规则
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 对所有访问路径，都通过MyInterceptor类型的拦截器进行拦截,
+        //注意这里不要使用 new WebInterceptor() ，否则就会出现拦截器里无法注入service的问题
+        registry.addInterceptor(new WebInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/login", "/index.html", "/user/login", "/css/**", "/images/**", "/js/**", "/fonts/**");
+        //放行登录页，登陆操作，静态资源
+    }
+}
+
+```
+
+这样就设置好了拦截器
 
 
 
@@ -3325,7 +3567,553 @@ class ApplicationTests {
 
 
 
-## 整合Redis(待学)
+## 整合Redis与缓存
+
+### SpringDataRedis
+
+SpringData是Spring中数据操作的模块，包含对各种数据库的集成，其中对Redis的集成模块就叫做SpringDataRedis，官网地址：https://spring.io/projects/spring-data-redis
+
+* 提供了对不同Redis客户端的整合（Lettuce和Jedis）, SpringBData默认使用Lettuce
+* 提供了RedisTemplate统一API来操作Redis
+* 支持Redis的发布订阅模型
+* 支持Redis哨兵和Redis集群
+* 支持基于Lettuce的响应式编程
+* 支持基于JDK.JSON.字符串.Spring对象的数据序列化及反序列化
+* 支持基于Redis的JDKCollection实现
+
+SpringDataRedis中提供了RedisTemplate工具类，其中封装了各种对Redis的操作。并且将不同数据类型的操作API封装到了不同的类型中：
+
+| **API**                       | 返回值类型      | 说明                  |
+| ----------------------------- | --------------- | --------------------- |
+| `redisTemplate.opsForValue()` | ValueOperations | 操作String类型数据    |
+| `redisTemplate.opsForHash()`  | HashOperations  | 操作Hash类型数据      |
+| `redisTemplate.opsForList()`  | ListOperations  | 操作List类型数据      |
+| `redisTemplate.opsForSet()`   | SetOperations   | 操作Set类型数据       |
+| `redisTemplate.opsForZSet()`  | ZSetOperations  | 操作SortedSet类型数据 |
+| `redisTemplate`               |                 | 通用的命令            |
+
+#### 快速入门
+
+SpringBoot已经提供了对SpringDataRedis的支持，使用非常简单：
+
+首先导入依赖:
+
+```xml
+ <!--redis依赖-->
+<dependency>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+<!--common-pool 数据库连接池-->
+<dependency>
+   <groupId>org.apache.commons</groupId>
+   <artifactId>commons-pool2</artifactId>
+</dependency>
+
+<!--Jackson依赖-->
+<dependency>
+   <groupId>com.fasterxml.jackson.core</groupId>
+   <artifactId>jackson-databind</artifactId>
+</dependency>
+```
+
+springboot配置文件:
+
+```yaml
+spring:
+  redis:
+    host: 192.168.150.101
+    port: 6379
+    password: 123321
+    lettuce:
+      pool:
+        max-active: 8  #最大连接
+        max-idle: 8   #最大空闲连接
+        min-idle: 0   #最小空闲连接
+        max-wait: 100ms #连接等待时间
+```
+
+**测试代码:**
+
+```java
+@SpringBootTest
+class SpringDataRedisApplicationTests {
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+    @Test
+    void String() {
+        redisTemplate.opsForValue().set("name", "顾北");
+        System.out.println(redisTemplate.opsForValue().get("name"));
+    }
+}
+```
+
+#### 数据序列化Serializer
+
+RedisTemplate可以接收**任意Object作为值写入Redis**：
+
+只不过写入前会把Object序列化为字节形式，默认是采用JDK序列化，得到的结果是这样的：
+
+![image-20221231131417950](SpringBoot/image-20221231131417950.png)
+
+
+
+缺点：
+
+- 可读性差
+- 内存占用较大
+
+我们可以自定义RedisTemplate的序列化方式，代码如下：
+
+在com.项目名xxx.redis.config包下创建:
+
+```java
+@Configuration
+public class RedisConfig {
+
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory){
+        // 创建RedisTemplate对象
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        // 设置连接工厂
+        template.setConnectionFactory(connectionFactory);
+        // 创建JSON序列化工具
+        GenericJackson2JsonRedisSerializer jsonRedisSerializer = 
+            							new GenericJackson2JsonRedisSerializer();
+        // 设置Key的序列化
+        template.setKeySerializer(RedisSerializer.string());
+        template.setHashKeySerializer(RedisSerializer.string());
+        // 设置Value的序列化
+        template.setValueSerializer(jsonRedisSerializer);
+        template.setHashValueSerializer(jsonRedisSerializer);
+        // 返回
+        return template;
+    }
+}
+```
+
+整体可读性有了很大提升，并且**能将Java对象自动的序列化为JSON字符串**，并且**查询时能自动把JSON反序列化为Java对象**。不过，其中**记录了序列化时对应的class名称**，目的是为了查询时实现自动反序列化。这**会带来额外的内存开销**。
+
+![image-20221231132423815](SpringBoot/image-20221231132423815.png)
+
+为了**减少内存的消耗**，我们可以**采用手动序列化的方式**，换句话说，就是不借助默认的序列化器，而是我们自己来控制序列化的动作，同时，我们只采用String的序列化器，这样，在存储value时，我们就不需要在内存中就不用多存储数据，从而节约我们的内存空间
+
+![image-20221231132533534](SpringBoot/image-20221231132533534.png)
+
+**这种用法比较普遍**，因此SpringDataRedis就提供了RedisTemplate的子类：`StringRedisTemplate`，它的key和value的序列化方式默认就是String方式。
+
+省去了我们自定义RedisTemplate的序列化方式的步骤，而是直接使用：
+
+```java
+@SpringBootTest
+class SpringDataRedisApplicationTests {
+
+    // 使用 StringRedisTemplate 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Test
+    void String() throws JsonProcessingException {
+        // 使用 jackson 库 解析 JSON
+        ObjectMapper objectMapper = new ObjectMapper();
+        User user = new User("南城",20);
+        // 讲 Java对象序列化成 JSON后插入
+        String jsonStr = objectMapper.writeValueAsString(user);
+        redisTemplate.opsForValue().set("user:200",jsonStr);
+        // 讲 JSON 字符串取出来后反序列化成Java对象
+        final String s = redisTemplate.opsForValue().get("user:200");
+        User o = objectMapper.readValue(s,User.class);
+        System.out.println(o);
+    }
+}
+```
+
+最后小总结：
+
+RedisTemplate的两种序列化实践方案：
+
+* 方案一：
+  * 自定义RedisTemplate
+  * 修改RedisTemplate的序列化器为GenericJackson2JsonRedisSerializer
+
+* 方案二：
+  * 使用StringRedisTemplate
+  * 写入Redis时，手动把对象序列化为JSON
+  * 读取Redis时，手动把读取到的JSON反序列化为对象
+
+#### Hash结结构和其他结构
+
+操作Hash结构时需要注意: api 不是类似原生的Redis命令风格设计,而是**按照Java的Map操作api进行设计**的
+
+而其他结构如: List ,Set 等则和原生Redis命令类似
+
+```java
+@Test
+void testHash(){
+ HashOperations<String, Object, Object> hashOperations = redisTemplate.opsForHash();
+    hashOperations.put("user:400","name","北笙");
+    hashOperations.put("user:400","age","18");
+    Map map = new HashMap<>();
+    map.put("name","北笙");
+    map.put("age","17");
+    hashOperations.putAll("user:400",map);
+}
+```
+
+
+
+### Redis缓存
+
+如果我们想通过Redis讲接口的数据进行缓存, Sring为我们提供了一个非常方便的方案**Spring Cache**:
+
+注: 一下操作已经是默认配置好并连接好Redis环境
+
+**首先我们要在程序启动类中使用注解`@EnableCaching`开启缓存功能:**
+
+```java
+@SpringBootApplication
+@EnableCaching //开启缓存
+public class BikeServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(BikeServerApplication.class, args);
+    }
+
+}
+```
+
+在需**要缓存的接口方法的类**上打上注解`@CacheConfig`:
+
+该注解主要属性有：
+
+- 缓存名称：`cacheNames`，对应value或者cacheNames,命名空间, 即Redis的键名前缀
+- 缓存管理器名称：`cacheManager`，对应cacheManager, 对应的一些配置信息
+- KeyGenerator的名称集合：keyGenerator，对应keyGenerator
+
+**要需要缓存的接口方法打上注解`@Cacheable`:**
+
+该注解的主要属性有: 
+
+- 缓存名称：`value`，可集体抽取为@CacheConfig的cacheNames，或者单独写，必填
+
+- 键名：`key`，可以为空，可使用 SpEL 表达式编写，如果为空，则按照方法的所有参数进行组合
+- 缓存条件：condition，可以为空，使用 SpEL 编写，返回 true 或 false，为 true 才进行缓存, 例如: `unless = "#result==null"` ,表示当接口放回null时, 不进行缓存
+
+一个实现了缓存的接口的`UserController`类如下所示:
+
+```java
+@RestController
+@CacheConfig(cacheNames="bike_server:cache-list")
+public class UserController {
+    @RequestMapping("/getAllUser")
+    @Cacheable(key = "'user'")
+    public Result getAllUser(){
+      // 代码逻辑...
+      // 返回结果
+    }
+    
+    // 其他接口方法...
+}
+```
+
+#### 其他缓存注解补充:
+
+上述所示的基本功能就已经实现了, 除此之外,我们可以根据不同情况选中如下的多种缓存方案:
+
+##### @CachePut
+
+与@Cacheable基本相同
+区别是:
+
+- @CachePut：这个注释可以确保方法被执行，同时方法的返回值也被记录到缓存中。
+- @Cacheable：当重复使用相同参数调用方法时，方法本身不会被调用，而是直接从缓存中找到结果并返回。**也就是说@Cacheable一次缓存，不再更新。@CachePut次次缓存，一直更新**
+
+
+
+##### @CacheEvict
+
+主要属性有：
+
+- 键名：`key`，可以为空，可使用 SpEL 表达式编写，如果为空，则按照方法的所有参数进行组合
+- 缓存条件：`condition`，可以为空，使用 SpEL 编写，返回 true 或 false，为 true 才进行缓存
+- 缓存名称：`value`，可集体抽取为@CacheConfig的cacheNames，或者单独写，必填
+- 是否清空所有缓存：`allEntries`，缺省为 false，指定为 true
+- 是否在方法执行前就清空：`beforeInvocation`，缺省为 false，指定为 true
+
+```java
+	@CacheEvict(key = "'findByBatchId_'+ #detailId + '_' + #batchId ")
+	public void updateByBatchId(Long detailId, String batchId) {
+		batchHistoryRepository.updateByBatchId(detailId,batchId);
+	}
+
+```
+
+##### @Caching
+
+为自定义的组合缓存规则, 主要属性有：
+
+- @Cacheable的组合：cacheable，默认{}
+- @CachePut的组合：put，默认{}
+- @CacheEvict的组合：evict，默认{}
+
+```java
+	@Caching(evict = { 
+		@CacheEvict(key = "'findByDocInfo_'+ #docVO.bussNo + '_'+ #docVO.category"),
+		@CacheEvict(key = "'selectByDocDetailId_'+ #docVO.id"),
+		@CacheEvict(key = "'findByDocDetailId_'+ #docVO.id ")
+		})
+    public void updateFileSort(DocVO docVO, DocDetailVO detailVO) {
+        impDocFileRepository.updateFileSort(detailVO.getId(),detailVO.getSort());
+    }
+
+```
+
+#### 序列化与缓存时间配置
+
+我们讲数据写入Redis默认是使用jdk的默认序列化方式, 在Redis中看到的就是一串乱码, **通常情况下,为了兼容性可读性,我们会把数据序列化成json格式再写入Redis. 为此我们需要编写一个配置类来修改一些配置**, 特别需要注意: 我们在设置序列化方式时, **需要配置`RedisTemplate`的序列化方式, ==如果使用``@Cacheable`注解来进行缓存,还需要对`RedisCacheManager`的序列化方式同样也要修改,(本人亲自踩坑实践过)==**, 
+
+配置类如下所示:
+
+```java
+
+@Configuration
+public class RedisConfig {
+    // 修改RedisTemplate的序列化方式,注意只修改这个并不能影响到@Cacheable注解的序列化方式
+    @Bean
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(factory);
+
+        // 设置键（key）的序列化方式为stringSerializer
+        StringRedisSerializer stringSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringSerializer);
+        redisTemplate.setHashKeySerializer(stringSerializer);
+
+        // 设置值（value）的序列化方式为json序列化器
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    }
+
+    @Bean
+    CacheManager cacheManager(RedisConnectionFactory factory) {
+
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofMinutes(2))  // 其他命名空间的过期时间
+                /* 设置键的序列化方式... 一般键都是字符串,可以省略 */
+                .serializeKeysWith(RedisSerializationContext.SerializationPair
+                        .fromSerializer(new StringRedisSerializer()))
+//               /* 设置值的序列化方式, 不设置就会使用jdk默认的序列化方式 */
+                .serializeValuesWith(RedisSerializationContext.SerializationPair
+                        .fromSerializer(new GenericJackson2JsonRedisSerializer()));
+
+        Map<String, RedisCacheConfiguration> configurationMap = new HashMap<>();
+        //此处可以自定义缓存空间的缓存的过期时间，可以根据自己实际情况进行设置，也可以不设置，用统一过期时间
+        configurationMap.put("bike_server:cache-list", config.entryTtl(Duration.ofSeconds(200)));
+
+        RedisCacheWriter redisCacheWriter =
+                RedisCacheWriter.nonLockingRedisCacheWriter(factory);
+
+        return RedisCacheManager.builder(redisCacheWriter)
+                .initialCacheNames(configurationMap.keySet())
+                .withInitialCacheConfigurations(configurationMap)
+                .cacheDefaults(config)
+                .build();
+    }
+}
+```
+
+
+
+## 项目打包发布
+
+**SpringBoot**项目有两种打包部署方式:
+
+- 打包成jar, 内置Tomcat, 使用`java 打包好的文件名.jar`部署
+
+- 打包成war, 部署到Tomcat上
+
+推荐打包成jar 包
+
+### Jar方式打包
+
+> 参考 [玩转 Spring Boot 应用篇（项目打包、发布） (qq.com)](https://mp.weixin.qq.com/s?__biz=MzU2MDg5NzYzNA==&mid=2247486699&idx=1&sn=68ed2d49011e40b83372164ad65dd409&chksm=fc0047e6cb77cef045fcccc0d2ff726602cf170a9b998dddd34a355b9d16d3c8631501169360&scene=27)
+>
+
+如果是在Idea下的项目, 并且是用Maven构建, 只需要**点击Idea右边的Maven选项工具, 选择 生命周期  选项下的package** , 
+
+打包可以检查一下项目结构:
+
+### 打包好的结构
+
+> Jar项目包结构: [SpringBoot项目打包后的项目结构（以jar包为例） - 飞蛇在水 - 博客园 (cnblogs.com)](https://www.cnblogs.com/flying-snake/p/12689801.html)
+
+```
+根目录
+    |-- BOOT-INF        |-- classes        |-- lib
+    |-- META-INF
+    |-- org
+```
+
+- BOOT-INF 目录
+  - classes 目录中存放项目代码对应的 .class文件
+  - lib 目录中存放项目相关的依赖包，依赖包以 jar包 的方式存放（jar文件中存放jar文件，有个专门称呼叫 “FatJar”
+- META-INF
+  - 存放清单文件，其内容描述当前可执行 jar 包的基本信息
+  - 其中，有两个主要的描述信息：
+    - Main-Class
+      - 描述 jar包 的入口文件（main 方法所在的类）
+      - Spring 框架固定是 `org.springframework.boot.loader.JarLauncher`
+      - 定义完此属性后，一定要有一个换行
+    - Start-Class
+      - 描述自定义 main 方法的全称
+- org
+  - 存放了一些打包 SpringBoot 项目后的相关启动类
+  - 由于 SpringBoot 基于管理及安全性的考虑，打包使用 “项目代码与依赖包分离” 的方式（不同于以前将所有依赖包中的 .class 文件与项目的 .class 文件合并到一起的方式），因此打包后的 jar/war 包中依然包含了依赖的 jar 包，不符合 jar包 的规范，依赖的 jar包 无法通过默认的加载器进行加载
+  - 为了规避 jar文件规范，SpringBoot 使用自定义加载器去加载整个项目，于是入口就不再是编写项目时的 main 方法，而是使用 `org.springframework.boot.loader.JarLauncher` 类，在启动的时候创建自定义加载器去加载项目中的所有类
+  - 因此，打包后的 SpringBoot 项目，只有 `org` 文件夹中的类的类加载器是 `AppClassLoader` ，`BOOT-INF` 文件夹中的类和依赖包的加载器是 `LaunchedURLClassLoader`
+
+war包的结构跟jar包结构差不多，只是多了几个目录（如 “WEB-INF/” 等）。
+
+
+
+Jar包启动
+
+
+
+### 常见问题:
+
+- 无法访问静态资源:
+
+检查`pom.xml`文件, 如果有如下内容, 请把他删掉, 就可以了
+
+```xml
+        <!--  包含的资源  -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.yaml</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.txt</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.tld</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+```
+
+
+
+- 报错: There are test failures. 
+
+这是因为测试方法有报错的, 忽略测试环境即可, 不影响打包部署. 
+
+![image-20230413204626933](SpringBoot/image-20230413204626933.png)
+
+- 打包以后运行时,**找不或者无法加载主类**
+
+修改maven的配置文件:`pom.xml`
+
+
+
+### 部署启动
+
+> https://www.cnblogs.com/xiaoqi/p/6955288.html
+
+打包成jar包后, 使用JDK的命令启动即可
+
+```sh
+java -jar xxx.jar 
+```
+
+该命令有一些命令参数,可以覆盖`application.yaml`配置文件的内容启动: 
+
+`--server.port=端口号`  指定端口号启动
+
+`-Dspring.config.location=配置文件带路径文件名`
+
+例如:
+
+```sh
+# 通过80端口启动
+java -jar xxx.jar --server.port=80
+
+# 通过当前目录下的 aaa配置文件启动
+java -jar -Dspring.config.location=./aaa.yaml xxx.jar 
+```
+
+**后台启动:**
+
+用上述方式启动后断开连接, SringBoot应用就会停止运行, 这时我们可以用如下命令进行后台运行, **断开连接也不会停止, 只能通过查询端口号找到对应进程来结束进程停止应用**
+
+```sh
+nohup java -jar xxx.jar >log.out 2>&1 &
+```
+
+该命令在后台启动一个Java进程，并将其标准输出和错误流重定向到名为"`log.out`"的文件中。"`nohup`"命令**确保即使用户注销或终端会话结束，进程仍将继续运行**。命令末尾的“＆”符号也将进程发送到后台。
+
+数字1和2分别代表标准输出和标准错误输出。使用“2>&1”将标准错误输出重定向到与标准输出相同的文件中。这意味着命令的所有输出都将被写入到"log.out"文件中。
+
+
+
+### 支持https, 生成SSL证书
+
+> [(100条消息) JDK生成HTTPS证书_](https://blog.csdn.net/Bank_Hu/article/details/107198865)
+
+JDK 能自带生成SSL功能. 首先, **进入JDK安装目录下的`bin`目录下** (推荐使用管理员权限, windos用管理员权限打开cmd进入), 输入如下命令:
+
+```sh
+keytool -genkey -alias tomcathttps -keyalg RSA -keysize 2048 -keystore bank.p -validity 365
+```
+
+• `-genkey` 表示要创建一个新的密钥。 
+
+• `-alias` 表示 keystore 的别名。 
+
+• `-keyalg` 表示使用的加密算法是 RSA， 一种非对称加密算法． 
+
+• `-keysize` 表示密钥的长度． 
+
+• `-keystore` 表示生成的密钥存放位直。 
+
+• -`validity` 表示密钥的有效时间，单位为天
+
+![image-20230414205436167](SpringBoot/image-20230414205436167.png)
+
+![image-20230414205647202](SpringBoot/image-20230414205647202.png)
+
+讲该证书文件拷贝到SpringBoot的根目录下(推荐这样, 也可以自定义,**默认会找 项目名\证书文件名的路径)**,
+
+本案例中放到了如下位置:
+
+![image-20230414205905699](SpringBoot/image-20230414205905699.png)  
+
+随后在`application.yaml`文件添加配置
+
+```yaml
+server:
+  port: 8081
+  ssl:
+    key-store: src\main\resources\bank.p     # 证书的带路径文件名
+    key-alias: tomcathttps
+    key-store-password: 123456   # 刚才我们通过jdk输入命令生成时的自定义的口令密码
+```
+
+随后启动项目, 就是 Https协议了
+
+
 
 
 

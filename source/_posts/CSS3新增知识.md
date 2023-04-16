@@ -179,7 +179,7 @@ categories:
 
 1.  X:first- child匹配子集的第一个元素。IE7就可以支持
 
-2.  X:last- child匹配父元素中最后-个X元素
+2.  X:last- child匹配父元素中最后一个X元素
 
    ```html
    <!DOCTYPE html>
@@ -1399,7 +1399,11 @@ categories:
 
 #### 6.4.2、行间距
 
-- 折行之后的间距可以使用**align-content**改变间距
+`align-content`属性用于修改 flex-wrap 属性的行为。与 align-items 相似，但它不对齐弹性项目，而是对齐 flex 线。
+
+(注:  css的`gap`属性可以直接设置行间距固定值)
+
+- 折行之后的间距可以使用**align-content**改变间距方式
 
 - align-content的属性值有：
 

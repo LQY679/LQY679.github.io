@@ -540,3 +540,41 @@ alias -p  #查看已经设置的别名
 
 1. 安装SSH
 2. 根据主机ip进行链接
+
+
+
+## CentOS 命令补充
+
+防火墙放行
+
+```sh
+firewall-cmd --permanent --add-service=dns
+firewall-cmd --permanent --add-service=ftp
+firewall-cmd --permanent --add-service=http
+firewall-cmd --reload  
+# 查看放行的服务: 
+firewall-cmd --list-services
+
+# 关闭SELinux,重启后失效
+setenforce 0
+# 查看是否SELinx关闭成功, 成功提示 Permissive
+getenforce
+```
+
+网卡相关配置
+
+```sh
+# 查看网卡信息
+nmcli device
+# 添加连接
+nmcli connection add con-name 连接名 ifname 网卡名 type ethernet
+# 修改ip地址
+nmcli connection modify 连接名 ipv4.method manual ipv4.addresses IP地址/网络位
+# 激活连接
+nmcli connection up 连接名
+#查看所有链接
+nmcli connection show
+```
+
+
+

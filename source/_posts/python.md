@@ -7976,6 +7976,12 @@ cv2.imwrite("result.jpg", im)
 
 
 
+## 虚拟环境
+
+参考链接 ： [pycharm的virtualenv、pipenv、conda详解_pycharm virtualenv_任识算法的博客-CSDN博客](https://blog.csdn.net/qq_35240555/article/details/123474660)
+
+
+
 ## 项目打包,发布
 
 Python是一个脚本语言，被解释器解释执行。它的发布方式：
