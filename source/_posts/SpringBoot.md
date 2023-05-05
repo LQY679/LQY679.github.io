@@ -3332,6 +3332,129 @@ public class UserController {
 
 
 
+### Mybatis-Puls与敏捷CURD
+
+#### 简介
+
+MyBatisPlus（简称MP）是基于MyBatis框架基础上开发的增强型工具，旨在简化开发、提高效率 
+
+官网：https://mybatis.plus/ https://mp.baomidou.com/
+
+**特性:**
+
+- 无侵入：只做增强不做改变，不会对现有工程产生影响 强大的 
+- CRUD 操作：**内置通用 Mapper，少量配置即可实现单表CRUD 操作** 
+- **支持 Lambda：编写查询条件无需担心字段写错 支持主键自动生成** 
+- 内置分页插件 ……
+
+#### 快速入门
+
+需要的依赖: 
+
+```xml
+<dependency>
+	<groupId>com.baomidou</groupId>
+	<artifactId>mybatis-plus-boot-starter</artifactId>
+	<version>3.4.1</version>
+</dependency>
+<!--        mysql驱动,这个是必须的-->
+<dependency>
+   <groupId>mysql</groupId>
+   <artifactId>mysql-connector-java</artifactId>
+   <scope>runtime</scope>
+</dependency>
+
+<!-- 数据源,看情况 -->
+<dependency>
+	<groupId>com.alibaba</groupId>
+	<artifactId>druid</artifactId>
+	<version>1.1.16</version>
+</dependency>
+```
+
+**配置Jdbc参数（application.yml）....**
+
+建表sql: 
+
+```sql
+create database if not exists mybatisplus_db character set utf8;
+use mybatisplus_db;
+CREATE TABLE user (
+id bigint(20) primary key auto_increment,
+name varchar(32) not null,
+password varchar(32) not null,
+age int(3) not null ,
+tel varchar(32) not null
+);
+insert into user values(null,'tom','123456',12,'12345678910');
+insert into user values(null,'jack','123456',8,'12345678910');
+insert into user values(null,'jerry','123456',15,'12345678910');
+insert into user values(null,'tom','123456',9,'12345678910');
+insert into user values(null,'snake','123456',28,'12345678910');
+insert into user values(null,'张益达','123456',22,'12345678910');
+insert into user values(null,'张大炮','123456',16,'12345678910');
+```
+
+实体类:
+
+```java
+public class User {
+private Long id;
+private String name;
+private String password;
+private Integer age;
+private String tel;
+//自行添加getter、setter、toString()等方法
+}
+```
+
+**定义数据接口，继承BaseMapper** , 请注意这里的`@Mapper`注解是Mybatis-Puls注解, 而不是Mybatis, 也就不需要在xml文件里sql
+
+mybatis-puls 的Mapper内置封装了一些简单的增删改查
+
+```java
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zgc.domain.User;
+import org.apache.ibatis.annotations.Mapper;
+@Mapper
+public interface UserDao extends BaseMapper<User> {
+    
+}
+```
+
+**测试:**
+
+```java
+@SpringBootTest
+public class Mybatisplus01QuickstartApplicationTests {
+	@Autowired
+	private UserDao userDao;
+	@Test
+	void testGetAll() {
+        //selectList()根据MP内置的条件构造器查询一个list集合，null表示没有条件，即查询所有
+		List<User> userList = userDao.selectList(null);
+		System.out.println(userList);
+	}		
+}
+
+```
+
+#### 日志
+
+在`application.yml`中配置日志输出
+
+```yaml
+# 配置MyBatis日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+```
+
+
+
+
+
 ## 异步,定义任务与邮箱
 
 ### 异步任务
@@ -3925,6 +4048,172 @@ public class RedisConfig {
 
 
 
+## 热部署与监控
+
+### 热部署
+
+在开发时期，经常修改内容并测试，大量手动重复【重启服务】操作。将**spring-boot-devtools**引入项目后，**只要classpath路径下的文件发生了变化，项目就会自动重启，这极大地提高了项目的开发速度。**
+
+==经过本人测试, 效果一般,勉强能接受, 相当于文件改动后若干秒后自动启动,也可能是本人电脑不好==
+
+> 参考连接: [SpringBoot实现热部署两种方式！ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/433129960)
+
+添加依赖项:
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-devtools</artifactId>
+</dependency>
+```
+
+![image-20230418153703315](SpringBoot/image-20230418153703315.png)
+
+使用快捷键：`Ctr	l + Alt + Shift + /` 调出 Registry 窗口,勾选 `compiler.automake.allow.when.app.running` 选项。
+
+![image-20230418153736911](SpringBoot/image-20230418153736911.png)
+
+
+
+### 监控
+
+应用启动：我们需要对应用程序的基本信息、运行状况进行实时监控，以便了解程序是否健康。 硬盘使用状况，内存使用状况，CPU使用状况等等... 数据库链接状况，网络连接状况，线程使用状况等等... 于此同时：我们还需要收集应用程序的运行情况，对一些关键数据进行统计分析。
+
+**解决方案: **
+
+- 使用第三方工具+自定义工具类+日志系统，封装所需要的内容，然后对外暴露。 
+
+- SpringBoot 提供了相关组件 Actuator。
+
+####  SpringBoot Actuator
+
+Actuator 是 Spring Boot自带的一个组件，包含许多附加功能，可在您将应用程序投入生产 时帮助您监视和管理应用程序。 包括：Bean加载情况、环境变量、日志信息、线程信息等等，使用非常简单。
+
+使用步骤： 
+
+1. 添加Actuator的起步依赖即可使用 
+2. 增加配置可启用更多功能
+
+`pom.xml`:
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+`application.yaml`
+
+```yaml
+management:
+  endpoint:
+    health:
+      show-details: always #配置健康端点开启所有详情信息，默认是不显示
+    shutdown:
+      enabled: true #开启远程关闭功能
+  endpoints:
+    web:
+      exposure:
+        include: '*' #设置开放所有web相关的端点信息
+```
+
+随后输入: https://localhost:8081/actuator , 主机名,端口号自定义, + `/actuator`, 
+
+![image-20230418160219311](SpringBoot/image-20230418160219311.png)
+
+返回了一个JSON, JSON的信息包含了一些监控信息的url, 如下是一些说明:
+
+|路径 | 描述 | 
+|---|---|
+|/beans |描述应用程序上下文里全部的Bean，以及它们的关系| 
+|/env |获取全部环境属性 /env/{name} 根据名称获取特定的环境属性值| 
+|/health |报告应用程序的健康指标，这些值由HealthIndicator的实现类提供| 
+|/info |获取应用程序的定制信息，这些信息由info打头的属性提供 |
+|/mappings |描述全部的URI路径，以及它们和控制器(包含Actuator端点)的映射关系| 
+|/metrics |报告各种应用程序度量信息，比如内存用量和HTTP请求计数 |
+|/metrics/{name} |报告指定名称的应用程序度量值| 
+|/trace |提供基本的HTTP请求跟踪信息(时间戳、HTTP头等)|
+
+
+
+#### SpringBoot Admin
+
+Spring Boot Admin是一个开源社区项目，**用于管理和监控SpringBoot应用程序**。 Spring Boot Admin 有两个角色，客户端(Client)和服务端(Server)。 **应用程序作为Spring Boot Admin Client向Spring Boot Admin Server注册 ,  Spring Boot Admin Server 通过图形化界面方式展示Spring Boot Admin Client的监控信息**
+
+##### 启动服务端:
+
+注意!! 服务端和客户端应该是两个项目, 为了避免端口冲突
+
+新建项目:
+
+导入依赖项: 
+
+```xml
+<dependency>
+	<groupId>de.codecentric</groupId>
+	<artifactId>spring-boot-admin-starter-server</artifactId>
+	<version>2.2.4</version>
+</dependency>
+```
+
+在启动类使用`@EnableAdminServer`
+
+```java
+@SpringBootApplication
+@EnableAdminServer
+public class SpringbootAdminServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootAdminServerApplication.class, args);
+    }
+
+}
+```
+
+访问该项目可以看到一个可视化管理界面:
+
+![image-20230418164636516](SpringBoot/image-20230418164636516.png)
+
+##### 注册客户端:
+
+添加依赖:
+
+```xml
+<dependency>
+	<groupId>de.codecentric</groupId>
+	<artifactId>spring-boot-admin-starter-client</artifactId>
+	<version>2.2.4</version>
+</dependency>
+```
+
+修改`application.yaml`配置:
+
+```yaml
+# 增加如下配置
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000 # 服务端地址
+#-- 以下是SpringBoot Actuator配置
+management:
+  endpoint:
+    health:
+      show-details: always #配置健康端点开启所有详情信息，默认是不显示
+    shutdown:
+      enabled: true #开启远程关闭功能
+  endpoints:
+    web:
+      exposure:
+        include: '*' #设置开放所有web相关的端点信息
+```
+
+随后再次刷新访问服务端项目(本例中是: http://localhost:9000/)
+
+
+
+
+
 ## 项目打包发布
 
 **SpringBoot**项目有两种打包部署方式:
@@ -3944,7 +4233,7 @@ public class RedisConfig {
 
 打包可以检查一下项目结构:
 
-### 打包好的结构
+#### 打包好的结构
 
 > Jar项目包结构: [SpringBoot项目打包后的项目结构（以jar包为例） - 飞蛇在水 - 博客园 (cnblogs.com)](https://www.cnblogs.com/flying-snake/p/12689801.html)
 
@@ -3981,7 +4270,7 @@ Jar包启动
 
 
 
-### 常见问题:
+#### 常见问题:
 
 - 无法访问静态资源:
 
@@ -4028,7 +4317,7 @@ Jar包启动
 
 
 
-### 部署启动
+#### 部署启动
 
 > https://www.cnblogs.com/xiaoqi/p/6955288.html
 
@@ -4065,6 +4354,38 @@ nohup java -jar xxx.jar >log.out 2>&1 &
 该命令在后台启动一个Java进程，并将其标准输出和错误流重定向到名为"`log.out`"的文件中。"`nohup`"命令**确保即使用户注销或终端会话结束，进程仍将继续运行**。命令末尾的“＆”符号也将进程发送到后台。
 
 数字1和2分别代表标准输出和标准错误输出。使用“2>&1”将标准错误输出重定向到与标准输出相同的文件中。这意味着命令的所有输出都将被写入到"log.out"文件中。
+
+
+
+### war包
+
+需要修改maven的配置文件`pom.xml`:
+
+- 需要配置spring-boot-maven-plugin插件,web启动器移除默认内嵌tomcat依赖
+- 加入servlet-api避免编译失败 
+- SpringBoot应用启动类继承SpringBootServletInitializer【表示配置web.xml】
+
+```xml
+<packaging>war</packaging>
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-web</artifactId>
+	<exclusions>
+		<exclusion>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</exclusion>
+	</exclusions>
+</dependency>
+<dependency>
+	<groupId>javax.servlet</groupId>
+	<artifactId>javax.servlet-api</artifactId>
+	<scope>provided</scope>
+</dependency>
+
+```
+
+
 
 
 
@@ -4127,25 +4448,7 @@ server:
 
 ### Swagger简介
 
-**前后端分离**
-
-Vue+SpringBoot
-
-后端时代：前端只用管理静态页面；html==>后端。模板引擎JSP=>后端才是主力
-
-**前后端分离时代**
-
-- 前端 -> 前端控制层、视图层
-  - 伪造后端数据，json。已经存在了，不需要后端，前端工程队依旧能够跑起来
-- 后端 -> 后端控制层、服务层、数据访问层
-- 前后端通过API进行交互
-- 前后端相对独立且松耦合
-
-**产生的问题**
-
-- 前后端集成联调，前端或者后端无法做到“及时协商，尽早解决”，最终导致问题集中爆发
-
-**解决方案**
+**解决**
 
 - 首先定义schema [ 计划的提纲 ]，并实时跟踪最新的API，降低集成风险；
 - 早些年：指定word计划文档；
@@ -4271,7 +4574,7 @@ Vue+SpringBoot
 
 3. 除了通过包路径配置扫描接口外，还可以通过配置其他方式扫描接口，这里注释一下所有的配置方式：
 
-   ```
+   ```java
    basePackage(final String basePackage) // 根据包路径扫描接口
    any() // 扫描所有，项目中的所有接口都会被扫描到
    none() // 不扫描接口

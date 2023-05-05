@@ -495,8 +495,6 @@ docker run -d -p 3306:3306 --privileged=true -v /opt/mysql/log:/var/log/mysql -v
 
 跟上述同理,不过最新版有个bug,无法正常进入首页,把webapps..dist目录命名为webapps即可
 
-
-
 ### 安装Redis
 
 注: Redis的配置文件可以从网上下载到,例如github:https://github.com/redis/redis/blob/6.0.8/redis.conf, 切换到对应版本即可

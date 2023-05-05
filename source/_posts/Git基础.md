@@ -112,15 +112,21 @@ git clone url  #克隆一个远程仓库项目到本地,url是项目链接; 克�
 git status [文件名]# 查看仓库(文件)状态
 git add 文件名 # 添加文件到暂存区
 git rm --cached 文件名  # 将文件从暂存区移除,相当于标记为未跟踪,不删除本地文件
+
 git commit -m "日志信息" 文件名  # 提交到本地仓库
 git reflog # 查看历代版本信息
 git log # 查看详细版本
-git reset --hard 版本号  # 回滚,即切换版本
+git reset --hard 版本号  # 回滚,即切换版本,会删除提交
+git revert -n 版本号  # 不会删除commit 的hui
+
 git push 远程库的别名或url 分支名  #将本地库推送到远程库
 git pull 远程库的别名或url 分支名  #将本地库拉取到远程库
 # 以下不常用
-git git restore 文件名 #恢复,这个命令针对已修改但还未添加到暂存区的文件,撤销本次修改操作,文件将恢复成未修改之前的样子
+git restore 文件名 #恢复,这个命令针对已修改但还未添加到暂存区的文件,撤销本次修改操作,文件将恢复成未修改之前的样子
 git restore --staged 文件名 #恢复暂存的文件,这个命令针对已修改并且已经添加到暂存区的文件,相当于撤销本次添加到暂存区操作
+
+git checkout . # 直接回滚当前目录一下的所有working tree内的修改，会递归扫描当前目录下的所有子目录
+
 # 分支管理命令
 git branch 分支名  # 创建分支
 git branch -v + # 查看分支
