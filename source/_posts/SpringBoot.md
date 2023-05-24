@@ -45,7 +45,7 @@ Spring是为了解决企业级应用开发的复杂性而创建的，简化开�
 
 
 
-## 微服务架构
+## 微服务架构简介
 
 > [微服务理解(国外论文)](https://martinfowler.com/articles/microservices.html#CharacteristicsOfAMicroserviceArchitecture) , 翻译转载:[微服务（Microservices）——Martin Flower - 船长&CAP - 博客园 (cnblogs.com)](https://www.cnblogs.com/liuning8023/p/4493156.html)
 
@@ -523,9 +523,13 @@ public SpringApplication(ResourceLoader resourceLoader, Class... primarySources)
 
 
 
-## yaml
+## 配置文件
 
-### 配置文件
+
+
+### yaml
+
+#### 配置文件
 
 SpringBoot使用**一个全局的配置文件 ， 配置文件名称是固定的**
 
@@ -539,7 +543,7 @@ SpringBoot使用**一个全局的配置文件 ， 配置文件名称是固定的
 
 
 
-### yaml概述:
+#### yaml概述:
 
 *YAML*是"YAML Ain't a Markup Language"（YAML不是一种[标记语言](https://baike.baidu.com/item/标记语言)）的[递归缩写](https://baike.baidu.com/item/递归缩写)。在开发的这种语言时，*YAML* 的意思其实是："Yet Another Markup Language"（仍是一种[标记语言](https://baike.baidu.com/item/标记语言)），但为了强调这种语言以数据做为中心，而不是以标记语言为重点，而用反向缩略语重命名。
 
@@ -564,7 +568,7 @@ SpringBoot使用**一个全局的配置文件 ， 配置文件名称是固定的
 
 
 
-### 基础语法:
+#### 基础语法:
 
 **说明：语法要求严格！**
 
@@ -746,7 +750,7 @@ class Springboot02ConfigApplicationTests {
 
 
 
-### 加载指定的配置文件
+#### 加载指定的配置文件
 
 **需要用到的两个注解:**
 
@@ -792,7 +796,7 @@ person:
 
 
 
-### @ConfigurationProperties与@Value
+#### @ConfigurationProperties与@Value
 
 |                | @ConfigurationProperties | @Value     |
 | -------------- | ------------------------ | ---------- |
@@ -809,71 +813,9 @@ person:
 
 
 
-## JSR303数据校验
-
-Springboot中可以用`@validated`来**校验数据(作用于类上,校验类的注入属性)**，如果数据异常则会统一抛出异常，方便异常中心统一处理。我们这里来写个注解让我们的name只能支持Email格式；
-
-1. **使用前需要配置依赖项:**
-
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-validation</artifactId>
-</dependency>
-```
-
-2. **添加校验注解:**
-
-```java
-@Component //注册bean
-@ConfigurationProperties(prefix = "person")
-@Validated  //数据校验
-public class Person {
-    @Email(message="邮箱格式错误") //name必须是邮箱格式,可以通过message自定义异常打印信息
-    private String name;
-}
-```
-
-运行结果: default message [不是一个合法的电子邮件地址];
-
-![image-20220430003144241](SpringBoot/image-20220430003144241.png)
-
-### 常用校验格式注解:
-
-```java
-@NotNull(message="名字不能为空")
-private String userName;
-@Max(value=120,message="年龄最大不能查过120")
-private int age;
-@Email(message="邮箱格式错误")
-private String email;
-
-空检查
-@Null       验证对象是否为null
-@NotNull    验证对象是否不为null, 无法查检长度为0的字符串
-@NotBlank   检查约束字符串是不是Null还有被Trim的长度是否大于0,只对字符串,且会去掉前后空格.
-@NotEmpty   检查约束元素是否为NULL或者是EMPTY.
-    
-Booelan检查
-@AssertTrue     验证 Boolean 对象是否为 true  
-@AssertFalse    验证 Boolean 对象是否为 false  
-    
-长度检查
-@Size(min=, max=) 验证对象（Array,Collection,Map,String）长度是否在给定的范围之内  
-@Length(min=, max=) string is between min and max included.
-
-日期检查
-@Past       验证 Date 和 Calendar 对象是否在当前时间之前  
-@Future     验证 Date 和 Calendar 对象是否在当前时间之后  
-@Pattern    验证 String 对象是否符合正则表达式的规则
-
-.......等等
-除此以外，我们还可以通过正则表达式自定义一些数据校验规则
-```
 
 
-
-## 配置加载与多环境切换
+### 配置加载与多环境切换
 
 > 官网参考:[核心特性 (spring.io)](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config.files)
 
@@ -881,7 +823,7 @@ profile是Spring对不同环境提供不同配置功能的支持，可以通过�
 
 
 
-### 多环境配置文件
+#### 多环境配置文件
 
 我们在主配置文件编写的时候，文件名可以是 `application-环境名.properties/yml `, 用来指定多个环境版本；
 
@@ -895,7 +837,7 @@ application-dev.properties 代表开发环境配置
 
 
 
-#### yaml文档多模块
+##### yaml文档多模块
 
 和properties配置文件中一样，但是yml支持文档多模块,不需要创建多个配置文件
 
@@ -938,7 +880,7 @@ spring.profiles.active=dev
 
 
 
-### 配置文件加载位置
+#### 配置文件加载位置
 
 > 官网参考:[核心特性 (spring.io)](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config.files)
 
@@ -966,7 +908,7 @@ java -jar spring-boot-config.jar --spring.config.location=配置文件路径
 
 
 
-## 配置文件详解
+### 配置文件详解
 
 > [核心特性 (spring.io)](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.profiles)
 
@@ -974,7 +916,7 @@ java -jar spring-boot-config.jar --spring.config.location=配置文件路径
 
 
 
-### 自动配置原理
+#### 自动配置原理
 
 1. SpringBoot启动的时候加载主配置类，开启了自动配置功能 `@EnableAutoConfiguration`
 
@@ -1239,7 +1181,7 @@ java -jar spring-boot-config.jar --spring.config.location=配置文件路径
 
 
 
-#### 小结:
+##### 小结:
 
 1. SpringBoot启动会加载大量的自动配置类
 
@@ -1255,7 +1197,7 @@ java -jar spring-boot-config.jar --spring.config.location=配置文件路径
 
 
 
-### @Conditional
+#### @Conditional
 
 了解完自动装配的原理后，我们来关注一个细节问题，**自动配置类必须在一定的条件下才能生效；**
 
@@ -1280,7 +1222,7 @@ java -jar spring-boot-config.jar --spring.config.location=配置文件路径
 
 
 
-### 自动配置类是否生效
+#### 自动配置类是否生效
 
 **在application.properties通过启用 `debug=true`属性；在控制台打印日志，这样我们就可以很方便的知道哪些自动配置类生效**
 
@@ -1298,13 +1240,13 @@ debug=true
 
 
 
-### 自定义启动器(了解拓展)
+#### 自定义启动器(了解拓展)
 
-#### 自定义Starter
+##### 自定义Starter
 
 我们分析完毕了源码以及自动装配的过程，我们可以尝试自定义一个启动器来玩玩！
 
-#### 说明
+##### 说明
 
 启动器模块是一个 空 jar 文件，仅提供辅助性依赖管理，这些依赖可能用于自动装配或者其他类库；
 
@@ -1320,7 +1262,7 @@ debug=true
 - xxx-spring-boot-starter
 - 比如：mybatis-spring-boot-starter
 
-#### 编写启动器
+##### 编写启动器
 
 1. 在IDEA中新建一个空项目 spring-boot-starter-diy
 
@@ -1453,7 +1395,7 @@ debug=true
 
 
 
-#### 新建项目测试我们自己写的启动器
+##### 新建项目测试我们自己写的启动器
 
 1. 新建一个SpringBoot 项目
 
@@ -1499,9 +1441,9 @@ debug=true
 
 
 
-## 配置文件与配置类自定义
+### 配置文件与配置类自定义
 
-### 自定配置文件绑定配置类
+#### 自定配置文件绑定配置类
 
 在配置类与配置文件属性结构相似甚至相同的时候, 推荐使用配置文件绑定配置类, 这样能更方便的注入配置项
 
@@ -1633,7 +1575,7 @@ tips: 当我们讲自定义配置文件引入到主配置文件中时, 我们编
 
 
 
-### 从配置文件中注入配置项的值
+#### 从配置文件中注入配置项的值
 
 这种情况通常是**用于我们某些业务需要部分使用到配置文件的值,的时候, 并且配置文件的结构并没有与之对应的配置类, 这种方式并不要求配置文件需要有前缀**
 
@@ -1669,6 +1611,119 @@ public class UserService{
 
 
 
+## AOP
+
+SpringBoot中实现AOP较Spring有更简便的方式,使用步骤如下: 
+
+### 1.引入依赖:
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+```
+
+不需要再添加aspectjweaver的依赖了，因为spring-boot-starter-aop包含了aspectjweaver，并且版本是较新的版本，如果在添加老版本（如1.5.4）启动会报错。
+
+### 2.定义切面
+
+Spring采用`@AspectJ`注解对POJO进行标注，**该注解表明该类不仅仅是一个POJO，还是一个切面。切面是切点和通知的结合，那么定义一个切面就需要编写切点和通知。**在代码中，只需要添加`@Aspect`注解即可。
+
+
+
+### 3.定义切点
+
+**切点是通过`@Pointcut`注解和切点表达式定义的。`@Pointcut`注解作用在方法上,可以在一个切面内定义可重用的切点。==在使用 @Pointcut 注解时，需要将该注解所标注的方法声明为一个空方法体==，即不需要在该方法中编写任何代码逻辑。**因为 @Pointcut 注解的作用并不是用来运行方法体内的代码逻辑，而是用来定义切入点的条件表达式。当 Spring AOP 执行切入点时，它会根据切入点表达式匹配指定的方法并将通知织入到这些方法中。因此，即使方法体中包含代码逻辑，也不会在执行切入点时被执行。
+
+**由于Spring切面粒度最小是达到方法级别**，而`execution表达式`可以用于明确指定方法返回类型，类名，方法名和参数名等与方法相关的部件，并且实际中，大部分需要使用AOP的业务场景也只需要达到方法级别即可，因而execution表达式的使用是最为广泛的。如图是execution表达式的语法：
+
+![image-20230515225220420](SpringBoot/image-20230515225220420.png)
+
+
+
+execution表示在方法执行的时候触发。**以`“`开头，表明方法返回值类型为任意类型**。然后是全限定的类名和方法名， **`*`可以表示任意类和任意方法。**对于方法参数列表，**可以使用`..`表示参数为任意类型。**如果需要多个表达式，可以使用“&&”、“||”和“!”完成与、或、非的操作。
+
+###  4.定义通知
+
+通知有五种类型，分别是：
+
+- 前置通知（`@Before`）：在目标方法调用之前调用通知
+
+- 后置通知（`@After`）：在目标方法完成之后调用通知
+
+- 环绕通知（`@Around`）：在**被通知的方法调用之前和调用之后执行自定义的方法**
+
+- 返回通知（`@AfterReturning`）：在目标方法成功执行之后调用通知
+
+- 异常通知（`@AfterThrowing`）：在目标方法抛出异常之后调用通知
+
+### 案例:
+
+有一个控制器如下:
+
+```java
+@RestController
+public class AopController {
+	@RequestMapping("/hello")
+	public String sayHello(){
+		System.out.println("hello");
+		return ;
+	}
+}
+```
+
+代码中定义了三种类型的通知，使用@Before注解标识前置通知，打印“beforeAdvice...”，使用@After注解标识后置通知，打印“AfterAdvice...”，使用@Around注解标识环绕通知，在方法执行前和执行之后分别打印“before”和“after”。这样一个切面就定义好了，代码如下：
+
+```java
+@Aspect
+@Component
+public class AopAdvice {
+
+    /*
+    	@Pointcut标注的切点方法仅仅用来定义切点表达式
+    	方法体应该为空不具有任何逻辑
+    */
+	@Pointcut("execution (* com.shangguan.aop.controller.*.*(..))")
+	public void test() {
+
+	}
+
+	@Before("test()")
+	public void beforeAdvice() {
+		System.out.println("beforeAdvice...");
+	}
+
+	@After()
+	public void afterAdvice() {
+		System.out.println("afterAdvice...");
+	}
+
+	@Around()
+	public void aroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
+		System.out.println("before");
+		try {
+			proceedingJoinPoint.proceed();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+		System.out.println("after");
+	}
+}
+```
+
+测试结果如下:
+
+```sh
+before
+beforeAdvice...
+hello
+after
+afterAdvice...
+```
+
+
+
 
 
 ## Web开发
@@ -1689,8 +1744,8 @@ public class UserService{
 
 比如SpringBoot到底帮我们配置了什么？我们能不能修改？我们能修改哪些配置？我们能不能扩展？
 
-- 向容器中自动配置组件 ：*** Autoconfiguration
-- 自动配置类，封装配置文件的内容：***Properties
+- 向容器中自动配置组件 ：**Autoconfiguration**
+- 自动配置类，封装配置文件的内容：**Properties**
 
 没事就找找类，看看自动装配原理！
 
@@ -2510,6 +2565,72 @@ public class WebConfig implements WebMvcConfigurer {
 ```
 
 这样就设置好了拦截器
+
+
+
+### 接口异常统一处理
+
+在前后端分离的模式下,后端需要关注数据(json)传输,而不需要控制视图跳转,所以我们常常会用一个统一规范的数据集表示:
+
+```json
+{
+    code: "业务代码",
+    msg: "描述信息"
+    data: ... // 业务数据
+}
+```
+
+而**业务异常或者失败的结果集是非常类似甚至相同的,这样会在控制器代码中重复变量大量的冗余代码, 这时我们可以想办法集中统一处理这些接口异常**,具体实现案例如下:
+
+#### 1.自定义异常类:
+
+```java
+public class MyException extends RuntimeException {
+  private Integer code;
+  public MyException(Integer code, String message) {
+    super(message);
+    this.code = code;
+  }
+  // Getter 和 Setter 方法省略
+}
+```
+
+#### 2.定义异常处理器
+
+`@ControllerAdvice`注解，**表示这个类是一个全局控制器异常处理器，用来捕获所有 Controller 层抛出的异常。**然后，我们定义了一个方法，**使用`@ExceptionHandler`注解来指明处理的异常类型为MyException。当控制器抛出MyException异常时，Spring Boot 就会自动调用这个方法并返回相应的自定义异常信息。**
+
+```java
+@ControllerAdvice
+public class MyExceptionHandler {
+  @ExceptionHandler(MyException.class)
+  @ResponseBody
+  public ResponseResult handleMyException(MyException e) {
+    // ResponseResult 是我们自定义的接口统一数据集
+    return ResponseResult.failure(e.getCode(), e.getMessage(), null);
+  }
+}
+```
+
+#### 3.在Controller中使用自定义异常
+
+在 Controller 层方法中，我们**在相应的业务情况下人为手动抛出了一个自定义异常 MyException。当系统捕获到这个异常时，就会被 MyExceptionHandler 中定义的 handleMyException 方法所捕获，然后将自定义异常信息返回给前端。**
+
+```java
+@RestController
+public class UserController {
+  @Autowired
+  private UserService userService;
+  @DeleteMapping("/users/{id}")
+  public ResponseResult<Void> deleteUser(@PathVariable Long id) {
+    User user = userService.getUserById(id);
+    if (user == null) {
+      throw new MyException(10001, "用户不存在");
+    }
+    userService.deleteUser(id);
+    return ResponseResult.success(null);
+  }
+}
+```
 
 
 
@@ -3450,6 +3571,260 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 ```
+
+
+
+## Spring事务
+
+> https://blog.csdn.net/lemon_TT/article/details/127089922
+
+Spring 为事务管理提供了丰富的功能支持。Spring 事务管理分为**编码式和声明式**的两种方式。
+
+- 编程式事务管理： 编程式事务管理使用 TransactionTemplate 或者直接使用底层的 PlatformTransactionManager。对于编程式事务管理，spring推荐使用TransactionTemplate
+
+- 声明式事务管理： 建立在AOP之上的。其本质是对方法前后进行拦截，然后在目标方法开始之前创建或者加入一个事务，在执行完目标方法之后根据执行情况提交或者回滚事务
+
+
+- 声明式事务管理不需要入侵代码，更快捷而且简单，推荐使用
+
+声明式事务有两种方式：
+
+- 一种是在配置文件(xml)中做相关的事务规则声明
+- 另一种是基于 **`@Transactional`** 注解的方式。**注释配置是目前流行的使用方式，推荐使用**
+
+在应用系统**调用声明了 @Transactional 的目标方法时，Spring Framework 默认使用 AOP 代理**，在代码运行时生成一个代理对象，根据 @Transactional 的属性配置信息，这个代理对象决定该声明 @Transactional 的目标方法是否由拦截器 TransactionInterceptor来使用拦截，在 TransactionInterceptor拦截时，会在目标方法开始执行之前创建并加入事务，并执行目标方法的逻辑，最后根据执行情况是否出现异常，利用抽象事务管理器 AbstractPlatformTransactionManager 操作数据源 DataSource 提交或回滚事务
+
+> Spring AOP 代理有 `CglibAopProxy`和 `JdkDynamicAopProxy`两种，以 CglibAopProxy 为例，对于 CglibAopProxy，需要调用其内部类的 DynamicAdvisedInterceptor的 intercept方法。对于 JdkDynamicAopProxy，需要调用其 invoke方法
+
+
+
+### @Transactional详解
+
+| **参 数 名 称** | **功 能 描 述** |
+| --------------- | --------------- |
+| readOnly| 该属性用于设置当前事务是否为只读事务，设置为true表示只读，false则表示可读写，默认值为false。例如：@Transactional(readOnly=true) |
+| **rollbackFor** | **rollbackFor 该属性用于设置需要进行回滚的异常类数组**，当方法中抛出指定异常数组中的异常时，则进行事务回滚。例如：指定单一异常类：@Transactional(rollbackFor=RuntimeException.class)指定多个异常类：@Transactional(rollbackFor={RuntimeException.class,Exception.class}) |
+| rollbackForClassName|	该属性用于设置需要进行回滚的异常类名称数组，当方法中抛出指定异常名称数组中的异常时，则进行事务回滚。例如：指定单一异常类名称@Transactional(rollbackForClassName="RuntimeException")指定多个异常类名称：@Transactional(rollbackForClassName={"RuntimeException","Exception"})|
+| noRollbackFor|	该属性用于设置不需要进行回滚的异常类数组，当方法中抛出指定异常数组中的异常时，不进行事务回滚。例如：指定单一异常类：@Transactional(noRollbackFor=RuntimeException.class)指定多个异常类：@Transactional(noRollbackFor={RuntimeException.class, Exception.class})|
+| noRollbackForClassName|	该属性用于设置不需要进行回滚的异常类名称数组，当方法中抛出指定异常名称数组中的异常时，不进行事务回滚。例如：指定单一异常类名称：@Transactional(noRollbackForClassName="RuntimeException")指定多个异常类名称：@Transactional(noRollbackForClassName={"RuntimeException", "Exception"})|
+| **propagation** | 该属性**用于设置事务的传播行为**。例如：@Transactional(propagation=Propagation.NOT_SUPPORTED, readOnly=true) |
+| **isolation**	|该属性用于**设置底层数据库的事务隔离级别**，事务隔离级别用于处理多事务并发的情况，通常使用数据库的默认隔离级别即可，基本不需要进行设置|
+| timeout|	该属性用于设置事务的超时秒数，默认值为-1表示永不超时 事物超时设置：@Transactional(timeout=30) ，设置为30秒|
+
+### 事务传播行为
+
+例如：@Transactional(isolation = Isolation.READ_COMMITTED)
+
+| **隔离级别** | **含义** |
+| ------------ | -------- |
+|DEFAULT| 这是一个PlatfromTransactionManager默认的隔离级别，**使用数据库默认的事务隔离级别另外四个与JDBC的隔离级别相对应** |
+|READ_UNCOMMITTED| 最低的隔离级别。事实上我们不应该称其为隔离级别，**因为在事务完成前，其他事务可以看到该事务所修改的数据。**而在其他事务提交前，该事务也可以看到其他事务所做的修改。可能导致脏，幻，不可重复读 |
+|READ_COMMITTED| **大多数数据库的默认级别。**在**事务完成前，其他事务无法看到该事务所修改的数据。**遗憾的是，在该事务提交后，你就可以查看其他事务插入或更新的数据。这意味着在事务的不同点上，如果其他事务修改了数据，你就会看到不同的数据。可防止脏读，但幻读和不可重复读仍可以发生 |
+|REPEATABLE_READ| 比ISOLATION_READ_COMMITTED更严格，**该隔离级别确保如果在事务中查询了某个数据集，你至少还能再次查询到相同的数据集，即使其他事务修改了所查询的数据。**然而如果其他事务插入了新数据，你就可以查询到该新插入的数据。可防止脏读，不可重复读，但幻读仍可能发生 |
+|SERIALIZABLE| 完全服从ACID的隔离级别，确保不发生脏读、不可重复读和幻影读。**这在所有隔离级别中也是最慢的，因为它通常是通过完全锁定当前事务所涉及的数据表来完成的。**代价最大、可靠性最高的隔离级别，所有的事务都是按顺序一个接一个地执行。避免所有不安全读取 |
+
+### 事务使用事项与场景
+
+- 在**具体的类(或类的方法)上使用 @Transactional 注解**，而不要使用在类所要实现的任何接口上
+
+
+- `@Transactional `注解应该**只被应用在 public 修饰的方法上(注意)**。 如果在 protected、private 或者 package-visible 的方法上使用 该注解，它也不会报错(IDEA会有提示)， 但事务并没有生效
+
+- @Transactional是**基于动态代理的(注意)，需要一个类调用另一个类，类内调用会失效**
+
+
+- 被外部调用的公共方法A有两个进行了数据操作的子方法B和子方法C的事务注解说明：
+
+  - 被**外部调用的公共方法A声明事务@Transactional**，无论子方法B和C是不是本类的方法，无论子方法B和C是否声明事务，**事务均由公共方法A控制**
+
+
+  - 被外部调用的公共方法A未声明事务@Transactional，子方法B和C若是其他类的方法且各自声明事务：事务由子方法B和C各自控制
+
+
+  - **被外部调用的公共方法A未声明事务@Transactional，子方法B和C若是本类的方法，则即使子方法B和C各自声明事务，事务也不会生效，并且会报错(没有可用的transactional)**
+
+- 默认情况下，**Spring会对unchecked异常进行事务回滚，也就是默认对 RuntimeException() 异常或是其子类进行事务回滚；如果是checked异常则不回滚，例如空指针异常、算数异常等会被回滚；文件读写、网络问题Spring就没法回滚。若想对所有异常(包括自定义异常)都起作用，注解上面需配置异常类型：@Transactional(rollbackFor = Exception.class)**
+
+
+- 数据库要支持事务，如果是mysql，要使用innodb引擎，myisam不支持事务
+
+- **被外部调用的公共方法A声明事务@Transactional，子方法运行异常，但运行异常被子方法自己 try-catch 处理了，则事务回滚是不会生效的！如果想要事务回滚生效，需要将子方法的事务控制交给调用的方法来处理：**
+
+  - 方案1：子方法中不用 try-catch 处理运行异常
+  
+  - 方案2：子方法的catch里面将运行异常抛出throw new RuntimeException(), 如果想事务生效可以进行手动回滚或者在catch里面将异常抛出`throw new RuntimeException();`有两种方法:
+  
+  方案一：手动抛出运行时异常(缺陷是不能在catch代码块自定义返回值)
+  
+  ```java
+  try{
+        ....  
+    }catch(Exception e){
+        logger.error("fail",e);
+        throw new RuntimeException;
+  }
+  ```
+  
+  方案二：手动进行回滚 `TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();`
+  
+  ```java
+  try{
+        ...
+    }catch(Exception e){
+        log.error("fail",e);
+        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        return false;
+  }
+  ```
+
+### 事务使用场景
+
+#### 自动回滚
+
+直接抛出，不try/catch
+
+```java
+@Override
+@Transactional(rollbackFor = Exception.class)
+public Object submitOrder() throws Exception {  
+     success();  
+     //假如exception这个操作数据库的方法会抛出异常，方法success()对数据库的操作会回滚
+     exception(); 
+     return ApiReturnUtil.success();
+}
+```
+
+#### 手动回滚
+
+进行try/catch，回滚并抛出
+
+```java
+@Override
+@Transactional(rollbackFor = Exception.class)
+public Object submitOrder (){  
+    success();  
+    try {  
+        exception(); 
+     } catch (Exception e) {  
+        e.printStackTrace();     
+        //手工回滚异常
+        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        return ApiReturnUtil.error();
+     }  
+    return ApiReturnUtil.success();
+}
+```
+
+#### 回滚部分异常
+
+```java
+@Override
+@Transactional(rollbackFor = Exception.class)
+public Object submitOrder (){  
+    success();  
+    //只回滚以下异常，设置回滚点
+    Object savePoint = TransactionAspectSupport.currentTransactionStatus().createSavepoint();
+    try {  
+        exception(); 
+     } catch (Exception e) {  
+        e.printStackTrace();     
+        //手工回滚异常，回滚到savePoint
+        TransactionAspectSupport.currentTransactionStatus().rollbackToSavepoint(savePoint);
+        return ApiReturnUtil.error();
+     }  
+    return ApiReturnUtil.success();
+}
+```
+
+#### 手动创建、提交、回滚事务
+
+`PlatformTransactionManager` 这个接口中定义了三个方法 getTransaction创建事务，commit 提交事务，rollback 回滚事务。它的实现类是 `AbstractPlatformTransactionManager`
+
+
+
+### 事务其他情况
+
+#### 事务的提交方式
+
+**默认情况下，数据库处于自动提交模式。每一条语句处于一个单独的事务中，在这条语句执行完毕时，如果执行成功则隐式的提交事务，如果执行失败则隐式的回滚事务。**
+
+**对于正常的事务管理，是一组相关的操作处于一个事务之中，因此必须关闭数据库的自动提交模式。不过，这个我们不用担心，spring 会将底层连接的自动提交特性设置为 false 。**也就是在使用 spring 进行事物管理的时候，spring 会将是否自动提交设置为false，等价于JDBC中的 connection.setAutoCommit(false); ，在执行完之后在进行提交 connection.commit();
+
+**spring事务管理器回滚一个事务的推荐方法是在当前事务的上下文内抛出异常。spring事务管理器会捕捉任何未处理的异常，然后依据规则决定是否回滚抛出异常的事务。**
+
+#### 事务并发经典情况
+
+- **第一类丢失更新**
+
+​	在没有事务隔离的情况下，两个事务都同时更新一行数据，但是第二个事务却中途失败退出， 导致对数据的两个修改都失效了
+
+- **脏读**
+
+​	脏读就是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数	据，然后使用了这个数据。
+
+- **不可重复读**
+
+​	在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两次读数据之	间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样	的，因此称为是不可重复读
+
+- **第二类丢失更新**
+
+​	不可重复读的特例，有两个并发事务同时读取同一行数据，然后其中一个对它进行修改提交，而另一个也进行了修改提交。这就会造成	第一次写操作失效。
+
+- **幻读**
+
+​	当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。同时，第	二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修	改的数据行，就好象发生了幻觉一样
+
+
+
+### 事务常见错误案例
+
+#### **问题描述:**
+
+两个使用Transaction注解的Service，A和B，在A中引入了B的方法用于更新数据 ，当A中捕捉到B中有异常时，回滚动作正常执行，但是当return时则出现org.springframework.transaction.UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only异常
+
+```java
+@Transactional
+public class ServiceA {
+  @Autowired
+  private ServiceB serviceB;
+
+  public void methodA() {
+    try{
+      serviceB.methodB();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+}
+
+@Transactional
+public class serviceB {
+  public void methodB() {
+    throw new RuntimeException();
+  }
+}
+```
+
+#### 问题原因:
+
+`@Transactional(propagation= Propagation.REQUIRED)`：如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务。这是@Transactional的默认方式。在这种情况下，外层事务（ServiceA）和内层事务（ServiceB）就是一个事务，任何一个出现异常，都会在methodA执行完毕后回滚。
+
+如果内层事务B抛出异常e（没有catch，继续向外层抛出），在内层事务结束时，spring会把事务B标记为"rollback-only"；这时外层事务A发现了异常e，如果外层事务A catch了异常并处理掉，那么外层事务A的方法会继续执行代码，直到外层事务也结束时，**这时外层事务A想commit，因为正常结束没有向外抛异常，但是内外层事务AB是同一个事务，事务B（同时也是事务A）已经被内层方法标记为"rollback-only"，需要回滚，无法commit**，这时spring就会抛出`org.springframework.transaction.UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only`，意思是**事务已经被标记为回滚，无法提交**
+
+**解决方案:**
+
+- 直接在外层事务的catch代码块中抛出捕获的内层事务的异常，两层事务有未捕获异常，都回滚（有时候这个异常就是交给外层处理的，抛出到更外层显得多此一举）；
+
+
+- 在内层事务中做异常捕获处理，并且不向外抛异常，两层事务都不回滚
+
+
+- 最好的方式：如果希望内层事务回滚，但不影响外层事务提交，需要将内层事务的传播方式指定为`@Transactional(propagation= Propagation.NESTED)`，外层事务的提交和回滚能够控制嵌套的内层事务回滚；而内层事务报错时，只回滚内层事务，外层事务可以继续提交。（JPA不支持NESTED，有时可以用REQUIRES_NEW替代一下）。
+
+
+详细说明参考：https://www.jianshu.com/p/8beab9f37e5b
+
+- 如果这个异常发生时，内层需要事务回滚的代码还没有执行，则可以@Transactional(noRollbackFor = {内层抛出的异常}.class)，指定内层也不为这个异常回滚。
 
 
 
@@ -4497,7 +4872,7 @@ server:
 
 3. 编写HelloController，测试确保运行成功！
 
-4. 要使用Swagger，我们需要编写一个配置类-SwaggerConfig来配置 Swagger
+4. 要使用Swagger，我们需要**编写一个配置类-SwaggerConfig来配置 Swagger**
 
    ```java
    @Configuration //配置类
@@ -4540,7 +4915,7 @@ server:
    }
    ```
 
-3. Docket 实例关联上 apiInfo()
+3. 在配置类Docket 实例关联上 apiInfo()
 
    ```java
    @Bean
@@ -4601,7 +4976,7 @@ server:
 
 5. 这里的可选值还有
 
-   ```
+   ```java
    any() // 任何请求都扫描
    none() // 任何请求都不扫描
    regex(final String pathRegex) // 通过正则表达式控制
@@ -4771,9 +5146,9 @@ server:
 
 <font color=red>注：并不是因为@ApiModel这个注解让实体显示在这里了，而是只要出现在接口方法的返回值上的实体都会显示在这里，而@ApiModel和@ApiModelProperty这两个注解只是为实体添加注释的</font>。
 
-- @ApiModel为类添加注释
+- `@ApiModel`为类添加注释
 
-- @ApiModelProperty为类属性添加注释
+- `@ApiModelProperty`为类属性添加注释
 
 **总结：**
 
@@ -5455,6 +5830,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
+# SpringCould
+
 ## 分布式(待学)
 
 ### 分布式理论
@@ -5517,7 +5894,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ### RPC
 
-RPC【Remote Procedure Call】是指远程过程调用，是一种进程间通信方式，他是一种技术的思想，而不是规范。它允许程序调用另一个地址空间（通常是共享网络的另一台机器上）的过程或函数，而不用程序员显式编码这个远程调用的细节。即程序员无论是调用本地的还是远程的函数，本质上编写的调用代码基本相同。
+**RPC【Remote Procedure Call】是指远程过程调用，是一种进程间通信方式**，他是一种技术的思想，而不是规范。它允许程序调用另一个地址空间（通常是共享网络的另一台机器上）的过程或函数，而不用程序员显式编码这个远程调用的细节。即程序员无论是调用本地的还是远程的函数，本质上编写的调用代码基本相同。
 
 也就是说两台服务器A，B，一个应用部署在A服务器上，想要调用B服务器上应用提供的函数/方法，由于不在一个内存空间，不能直接调用，需要通过网络来表达调用的语义和传达调用的数据。为什么要用RPC呢？就是无法在一个进程内，甚至一个计算机内通过本地调用的方式完成的需求，比如不同的系统间的通讯，甚至不同的组织间的通讯，由于计算能力需要横向扩展，需要在多台机器组成的集群上部署应用。RPC就是要像调用本地的函数一样去调远程函数；
 
@@ -5963,4 +6340,5 @@ public class ConsumerServerApplicationTests {
 
 ![image-20200801222026747](SpringBoot/image-20200801222026747.png)
 
-**ok , 这就是SpingBoot + dubbo + zookeeper实现分布式开发的应用，其实就是一个服务拆分的思想；**
+**这就是SpingBoot + dubbo + zookeeper实现分布式开发的应用，其实就是一个服务拆分的思想；**
+
