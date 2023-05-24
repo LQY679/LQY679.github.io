@@ -98,7 +98,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">32</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">11</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">33</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -163,13 +163,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -376,6 +376,98 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/01/02/mybatis-puls/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/02/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97MQ/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/site_images/logo.jpg">
+      <meta itemprop="name" content="Luo Qianyou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南城记录倌">
+      <meta itemprop="description" content="清醒,知趣 明得失,知进退">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 南城记录倌">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/01/02/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97MQ/" class="post-title-link" itemprop="url">消息队列</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-02 18:57:32" itemprop="dateCreated datePublished" datetime="2020-01-02T18:57:32+08:00">2020-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-24 20:04:42" itemprop="dateModified" datetime="2023-05-24T20:04:42+08:00">2023-05-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="消息队列MQ"><a href="#消息队列MQ" class="headerlink" title="消息队列MQ"></a>消息队列MQ</h1><h2 id="MQ相关概念"><a href="#MQ相关概念" class="headerlink" title="MQ相关概念"></a>MQ相关概念</h2><h3 id="什么是MQ"><a href="#什么是MQ" class="headerlink" title="什么是MQ?"></a>什么是MQ?</h3><p>MQ(message queue)，从字面意思上看，本质是个队列，FIFO 先入先出，只不过队列中存放的内容是<br>message 而已，还是一种跨进程的通信机制，用于上下游传递消息。在互联网架构中，MQ 是一种非常常<br>见的上下游“逻辑解耦+物理解耦”的消息通信服务。使用了 MQ 之后，消息发送上游只需要依赖 MQ，不<br>用依赖其他服务。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/02/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97MQ/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1048,170 +1140,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/01/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/site_images/logo.jpg">
-      <meta itemprop="name" content="Luo Qianyou">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="南城记录倌">
-      <meta itemprop="description" content="清醒,知趣 明得失,知进退">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 南城记录倌">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/01/01/Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/" class="post-title-link" itemprop="url">Maven课程教案</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-01-01 18:57:32" itemprop="dateCreated datePublished" datetime="2020-01-01T18:57:32+08:00">2020-01-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-22 15:51:25" itemprop="dateModified" datetime="2023-02-22T15:51:25+08:00">2023-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">Java系列</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Maven课程教案"><a href="#Maven课程教案" class="headerlink" title="Maven课程教案"></a>Maven课程教案</h1><h2 id="课程介绍"><a href="#课程介绍" class="headerlink" title="课程介绍"></a>课程介绍</h2><table>
-<thead>
-<tr>
-<th>课程目录</th>
-<th align="left">课程目标</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>01. 知识点 - Maven 概述</td>
-<td align="left">认识 Maven</td>
-</tr>
-<tr>
-<td>02. 实操 - Maven 下载与安装</td>
-<td align="left">完成 Maven的下载与安装</td>
-</tr>
-<tr>
-<td>03. 知识点 - Maven 结构与配置</td>
-<td align="left">了解 Maven的结构与配置</td>
-</tr>
-<tr>
-<td>04. 知识点 - Maven 仓库与坐标</td>
-<td align="left">认识 Maven的仓库与坐标</td>
-</tr>
-<tr>
-<td>05. 知识点 - Maven 项目的结构</td>
-<td align="left">认识 约定结构与pom文件</td>
-</tr>
-<tr>
-<td>06. 实操 - 手动创建 Maven项目</td>
-<td align="left">完成 第一个项目的创建</td>
-</tr>
-<tr>
-<td>07. 实操 - 模板创建 Maven项目</td>
-<td align="left">认识 模板创建的方法</td>
-</tr>
-<tr>
-<td>08. 实操 - Idea创建 Maven项目</td>
-<td align="left">完成 Idea集成Maven</td>
-</tr>
-<tr>
-<td>09. 知识点 - Maven 生命周期</td>
-<td align="left">认识 Maven的生命周期</td>
-</tr>
-<tr>
-<td>10. 实操 - 常用构建命令</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td>11. 知识点 - Maven 插件介绍</td>
-<td align="left">了解 Maven插件的作用</td>
-</tr>
-<tr>
-<td>12. 实操 - 生成项目站点</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td>13. 知识点 - Maven 依赖管理</td>
-<td align="left">掌握 Maven的依赖管理</td>
-</tr>
-<tr>
-<td>14. 知识点 - 项目模块化开发</td>
-<td align="left">了解 项目的模块化开发</td>
-</tr>
-<tr>
-<td>15. 实操 - Maven 项目继承与聚合</td>
-<td align="left">掌握 项目继承配置</td>
-</tr>
-<tr>
-<td>16. 实操 - 测试项目的代码编写</td>
-<td align="left">测试以上配置</td>
-</tr>
-</tbody></table>
-<h2 id="重点难点"><a href="#重点难点" class="headerlink" title="重点难点"></a>重点难点</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/01/Maven%E8%AF%BE%E7%A8%8B%E6%95%99%E6%A1%88/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
