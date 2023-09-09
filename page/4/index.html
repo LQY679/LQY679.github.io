@@ -218,7 +218,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/vue%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/site_images/logo.jpg">
@@ -236,7 +236,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/01/01/vue%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Vue使用</a>
+          <a href="/2020/01/01/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">设计模式</a>
         </h2>
 
         <div class="post-meta-container">
@@ -254,7 +254,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-13 12:00:50" itemprop="dateModified" datetime="2023-04-13T12:00:50+08:00">2023-04-13</time>
+      <time title="修改时间：2023-02-22 17:18:07" itemprop="dateModified" datetime="2023-02-22T17:18:07+08:00">2023-02-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,7 +262,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">大前端</span></a>
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">计算机基础理论</span></a>
         </span>
     </span>
 
@@ -276,10 +276,54 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Vue2-使用"><a href="#Vue2-使用" class="headerlink" title="Vue2(使用)"></a>Vue2(使用)</h1><h2 id="Vue初识"><a href="#Vue初识" class="headerlink" title="Vue初识"></a>Vue初识</h2><h3 id="1、什么是MVVM"><a href="#1、什么是MVVM" class="headerlink" title="1、什么是MVVM"></a>1、什么是MVVM</h3><p>MVVM（Model-View-ViewModel）是一种软件设计模式，由微软WPF（用于替代WinForm，以前就是用这个技术开发桌面应用程序的）和Silverlight（类似于Java Applet，简单点说就是在浏览器上运行WPF）的架构师Ken Cooper和Ted Peters开发，是一种简化用户界面的事件驱动编程方式。由John Gossman（同样也是WPF和Sliverlight的架构师）与2005年在他的博客上发表。</p>
+          <h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><h2 id="面向对象设计原则"><a href="#面向对象设计原则" class="headerlink" title="面向对象设计原则"></a>面向对象设计原则</h2><p><strong>常用的面向对象设计原则包括7个，这些原则并不是孤立存在的，它们相互依赖，相互补充。</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>设计原则名称</strong></th>
+<th align="center"><strong>设计原则简介</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">单一职责原则（Single Responsibility Principle, SRP）</td>
+<td align="center">类的职责要单一，不能将太多的职责放在一个类中</td>
+</tr>
+<tr>
+<td align="center">开闭原则（Open-Closed Principle, OCP）</td>
+<td align="center">软件实体<strong>对扩展是开放的</strong>，但<strong>对修改是关闭</strong>的，即在不修改一个软件实体的基础上去扩展其功能</td>
+</tr>
+<tr>
+<td align="center">里氏代换原则（Liskov Substitution Principle, LSP）</td>
+<td align="center">在软件系统中，一个<strong>可以接受基类(父类)对象的地方必然可以接受一个子类对象</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>依赖倒转</strong>原则（Dependency Inversion Principle, DIP）</td>
+<td align="center">要<strong>针对抽象层编程</strong>，而<strong>不要针对具体类编程</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>接口隔离</strong>原则（Interface Segregation Principle, ISP）</td>
+<td align="center">使用<strong>多个专门的接口来取代一个统一的接口</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>合成复用</strong>原则（Composite Reuse Principle, CRP）</td>
+<td align="center">在系统中应该<strong>尽量多使用组合和聚合关联关系</strong>，尽量<strong>少使用甚至不使用继承关系</strong></td>
+</tr>
+<tr>
+<td align="center">迪米特法则（Law of Demeter, LoD）</td>
+<td align="center">一个软件<strong>实体对其他实体的引用越少越好</strong>，或者说如果<strong>两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用，而是通过引入一个第三者发生间接交互</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>共同封闭</strong></td>
+<td align="center">指因某个原因而需要修改的所有类,都应封闭在一个包里,<strong>一个变化若对一个封闭包中的类产生影响,则将对该包中的所有类产生影响,而对其他包则不造成任何影响</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>共同重用</strong></td>
+<td align="center">指一个包中的所有类应该是共同重用的,即<strong>如果重用了包中的一个类,那么就要重用包中所有类</strong></td>
+</tr>
+</tbody></table>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/01/01/vue%E4%BD%BF%E7%94%A8/#more" rel="contents">
+              <a class="btn" href="/2020/01/01/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -310,7 +354,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/python/">
+    <link itemprop="mainEntityOfPage" href="https://lqy679.github.io/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/site_images/logo.jpg">
@@ -328,7 +372,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/01/01/python/" class="post-title-link" itemprop="url">python快速入门</a>
+          <a href="/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="post-title-link" itemprop="url">软件工程</a>
         </h2>
 
         <div class="post-meta-container">
@@ -346,7 +390,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-27 14:52:49" itemprop="dateModified" datetime="2023-03-27T14:52:49+08:00">2023-03-27</time>
+      <time title="修改时间：2023-03-06 10:59:52" itemprop="dateModified" datetime="2023-03-06T10:59:52+08:00">2023-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -354,7 +398,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/python%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">python系列</span></a>
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">计算机基础理论</span></a>
         </span>
     </span>
 
@@ -368,11 +412,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="python快速入门"><a href="#python快速入门" class="headerlink" title="python快速入门"></a>python快速入门</h1><p>主要用于自动化方向,不做后端开发</p>
-<h2 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装:"></a>Linux安装:</h2><p>以CentOS 7 为例</p>
+          <h1 id="软件工程"><a href="#软件工程" class="headerlink" title="软件工程"></a>软件工程</h1><h2 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h2><p>统一建模语言(Unified Modeling Language，UML)是一种为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/2262089">面向对象</a>系统的产品进行说明、可视化和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BC%96%E5%88%B6/9907954">编制</a>文档的一种标准语言，是非专利的第三代建模和规约语言。<strong>UML是面向对象设计的建模工具，独立于任何具体程序设计语言。</strong> </p>
+<h3 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/01/01/python/#more" rel="contents">
+              <a class="btn" href="/2020/01/01/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -439,7 +483,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-17 16:08:11" itemprop="dateModified" datetime="2023-05-17T16:08:11+08:00">2023-05-17</time>
+      <time title="修改时间：2023-09-09 22:49:12" itemprop="dateModified" datetime="2023-09-09T22:49:12+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
