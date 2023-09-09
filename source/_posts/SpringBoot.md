@@ -4444,7 +4444,7 @@ public class RedisConfig {
 
 ![image-20230418153703315](SpringBoot/image-20230418153703315.png)
 
-使用快捷键：`Ctr	l + Alt + Shift + /` 调出 Registry 窗口,勾选 `compiler.automake.allow.when.app.running` 选项。
+使用快捷键：`Ctrl + Alt + Shift + /` 调出 Registry 窗口,勾选 `compiler.automake.allow.when.app.running` 选项。
 
 ![image-20230418153736911](SpringBoot/image-20230418153736911.png)
 

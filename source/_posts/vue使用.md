@@ -5107,7 +5107,7 @@ axios({
 
 ### 在Vue中使用axios
 
-1. 安装`npm i axious`
+1. 安装`npm i axios`
 2. 引入并且在Vue原型链中挂载:
 
 在`main.js`中添加:

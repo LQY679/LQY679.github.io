@@ -137,9 +137,9 @@ d>添加mapper
 BaseMapper是MyBatis-Plus提供的模板mapper，其中包含了基本的CRUD方法，泛型为操作的 实体类型
 
 ```java
+@Mapp
 public interface UserMapper extends BaseMapper<User> {
 }
-
 ```
 
 e>测试
@@ -1525,7 +1525,7 @@ DROP TABLE IF EXISTS product;
 <dependency>
   <groupId>com.baomidou</groupId>
   <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-  <version>3.5.0</version>
+  <version>3.3.0</version>
 </dependency>
 ```
 
